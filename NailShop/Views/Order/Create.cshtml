@@ -11,106 +11,95 @@
             <div class="row">
                 <div class="col-sm-12 about-content">
                     <h4>@Resources.CreateOrder.titleForm</h4>
-                    <div class="col-md-6">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">@Resources.CreateOrder.lblBillAddress</label>
-                                <div class="col-sm-9">
-                                    @Html.TextBox("BillAddress", (string)ViewBag.BillAddress, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">City</label>
-                                <div class="col-sm-4">
-                                    @Html.TextBox("City", (string)ViewBag.City, new { @class = "form-control" })
-                                </div>
-                                <label class="col-sm-1 control-label">State</label>
-                                <div class="col-sm-4">
-                                    @Html.TextBox("State", (string)ViewBag.State, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">ZipCode</label>
-                                <div class="col-sm-9">
-                                    @Html.TextBox("ZipCode", (string)ViewBag.ZipCode, new { @class = "form-control" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Description</label>
-                                <div class="col-sm-9">
-                                    @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "5" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <div class="checkbox">
-                                        <label>
-                                            @{
-                                                bool IsCheck = Convert.ToBoolean(ViewBag.IsTemplate);
-                                                @Html.CheckBox("IsTemplate", IsCheck)<strong>@Resources.CreateOrder.lblOrdTemplate</strong>
-                                            }
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">@Resources.CreateOrder.lblShipAddress</label>
-                                <div class="col-sm-9">
-                                    @Html.TextBox("DeliveryAddress", (string)ViewBag.DeliveryAddress, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">City</label>
-                                <div class="col-sm-4">
-                                    @Html.TextBox("CityShip", (string)ViewBag.CityShip, new { @class = "form-control" })
-                                </div>
-                                <label class="col-sm-1 control-label">State</label>
-                                <div class="col-sm-4">
-                                    @Html.TextBox("StateShip", (string)ViewBag.StateShip, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">ZipCode</label>
-                                <div class="col-sm-9">
-                                    @Html.TextBox("ZipCodeShip", (string)ViewBag.ZipCodeShip, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <p class="control-label">@Resources.CreateOrder.lblNo  @Html.Label((string)@ViewBag.InvoiceNo, new { id = "lblInvoiceNo" })</></p>
-                                <p class="control-label">@Resources.CreateOrder.lblOrdDate  @Html.Label((string)@ViewBag.InvoiceDate, new { id = "lblInvoiceDate" })</p>
-                                <p class="control-label">@Resources.CreateOrder.lblAmount $@Html.Label((string)@ViewBag.Amount, new { id = "lblAmount" })</p>
-                                <p class="control-label">@Resources.CreateOrder.lblDiscount $@Html.Label((string)@ViewBag.DiscountAmount, new { id = "lblDiscountAmount" })</p>
-                                <p class="control-label">@Resources.CreateOrder.lblTaxAmount $@Html.Label((string)@ViewBag.TaxAmount, new { id = "lblTaxAmount" })</p>
-                                <p class="control-label">@Resources.CreateOrder.lblTotal $@Html.Label((string)@ViewBag.TotalAmount, new { id = "lblTotalAmount" })</p>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">@Resources.CreateOrder.lblBillAddress</label>
                                     <div class="col-sm-9">
+                                        @Html.TextBox("BillAddress", (string)ViewBag.BillAddress, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">City</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBox("City", (string)ViewBag.City, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-1 control-label">State</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBox("State", (string)ViewBag.State, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ZipCode</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBox("ZipCode", (string)ViewBag.ZipCode, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Description</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "5" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-8">
+                                        <div class="checkbox">
+                                            <label>
+                                                @{
+                                                    bool IsCheck = Convert.ToBoolean(ViewBag.IsTemplate);
+                                                    @Html.CheckBox("IsTemplate", IsCheck)<strong>@Resources.CreateOrder.lblOrdTemplate</strong>
+                                                }
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-8">
                                         <button id="btnSave" type="submit" data-ng-click="addNew()" class="btn btn-primary">@Resources.CreateOrder.btnSave</button>
                                         <a href="/Order" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                                     </div>
-
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">@Resources.CreateOrder.lblShipAddress</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBox("DeliveryAddress", (string)ViewBag.DeliveryAddress, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">City</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBox("CityShip", (string)ViewBag.CityShip, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-1 control-label">State</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBox("StateShip", (string)ViewBag.StateShip, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ZipCode</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBox("ZipCodeShip", (string)ViewBag.ZipCodeShip, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <p>@Resources.CreateOrder.lblNo  @Html.Label((string)@ViewBag.InvoiceNo, new { id = "lblInvoiceNo" })</></p>
+                                        <p>@Resources.CreateOrder.lblOrdDate  @Html.Label((string)@ViewBag.InvoiceDate, new { id = "lblInvoiceDate" })</p>
+                                        <p>@Resources.CreateOrder.lblAmount $@Html.Label((string)@ViewBag.Amount, new { id = "lblAmount" })</p>
+                                        <p>@Resources.CreateOrder.lblDiscount $@Html.Label((string)@ViewBag.DiscountAmount, new { id = "lblDiscountAmount" })</p>
+                                        <p>@Resources.CreateOrder.lblTaxAmount $@Html.Label((string)@ViewBag.TaxAmount, new { id = "lblTaxAmount" })</p>
+                                        <p>@Resources.CreateOrder.lblTotal $@Html.Label((string)@ViewBag.TotalAmount, new { id = "lblTotalAmount" })</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-inline">
-                        <h4>@Resources.CreateOrder.titleItems</h4>
-                    </div>
+                    <h4 class="text-left">@Resources.CreateOrder.titleItems</h4>
                     <div class="table-responsive">
-                        <div>
-                            <div ng-grid="gridOptions"></div>
-                        </div>
+                        <div ng-grid="gridOptions"></div>
                     </div>
                 </div>
             </div>
