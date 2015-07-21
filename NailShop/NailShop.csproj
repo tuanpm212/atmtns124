@@ -1,0 +1,678 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{069A0C46-6BDB-4262-8B85-AED5BC82F30A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NailShop</RootNamespace>
+    <AssemblyName>NailShop</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.3.4.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NailSyn.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\NailSyn.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Contents\assets\css\BlueOpal\editor.png" />
+    <Content Include="Contents\assets\css\BlueOpal\imagebrowser.png" />
+    <Content Include="Contents\assets\css\BlueOpal\indeterminate.gif" />
+    <Content Include="Contents\assets\css\BlueOpal\loading-image.gif" />
+    <Content Include="Contents\assets\css\BlueOpal\loading.gif" />
+    <Content Include="Contents\assets\css\BlueOpal\loading_2x.gif" />
+    <Content Include="Contents\assets\css\BlueOpal\markers.png" />
+    <Content Include="Contents\assets\css\BlueOpal\markers_2x.png" />
+    <Content Include="Contents\assets\css\BlueOpal\slider-h.gif" />
+    <Content Include="Contents\assets\css\BlueOpal\slider-v.gif" />
+    <Content Include="Contents\assets\css\BlueOpal\sprite.png" />
+    <Content Include="Contents\assets\css\BlueOpal\sprite_2x.png" />
+    <Content Include="Contents\assets\css\BlueOpal\sprite_kpi.png" />
+    <Content Include="Contents\assets\css\BlueOpal\sprite_kpi_2x.png" />
+    <Content Include="Contents\assets\css\Default\editor.png" />
+    <Content Include="Contents\assets\css\Default\imagebrowser.png" />
+    <Content Include="Contents\assets\css\Default\indeterminate.gif" />
+    <Content Include="Contents\assets\css\Default\loading-image.gif" />
+    <Content Include="Contents\assets\css\Default\loading.gif" />
+    <Content Include="Contents\assets\css\Default\loading_2x.gif" />
+    <Content Include="Contents\assets\css\Default\markers.png" />
+    <Content Include="Contents\assets\css\Default\markers_2x.png" />
+    <Content Include="Contents\assets\css\Default\slider-h.gif" />
+    <Content Include="Contents\assets\css\Default\slider-v.gif" />
+    <Content Include="Contents\assets\css\Default\sprite%402x.png" />
+    <Content Include="Contents\assets\css\Default\sprite.png" />
+    <Content Include="Contents\assets\css\Default\sprite_2x.png" />
+    <Content Include="Contents\assets\css\Default\sprite_kpi.png" />
+    <Content Include="Contents\assets\css\Default\sprite_kpi_2x.png" />
+    <Content Include="Contents\assets\css\kendo.common.css" />
+    <Content Include="Contents\assets\css\kendo.default.css" />
+    <Content Include="Contents\assets\css\textures\brushed-metal.png" />
+    <Content Include="Contents\assets\css\textures\dots1.png" />
+    <Content Include="Contents\assets\css\textures\dots10.png" />
+    <Content Include="Contents\assets\css\textures\dots11.png" />
+    <Content Include="Contents\assets\css\textures\dots12.png" />
+    <Content Include="Contents\assets\css\textures\dots13.png" />
+    <Content Include="Contents\assets\css\textures\dots2.png" />
+    <Content Include="Contents\assets\css\textures\dots3.png" />
+    <Content Include="Contents\assets\css\textures\dots4.png" />
+    <Content Include="Contents\assets\css\textures\dots5.png" />
+    <Content Include="Contents\assets\css\textures\dots6.png" />
+    <Content Include="Contents\assets\css\textures\dots7.png" />
+    <Content Include="Contents\assets\css\textures\dots8.png" />
+    <Content Include="Contents\assets\css\textures\dots9.png" />
+    <Content Include="Contents\assets\css\textures\glass-lighter.png" />
+    <Content Include="Contents\assets\css\textures\glass.png" />
+    <Content Include="Contents\assets\css\textures\highlight.png" />
+    <Content Include="Contents\assets\css\textures\hsv-gradient.png" />
+    <Content Include="Contents\assets\css\textures\hue.png" />
+    <Content Include="Contents\assets\css\textures\leather1.png" />
+    <Content Include="Contents\assets\css\textures\leather2.png" />
+    <Content Include="Contents\assets\css\textures\noise.png" />
+    <Content Include="Contents\assets\css\textures\stripe1.png" />
+    <Content Include="Contents\assets\css\textures\stripe2.png" />
+    <Content Include="Contents\assets\css\textures\stripe3.png" />
+    <Content Include="Contents\assets\css\textures\stripe4.png" />
+    <Content Include="Contents\assets\css\textures\stripe5.png" />
+    <Content Include="Contents\assets\css\textures\stripe6.png" />
+    <Content Include="Contents\assets\css\textures\transparency.png" />
+    <Content Include="Contents\assets\css\textures\transtexture.png" />
+    <Content Include="Contents\assets\js\function.js" />
+    <Content Include="Contents\assets\js\kendo.js" />
+    <Content Include="Contents\css\animate.css" />
+    <Content Include="Contents\css\app.css" />
+    <Content Include="Contents\css\blank.gif" />
+    <Content Include="Contents\css\bootstrap.css" />
+    <Content Include="Contents\css\bootstrap.min.css" />
+    <Content Include="Contents\css\datepicker.css" />
+    <Content Include="Contents\css\font-awesome.css" />
+    <Content Include="Contents\css\font-awesome.min.css" />
+    <Content Include="Contents\css\layerslider.css" />
+    <Content Include="Contents\css\lightbox.css" />
+    <Content Include="Contents\css\magnific-popup.css" />
+    <Content Include="Contents\css\material-fullpalette.css" />
+    <Content Include="Contents\css\nail-about.css" />
+    <Content Include="Contents\css\nail-changepass.css" />
+    <Content Include="Contents\css\nail-contact.css" />
+    <Content Include="Contents\css\nail-gallery.css" />
+    <Content Include="Contents\css\nail-home.css" />
+    <Content Include="Contents\css\nail-main.css" />
+    <Content Include="Contents\css\nail-order.css" />
+    <Content Include="Contents\css\nail-video.css" />
+    <Content Include="Contents\css\ng-grid.css" />
+    <Content Include="Contents\css\owl.carousel.css" />
+    <Content Include="Contents\css\theme-fresh.css" />
+    <Content Include="Contents\css\uploadfile.css" />
+    <Content Include="Contents\fonts\fontawesome-webfont.svg" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Contents\images\bg-image.jpg" />
+    <Content Include="Contents\images\bg-news.jpg" />
+    <Content Include="Contents\images\bg-video.jpg" />
+    <Content Include="Contents\images\close.png" />
+    <Content Include="Contents\images\loading.gif" />
+    <Content Include="Contents\images\logo.png" />
+    <Content Include="Contents\images\next.png" />
+    <Content Include="Contents\images\prev.png" />
+    <Content Include="Contents\skins\v5\loading.gif" />
+    <Content Include="Contents\skins\v5\nothumb.png" />
+    <Content Include="Contents\skins\v5\skin.css" />
+    <Content Include="Contents\skins\v5\skin.png" />
+    <Content Include="fonts\ui-grid.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Contents\css\bootstrap.css.map" />
+    <Content Include="Contents\css\less\.csscomb.json" />
+    <Content Include="Contents\css\less\.csslintrc" />
+    <Content Include="Contents\css\less\alerts.less" />
+    <Content Include="Contents\css\less\badges.less" />
+    <Content Include="Contents\css\less\bootstrap.less" />
+    <Content Include="Contents\css\less\breadcrumbs.less" />
+    <Content Include="Contents\css\less\button-groups.less" />
+    <Content Include="Contents\css\less\buttons.less" />
+    <Content Include="Contents\css\less\carousel.less" />
+    <Content Include="Contents\css\less\close.less" />
+    <Content Include="Contents\css\less\code.less" />
+    <Content Include="Contents\css\less\component-animations.less" />
+    <Content Include="Contents\css\less\dropdowns.less" />
+    <Content Include="Contents\css\less\forms.less" />
+    <Content Include="Contents\css\less\glyphicons.less" />
+    <Content Include="Contents\css\less\grid.less" />
+    <Content Include="Contents\css\less\input-groups.less" />
+    <Content Include="Contents\css\less\jumbotron.less" />
+    <Content Include="Contents\css\less\labels.less" />
+    <Content Include="Contents\css\less\list-group.less" />
+    <Content Include="Contents\css\less\media.less" />
+    <Content Include="Contents\css\less\mixins.less" />
+    <Content Include="Contents\css\less\mixins\alerts.less" />
+    <Content Include="Contents\css\less\mixins\background-variant.less" />
+    <Content Include="Contents\css\less\mixins\border-radius.less" />
+    <Content Include="Contents\css\less\mixins\buttons.less" />
+    <Content Include="Contents\css\less\mixins\center-block.less" />
+    <Content Include="Contents\css\less\mixins\clearfix.less" />
+    <Content Include="Contents\css\less\mixins\forms.less" />
+    <Content Include="Contents\css\less\mixins\gradients.less" />
+    <Content Include="Contents\css\less\mixins\grid-framework.less" />
+    <Content Include="Contents\css\less\mixins\grid.less" />
+    <Content Include="Contents\css\less\mixins\hide-text.less" />
+    <Content Include="Contents\css\less\mixins\image.less" />
+    <Content Include="Contents\css\less\mixins\labels.less" />
+    <Content Include="Contents\css\less\mixins\list-group.less" />
+    <Content Include="Contents\css\less\mixins\nav-divider.less" />
+    <Content Include="Contents\css\less\mixins\nav-vertical-align.less" />
+    <Content Include="Contents\css\less\mixins\opacity.less" />
+    <Content Include="Contents\css\less\mixins\pagination.less" />
+    <Content Include="Contents\css\less\mixins\panels.less" />
+    <Content Include="Contents\css\less\mixins\progress-bar.less" />
+    <Content Include="Contents\css\less\mixins\reset-filter.less" />
+    <Content Include="Contents\css\less\mixins\resize.less" />
+    <Content Include="Contents\css\less\mixins\responsive-visibility.less" />
+    <Content Include="Contents\css\less\mixins\size.less" />
+    <Content Include="Contents\css\less\mixins\tab-focus.less" />
+    <Content Include="Contents\css\less\mixins\table-row.less" />
+    <Content Include="Contents\css\less\mixins\text-emphasis.less" />
+    <Content Include="Contents\css\less\mixins\text-overflow.less" />
+    <Content Include="Contents\css\less\mixins\vendor-prefixes.less" />
+    <Content Include="Contents\css\less\modals.less" />
+    <Content Include="Contents\css\less\nail-main.less" />
+    <Content Include="Contents\css\less\navbar.less" />
+    <Content Include="Contents\css\less\navs.less" />
+    <Content Include="Contents\css\less\normalize.less" />
+    <Content Include="Contents\css\less\pager.less" />
+    <Content Include="Contents\css\less\pagination.less" />
+    <Content Include="Contents\css\less\panels.less" />
+    <Content Include="Contents\css\less\popovers.less" />
+    <Content Include="Contents\css\less\print.less" />
+    <Content Include="Contents\css\less\progress-bars.less" />
+    <Content Include="Contents\css\less\responsive-embed.less" />
+    <Content Include="Contents\css\less\responsive-utilities.less" />
+    <Content Include="Contents\css\less\scaffolding.less" />
+    <Content Include="Contents\css\less\tables.less" />
+    <Content Include="Contents\css\less\theme.less" />
+    <Content Include="Contents\css\less\thumbnails.less" />
+    <Content Include="Contents\css\less\tooltip.less" />
+    <Content Include="Contents\css\less\type.less" />
+    <Content Include="Contents\css\less\utilities.less" />
+    <Content Include="Contents\css\less\variables.less" />
+    <Content Include="Contents\css\less\wells.less" />
+    <Content Include="Contents\fonts\fontawesome-webfont.eot" />
+    <Content Include="Contents\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Contents\fonts\fontawesome-webfont.woff" />
+    <Content Include="Contents\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Contents\fonts\FontAwesome.otf" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Contents\css\less\nail-home.less" />
+    <Content Include="Contents\css\less\nail-variables.less" />
+    <Content Include="fonts\ui-grid.woff" />
+    <Content Include="fonts\ui-grid.ttf" />
+    <Content Include="fonts\ui-grid.eot" />
+    <None Include="Properties\PublishProfiles\NailShop.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\AngularJs\1.0.2.angular.min.js" />
+    <Content Include="Scripts\AngularJs\angular-grid.js" />
+    <Content Include="Scripts\AngularJs\angular.js" />
+    <Content Include="Scripts\AngularJs\1.3.8.angular.min.js" />
+    <Content Include="Scripts\AngularJs\jquery.min.js" />
+    <Content Include="Scripts\AngularJs\moment.js" />
+    <Content Include="Scripts\AngularJs\ng-grid.debug.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\app.plugin.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\greensock.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.magnific-popup.js" />
+    <Content Include="Scripts\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\jquery.uploadfile.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\layerslider.kreaturamedia.jquery.js" />
+    <Content Include="Scripts\layerslider.transitions.js" />
+    <Content Include="Scripts\lightbox.js" />
+    <Content Include="Scripts\nail.main.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\owl.carousel.js" />
+    <Content Include="Scripts\parallax.js" />
+    <Content Include="Scripts\ui-grid-unstable.js" />
+    <Content Include="Scripts\ui-grid-unstable.min.js" />
+    <Content Include="Uploads\Abouts\nail-about.jpg" />
+    <Content Include="Uploads\Brands\brand1.jpg" />
+    <Content Include="Uploads\Brands\brand2.jpg" />
+    <Content Include="Uploads\Brands\brand3.jpg" />
+    <Content Include="Uploads\Brands\brand4.jpg" />
+    <Content Include="Uploads\Default\default.png" />
+    <Content Include="Uploads\Gallery\photo1.jpg" />
+    <Content Include="Uploads\Gallery\photo2.jpg" />
+    <Content Include="Uploads\Gallery\photo3.jpg" />
+    <Content Include="Uploads\Gallery\photo4.jpg" />
+    <Content Include="Uploads\Gallery\photo5.jpg" />
+    <Content Include="Uploads\News\news-1.jpg" />
+    <Content Include="Uploads\News\news-2.jpg" />
+    <Content Include="Uploads\Sliders\slide-1.png" />
+    <Content Include="Uploads\Sliders\slide-2.png" />
+    <Content Include="Uploads\Sliders\slide-3.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BackendController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MediaManagerController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SynNailDataController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Backend.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Backend.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ChangePassword.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePassword.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Contact.vi-vn.Designer.cs">
+      <DependentUpon>Contact.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Contact.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Contact.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CreateOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateOrder.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DefaultValue.vi-vn.Designer.cs">
+      <DependentUpon>DefaultValue.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\DefaultValue.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultValue.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmailTemplate.vi-vn.Designer.cs">
+      <DependentUpon>EmailTemplate.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\EmailTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailTemplate.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Footer.vi-vn.Designer.cs">
+      <DependentUpon>Footer.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Footer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Footer.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\FormTitle.vi-vn.Designer.cs">
+      <DependentUpon>FormTitle.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\FormTitle.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormTitle.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Header.vi-vn.Designer.cs">
+      <DependentUpon>Header.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Header.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Header.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Home.vi-vn.Designer.cs">
+      <DependentUpon>Home.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Home.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Login.Designer.cs">
+      <DependentUpon>Login.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Login.vi-vn.Designer.cs">
+      <DependentUpon>Login.vi-vn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Order.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Order.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Constant.cs" />
+    <Compile Include="Utils\ISession.cs" />
+    <Compile Include="Utils\Session.cs" />
+    <Compile Include="Utils\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Share\_Layout.cshtml" />
+    <Content Include="Views\Share\_Header.cshtml" />
+    <Content Include="Views\Share\_Footer.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Home\Video.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\Photo.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\Share\_Backend.cshtml" />
+    <Content Include="Views\Share\_HeaderBackend.cshtml" />
+    <Content Include="Views\Share\_FooterBackend.cshtml" />
+    <Content Include="Views\Backend\Index.cshtml" />
+    <Content Include="Views\Backend\Order.cshtml" />
+    <Content Include="Views\Admin\About.cshtml" />
+    <Content Include="Views\Share\_LayoutPage.cshtml" />
+    <Content Include="Views\Share\MenuLeft.cshtml" />
+    <Content Include="Views\Admin\Photo.cshtml" />
+    <Content Include="Views\Admin\Video.cshtml" />
+    <Content Include="Views\Admin\CreatePhoto.cshtml" />
+    <Content Include="Views\Backend\Promotion.cshtml" />
+    <Content Include="Views\Backend\CreatePromotion.cshtml" />
+    <Content Include="Views\Backend\CreateOrder.cshtml" />
+    <Content Include="Views\Backend\PromotionCategory.cshtml" />
+    <Content Include="Views\Backend\CreatePromotionCategory.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\CreateVideo.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Contents\css\assets\" />
+    <Folder Include="Contents\js\" />
+    <Folder Include="Images\Editor\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NailShop.Business\NailShop.Business.csproj">
+      <Project>{902bb907-902d-43a5-8013-8716daee55f9}</Project>
+      <Name>NailShop.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NailShop.DataAccess\NailShop.DataAccess.csproj">
+      <Project>{0038b132-2d0c-409d-a848-4a06e6724749}</Project>
+      <Name>NailShop.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Backend.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Backend.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ChangePassword.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangePassword.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Contact.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Contact.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Contact.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Contact.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CreateOrder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateOrder.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DefaultValue.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DefaultValue.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DefaultValue.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DefaultValue.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmailTemplate.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailTemplate.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmailTemplate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailTemplate.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Footer.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Footer.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Footer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Footer.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\FormTitle.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormTitle.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\FormTitle.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormTitle.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Header.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Header.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Header.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Header.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Home.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Home.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Login.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Login.vi-vn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.vi-vn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Order.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Order.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3044</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1918/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

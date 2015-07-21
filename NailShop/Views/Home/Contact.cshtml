@@ -1,0 +1,94 @@
+﻿@model NailShop.DataAccess.Contact
+@{
+    ViewBag.Title = @Resources.FormTitle.formContact;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+<link href="~/Contents/css/nail-contact.css" rel="stylesheet" />
+<div class="page-wrap">
+    <div class="title-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>@Resources.Contact.title</h1>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <ol class="breadcrumb">
+                        <li><a href="/home">@Resources.Header.linkHome</a></li>
+                        <li class="active">@Resources.Header.linkContact</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.279511588404!2d-117.9562783!3d33.72758770000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd2709daf3b6a1%3A0x3bda96d64ad6f6d8!2s16151+Brookhurst+St%2C+Fountain+Valley%2C+CA+92708%2C+Hoa+K%E1%BB%B3!5e0!3m2!1svi!2s!4v1434212639858" width="100%" height="350" frameborder="0" style="border:0"></iframe>
+    </section>
+    @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <section class="section-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 contact-detail">
+                        <h3>@Resources.Contact.title</h3>
+                        <p class="text-justify">@Resources.Contact.content</p>
+                        <ul class="list-unstyled list-address">
+                            <li><i class="fa fa-home"></i>@Resources.Contact.address</li>
+                            <li><i class="fa fa-phone-square"></i>800-398-0525</li>
+                            <li><i class="fa fa-fax"></i>714-242-9550</li>
+                            <li><i class="fa fa-envelope"></i>info@atsoft123.com</li>
+                        </ul>
+                        <ul class="list-inline list-social">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook-square"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-google-plus-square"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter-square"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-youtube-square"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 contact-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control parsley-validated parsley-error", @placeholder = @Resources.Contact.placeholderName, @maxlength = "100" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                <span class="input-group-addon" id="basic-addon2"><i class="fa fa-user"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = @Resources.Contact.placeholderEmail, @maxlength = "100", @type="email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                <span class="input-group-addon" id="basic-addon2"><i class="fa fa-envelope"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder = @Resources.Contact.placeholderTitle, @maxlength = "150" })
+                                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                                <span class="input-group-addon" id="basic-addon2"><i class="fa fa-comment"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(m => m.Content, 3, 76, new { @class = "form-control", @placeholder = @Resources.Contact.placeholderContent, @maxlength = "1000" })
+                            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-primary">@Resources.Contact.btnSend</button>
+                            <button type="reset" class="btn btn-primary">@Resources.Contact.btnCancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+</div>
+
+@section Scripts {}

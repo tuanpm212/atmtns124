@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Video";
+    Layout = "~/Views/Share/_Backend.cshtml";
+}
+<section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
+    <section class="scrollable padder">
+        <div class="m-b-md">
+            <h3 class="m-b-none">VIDEO LIST</h3>
+            <hr />
+        </div>
+        <div class="table-responsive">
+            <div ng-grid="gridOptions"></div>
+        </div>
+        <div>
+            <a href="/admin/createvideo?id=-1" class="btn btn-primary">Add New</a>
+        </div>
+    </section>
+    <div class="modal fade" id="modalConfirm" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title"><i class="fa fa-warning"></i> Warning</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnOk" ng-click="DeleteInvoice()" class="btn btn-primary">@Resources.Backend.btnOk</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">@Resources.Backend.btnCancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Styles {
+    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/AngularJs/moment.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('MyApp', ['ngGrid']), ID;
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [4, 20, 40],
+                pageSize: 4,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.pagingOptions.pageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.pagingOptions.currentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/admin/GetVideo",
+                    method: "GET"
+                }).success(function (data, status, headers, config) {
+                    var myJson = JSON.parse(JSON.parse(data));
+                    $scope.myData = myJson;
+                    $scope.setPagingData(myJson, page, pageSize);
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                { field: "Title", displayName: 'Title', width: "25%" },
+                { field: 'Description', displayName: 'Description' },
+                { field: "Video", displayName: 'Video', width: "20%" },
+                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/CreateVideo?id={{row.entity.ID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                ],
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                enableCellSelection: true,
+                enableRowSelection: false,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            $scope.Delete = function (row) {
+                $('#modalConfirm').modal('show');
+                ID = row.entity.ID;
+            };
+
+            $scope.DeleteInvoice = function () {
+                $('#modalConfirm').modal('show');
+                $http({
+                    url: "/admin/DeletePhoto",
+                    method: "POST",
+                    params: { ID: ID }
+                }).success(function (data) {
+                    $('#modalConfirm').modal('hide');
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                });
+            };
+        }]);
+    </script>
+}
+
+
+
+
+

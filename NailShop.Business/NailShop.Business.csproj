@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{902BB907-902D-43A5-8013-8716DAEE55F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NailShop.Business</RootNamespace>
+    <AssemblyName>NailShop.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="NailSyn.DataAccess">
+      <HintPath>..\DLL\NailSyn.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\AboutBO.cs" />
+    <Compile Include="Business\ContactBO.cs" />
+    <Compile Include="Business\CustomerBO.cs" />
+    <Compile Include="Business\HomeBO.cs" />
+    <Compile Include="Business\NewsBO.cs" />
+    <Compile Include="Business\BrandBO.cs" />
+    <Compile Include="Business\OrderBO.cs" />
+    <Compile Include="Business\PhotoBO.cs" />
+    <Compile Include="Business\PromotionBO.cs" />
+    <Compile Include="Business\SlideBO.cs" />
+    <Compile Include="Business\StoreBO.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="IBusiness\IAbout.cs" />
+    <Compile Include="IBusiness\IBrand.cs" />
+    <Compile Include="IBusiness\IContact.cs" />
+    <Compile Include="IBusiness\ICustomer.cs" />
+    <Compile Include="IBusiness\IHome.cs" />
+    <Compile Include="IBusiness\INews.cs" />
+    <Compile Include="IBusiness\IOrder.cs" />
+    <Compile Include="IBusiness\IPhoto.cs" />
+    <Compile Include="IBusiness\IPromotion.cs" />
+    <Compile Include="IBusiness\ISlide.cs" />
+    <Compile Include="IBusiness\IStore.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\ModelWeb.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\SynDataClientToServer.cs" />
+    <Compile Include="Server\SynDataServerToClient.cs" />
+    <Compile Include="SynBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NailShop.DataAccess\NailShop.DataAccess.csproj">
+      <Project>{0038b132-2d0c-409d-a848-4a06e6724749}</Project>
+      <Name>NailShop.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = @Resources.FormTitle.formOrder;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+
+<link href="~/Contents/css/datepicker.css" rel="stylesheet" />
+<link href="~/Contents/css/nail-order.css" rel="stylesheet" />
+<link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<div class="page-wrap" ng-app="MyApp" ng-controller="CtrlController">
+    <section class="section-orders">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 about-content">
+                    <h4>@Resources.Order.titleFrom</h4>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label>@Resources.Order.lblFromDate</label>
+                            <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                        </div>
+                        <div class="form-group">
+                            <label>@Resources.Order.lblToDate</label>
+                            <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownList("Status", new SelectList(ViewBag.ListStatus, "Status", "Name", "-1"), new { @class = "form-control" })
+                        </div>
+                        <button type="submit" data-ng-click="getPagedDataAsync()" class="btn btn-primary">@Resources.Order.btnSearch</button>
+                        <a class="btn btn-primary" href="/Order/Create?ID=-1">@Resources.Order.btnCreate</a>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <div ng-grid="gridOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="modalConfirm" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có muốn xóa không ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnOk" ng-click="DeleteInvoice()" class="btn btn-default">Ok</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i> Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <p>Không được sửa</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/AngularJs/moment.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".date-control").datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'mm/dd/yyyy',
+                language: 'en',
+            });
+        });
+        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
+        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+
+        var InvoiceID;
+        var app = angular.module('MyApp', ['ngGrid']);
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [4, 20, 40],
+                pageSize: 4,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.pagingOptions.pageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.pagingOptions.currentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/Order/GetInvoice",
+                    method: "GET",
+                    params: {
+                        FromDate: $('#txtFromDate').val(),
+                        ToDate: $('#txtToDate').val(),
+                        Status: $('#Status').val()
+                    }
+                }).success(function (data, status, headers, config) {
+                    var myJson = JSON.parse(JSON.parse(data));
+                    $scope.myData = myJson;
+                    $scope.setPagingData(myJson, page, pageSize);
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                    { field: "InvoiceNo", displayName: '@Resources.Order.gridNo', width: "120", cellClass: 'ngCellText-Center' },
+                    { field: 'InvoiceDate', displayName: '@Resources.Order.gridInvoiceDate', width: "120", cellTemplate: '<div class="ngCellText">{{row.getProperty(col.field) | resolve_date}}</div>', cellClass: 'ngCellText-Center' },
+                    { field: "Notes", displayName: '@Resources.Order.gridNotes', pinnable: true },
+                    { field: "SubTotal", displayName: '@Resources.Order.gridAmount', pinnable: true, width: "120", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                    { field: "SaleTax", displayName: '@Resources.Order.gridTaxAmount', pinnable: true, width: "120", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                    { field: "Discount", displayName: '@Resources.Order.gridDiscount', pinnable: true, width: "120", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                    { field: "Total", displayName: '@Resources.Order.gridTotal', pinnable: true, width: "150", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                    { field: 'InvoiceID', displayName: '@Resources.Order.gridAction', cellTemplate: '<div class="ngCellText"><a ng-href="/order/create?id={{row.entity.InvoiceID}}">View</a>/<a ng-click="Delete(row)">Delete</a>', width: "150", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                ],
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                enableCellSelection: true,
+                enableRowSelection: false,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            $scope.Delete = function (row) {
+                InvoiceID = row.entity.InvoiceID;
+                if (row.entity.InvoiceStatus == 0) {
+                    $('#modalConfirm').modal('show');
+                }
+                else {
+                    $('#modalDelete').modal('show');
+                }
+            };
+            $scope.DeleteInvoice = function () {
+                $http({
+                    url: "/Order/Delete",
+                    method: "POST",
+                    params: { ID: InvoiceID}
+                }).success(function (data) {
+                    if (data.IsOk) {
+                        $('#modalConfirm').modal('hide');
+                        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    }
+                });
+            };
+        }]);
+
+        app.filter('resolve_date', function () {
+            return function (text, length, end) {
+                var mResult = '', twoDigitMonth;
+                var mDate = new Date(parseInt(text.substr(6)));
+                twoDigitMonth = ((mDate.getMonth().length + 1) === 1) ? (mDate.getMonth() + 1) : '0' + (mDate.getMonth() + 1);
+                mResult = mDate.getDate() + "/" + twoDigitMonth + "/" + mDate.getFullYear();
+                return mResult;
+            };
+        });
+    </script>
+}

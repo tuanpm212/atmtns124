@@ -1,0 +1,340 @@
+﻿@{
+    ViewBag.Title = "CreatePromotion";
+    Layout = "~/Views/Share/_Backend.cshtml";
+}
+<section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
+    <section class="scrollable padder">
+        <div class="m-b-md">
+            <h3 class="m-b-none">Create/View Promotion</h3>
+        </div>
+        <section class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-horizontal" name="promotionForm">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Promotion Name</label>
+                        <div class="col-sm-10">
+                            <input id="Name" type="text" class="form-control" ng-model="Name" />
+                            <span ng-show="promotionForm.Name.$error.required">Username is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                            <input id="Description" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">From Date</label>
+                        <div class="col-sm-4">
+                            <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                        </div>
+                        <label class="col-sm-2 control-label">To Date</label>
+                        <div class="col-sm-4">
+                            <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Discount Percent(%)</label>
+                        <div class="col-sm-10">
+                            <input id="Percent" type="number" class="form-control" required="required" />
+                            <input id="chkIsActvie" type="checkbox" />
+                            <label class="control-label">IsActive</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="promotionForm.name.$dirty && promotionForm.name.$invalid">@Resources.CreateOrder.btnSave</button>
+                            <button type="submit" data-ng-click="AddItemPromotion()" class="btn btn-primary">Add Item</button>
+                            <a href="/backend/promotion" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <div class="table-responsive">
+            <div ng-grid="gridOptions"></div>
+        </div>
+    </section>
+    <div id="modalAddItem" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Product Name</label>
+                            <div class="col-sm-4">
+                                <input id="txtSearch" type="text" class="form-control" placeholder="Search product" />
+                            </div>
+                            <div class="col-sm-6">
+                                <button id="btnSearch" type="submit" ng-click="getProduct()" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Quantity</label>
+                            <div class="col-sm-4">
+                                <input id="txtQuantity" type="number" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <div ng-grid="gridSearch"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAddItem" type="submit" ng-click="AddItem()" class="btn btn-primary">Add Item</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Styles {
+    <link href="~/Contents/css/datepicker.css" rel="stylesheet" />
+    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        var PromotoinID = '@ViewBag.PromotoinID', StoreID = '@ViewBag.StoreID';
+        $(".date-control").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'mm/dd/yyyy',
+            language: 'en',
+        });
+        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
+        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+
+        var app = angular.module('MyApp', ['ngGrid']);
+
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [10, 20, 40],
+                pageSize: 10,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.pagingOptions.pageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.pagingOptions.currentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/backend/GetPromotionItem",
+                    method: "GET",
+                    params: { ID: PromotoinID }
+
+                }).success(function (data, status, headers, config) {
+                    var temp = JSON.parse(JSON.parse(data));
+                    myJson = temp.detail;
+                    $scope.myMaster = temp.master;
+                    if ($scope.myMaster.PromotionID != 0) {
+                        $('#Name').val($scope.myMaster.PromotionName);
+                        $('#Description').val($scope.myMaster.Description);
+                        $('#Percent').val($scope.myMaster.Percent);
+                        $('#txtFromDate').val(ForDateTime($scope.myMaster.FromDate));
+                        $('#txtToDate').val(ForDateTime($scope.myMaster.ToDate));
+                        $('#chkIsActvie').prop('checked', $scope.myMaster.IsActive);
+                    }
+                    $scope.myData = myJson;
+                    $scope.setPagingData(myJson, page, pageSize);
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                { field: "ProdNo", displayName: 'Code', width: "15%", cellClass: 'ngCellText-Center' },
+                { field: 'ProductName', displayName: 'ProductName' },
+                { field: "Quantity", displayName: 'Quantity', width: "10%", cellClass: 'ngCellText-Right' },
+                { field: 'ProductID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                ],
+                enablePaging: false,
+                showFooter: false,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                enableCellSelection: true,
+                enableRowSelection: true,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            $scope.AddItemPromotion = function () {
+                $scope.myProduct = [];
+                $('#modalAddItem').modal('show');
+            };
+
+            $scope.Delete = function (row) {
+                var index = row.rowIndex;
+                $scope.gridOptions.selectItem(index, false);
+                $scope.myData.splice(index, 1);
+                $scope.$apply();
+            };
+
+            $scope.addNew = function () {
+                var master = {
+                    PromotionID: PromotoinID
+                    , StoreID: StoreID
+                    , SiteID: 1
+                    , PromotionName: $('#Name').val()
+                    , FromDate: $('#txtFromDate').val()
+                    , ToDate: $('#txtToDate').val()
+                    , CreateDate: $('#txtFromDate').val()
+                    , Description: $('#Description').val()
+                    , Percent: $('#Percent').val()
+                    , IsItem: 1
+                    , IsActive: $('#chkIsActvie').is(':checked')
+                };
+                $http({
+                    url: "/backend/SavePromotion",
+                    method: "POST",
+                    data: JSON.stringify({ master: master, detail: $scope.myData }),
+                    headers: { 'Content-Type': 'application/json' }
+                }).success(function (data) {
+                    if (data.IsOk) {
+                        window.location.href = "/backend/promotion";
+                    }
+                });
+            };
+
+            /*---Grid Product---*/
+            $scope.gridSearch = {
+                data: 'myProduct',
+                columnDefs: [
+                {
+                    field: 'checker', displayName: '',
+                    headerCellTemplate: '<div class="ngHeaderSortColumn {{col.headerClass}}" ng-style="{cursor: col.cursor}" ng-class="{ngSorted: !noSortVisible}"><div ng-click="col.sort($event)" class="ngHeaderText">{{col.displayName}}<input type="checkbox" ng-model="checker" ng-change="toggleCheckerAll(checker);"></div></div>"',
+                    cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><input type="checkbox" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-change="toggleChecker(COL_FIELD)"></div>', width: "5%"
+                },
+                { field: "ProdNo", displayName: 'Code', width: "20%" },
+                { field: 'ProductName', displayName: 'ProductName' },
+                { field: "Price", displayName: 'Price', width: "10%" }
+                ],
+                enablePaging: false,
+                showFooter: false,
+                totalServerItems: 'totalServerItems',
+                sortInfo: $scope.sortOptions,
+                enableCellSelection: true,
+                enableRowSelection: true,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            $scope.getProduct = function () {
+                $http({
+                    url: "/backend/GetItemForPromotion",
+                    method: "GET",
+                    params: { StoreID: StoreID, TextSearch: $('#txtSearch').val() }
+
+                }).success(function (data) {
+                    var productJson = JSON.parse(JSON.parse(data));
+                    $scope.myProduct = productJson;
+                    $scope.totalServerItems = productJson.length;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                });
+            };
+
+            $scope.toggleCheckerAll = function (checked) {
+                for (var i = 0; i < $scope.myProduct.length; i++) {
+                    $scope.myProduct[i].checker = checked;
+                }
+                $scope.$apply();
+            };
+
+            $scope.AddItem = function () {
+                var IsExist = false;
+                for (var i = 0; i < $scope.myProduct.length; i++) {
+                    if ($scope.myProduct[i].checker) {
+                        IsExist = false;
+                        for (var j = 0; j < $scope.myData.length; j++) {
+                            if ($scope.myData[j].ProductID == $scope.myProduct[i].ProductID) {
+                                IsExist = true;
+                                break;
+                            }
+                        }
+                        if (IsExist == false) {
+                            var item = {
+                                PromotionID: PromotoinID,
+                                ProductID: $scope.myProduct[i].ProductID,
+                                ProdNo: $scope.myProduct[i].ProdNo,
+                                ProductName: $scope.myProduct[i].ProductName,
+                                Quantity: $('#txtQuantity').val(),
+                                Sort: $scope.myData.length,
+                                IsItem: 1,
+                                IsActive: 1
+                            };
+                            $scope.myData.push(item);
+                        }
+                    }
+                }
+                $scope.$apply();
+                $('#modalAddItem').modal('hide');
+            };
+        }]);
+
+        app.filter('resolve_date', function () {
+            return function (text, length, end) {
+                var mResult = '', twoDigitMonth;
+                var mDate = new Date(parseInt(text.substr(6)));
+                twoDigitMonth = ((mDate.getMonth().length + 1) === 1) ? (mDate.getMonth() + 1) : '0' + (mDate.getMonth() + 1);
+                mResult = mDate.getDate() + "/" + twoDigitMonth + "/" + mDate.getFullYear();
+                return mResult;
+            };
+        });
+
+        function ForDateTime(jsonDate) {
+            var date = new Date(parseInt(jsonDate.substr(6)));
+            return ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+                  ("0" + date.getDate()).slice(-2) + "-" + date.getFullYear();
+        }
+    </script>
+}
+
+

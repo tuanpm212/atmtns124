@@ -1,0 +1,336 @@
+﻿@{
+    ViewBag.Title = "CreatePhoto";
+    Layout = "~/Views/Share/_Backend.cshtml";
+}
+
+<section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
+    <section class="scrollable padder">
+        <div class="m-b-md">
+            <h3 class="m-b-none">Create/View Photo</h3>
+        </div>
+        <section class="panel panel-default">
+            <header class="panel-heading font-bold"> Photo form </header>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-10">
+                            <input id="txtTitle" type="text" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                            <input id="txtDescription" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Image Cover</label>
+                        <div class="col-sm-10">
+                            <div id="boxCover" class="dropfile visible-lg">
+                                <img id="imgUpload" src="~/Uploads/Default/default.png" style="width: 240px; height: 173px" />
+                                <a id="imgCover" href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <button type="button" class="btn btn-primary" data-ng-click="saveCover()">@Resources.Backend.btnSave</button>
+                            <button type="button" class="btn btn-primary" data-ng-click="modalPhoto()">Add Photo</button>
+                            <a class="btn btn-primary" href="/admin/photo">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="table-responsive">
+            <div ng-grid="gridOptions"></div>
+        </div>
+    </section>
+    <div class="modal fade" id="modalConfirm" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnOk" ng-click="DeleteInvoice()" class="btn btn-primary">@Resources.Backend.btnOk</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">@Resources.Backend.btnCancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalAddPhoto" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title"><i class="fa fa-warning"></i>Photo Detail</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                @Html.TextBox("TitlePhoto", "", new { id = "TitlePhoto", @class = "form-control", @required = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Description</label>
+                            <div class="col-sm-10">
+                                @Html.TextBox("DescriptionPhoto", "", new { id = "DescriptionPhoto", @class = "form-control", @required = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Image Photo</label>
+                            <div class="col-sm-10">
+                                <div id="boxPhoto" class="dropfile visible-lg">
+                                    <img id="imgDetail" />
+                                    <a id="imgPhoto" href="#"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-ng-click="AddNewPhoto()">@Resources.Backend.btnAdd</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">@Resources.Backend.btnClose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Styles {
+    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/uploadfile.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/jquery.uploadfile.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script>
+        var photoID = '@ViewBag.ID';
+        $("#imgCover").uploadFile({
+            url: '/admin/UploadCover',
+            multiple: false,
+            dragDrop: false,
+            allowedTypes: 'jpg,png,bmp,gif',
+            maxFileSize: 2100000,
+            onSuccess: function (files, response, xhr) {
+                var data = $.parseJSON(response);
+                $('#boxCover').find('img').attr('src', data.file);
+            },
+        });
+
+        $("#imgPhoto").uploadFile({
+            url: '/admin/UploadPhoto',
+            multiple: false,
+            dragDrop: false,
+            allowedTypes: 'jpg,png,bmp,gif',
+            maxFileSize: 2100000,
+            onSuccess: function (files, response, xhr) {
+                var data = $.parseJSON(response);
+                $('#boxPhoto').find('img').attr({ 'src': data.file, 'data-id': data.id });
+            },
+        });
+
+        var app = angular.module('MyApp', ['ngGrid']), ID, PhotoDetailLang = [], PhotoDetail = [];
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [4, 20, 40],
+                pageSize: 4,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.pagingOptions.pageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.pagingOptions.currentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/admin/GetPhotoByID", 
+                    params: { id: photoID },
+                    method: "GET"
+                }).success(function (data, status, headers, config) {
+                    var temp = JSON.parse(JSON.parse(data));
+                    var myJson = temp.detail;
+                    $scope.myMaster = temp.master;
+                    if ($scope.myMaster.ID != 0) {
+                        $('#txtTitle').val($scope.myMaster.Title);
+                        $('#txtDescription').val($scope.myMaster.Description);
+                        $('#imgUpload').attr("src", $scope.myMaster.Image);
+                        $('#IsActvie').prop('checked', $scope.myMaster.IsActive);
+                    }
+                    $scope.myData = myJson;
+                    $scope.setPagingData(myJson, page, pageSize);
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                { field: "Title", displayName: 'Title', width: "25%" },
+                { field: 'Description', displayName: 'Description' },
+                { field: "Image", displayName: 'Image', width: "20%" },
+                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                ],
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                enableCellSelection: true,
+                enableRowSelection: false,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            $scope.Delete = function (row) {
+                ID = row.entity.ID;
+                $('#modalConfirm').modal('show');
+            };
+
+            $scope.DeleteInvoice = function () {
+                $http({
+                    url: "/admin/DeletePhoto",
+                    method: "POST",
+                    params: { ID: ID }
+                }).success(function (data) {
+                    $('#modalConfirm').modal('hide');
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                });
+            };
+
+            $scope.modalPhoto = function () {
+                
+                $('#modalAddPhoto').modal('show');
+            };
+
+            $scope.AddNewPhoto = function () {
+                var urlImg = ($('#boxPhoto').find('img').attr('src')).split(".");
+                if (true) {
+                    var item = {
+                        ID: -1,
+                        Title: $('#TitlePhoto').val(),
+                        Description: $('#DescriptionPhoto').val(),
+                        Image: $('#boxPhoto').find('img').attr('src'),
+                        Thumbnail: urlImg[0] + "_thumnail" + urlImg[1],
+                        FullImage: urlImg[0] + "_lightbox" + urlImg[1]
+                    };
+                    $scope.myData.push(item);
+                    $scope.$apply();
+                    $('#modalAddPhoto').modal('hide');
+
+                    $('#TitlePhoto').val('');
+                    $('#DescriptionPhoto').val('');
+                    $('#imgDetail').attr("src", "");
+                };
+            };
+
+            $scope.saveCover = function () {
+                if (true) {
+                    var PhotoLang = {
+                        PhotoID: photoID,
+                        LangID: "en-US",
+                        Title: $('#txtTitle').val(),
+                        Description: $('#txtDescription').val(),
+                        Image: $('#boxCover').find('img').attr('src')
+                    },
+                        Photo = {
+                            ID: photoID,
+                            IsPhoto: 1,
+                            IsActive: 1
+                        };
+
+                    var detail=[], detaillang=[], temp, templang;
+
+                    for (var i = 0; i < $scope.myData.length; i++)
+                    {
+                        temp = {
+                            DetailID: -1,
+                            PhotoID: photoID,
+                            IsActive: 1
+                        };
+                        detail.push(temp);
+
+                        templang = {
+                            DetailID: -1,
+                            LangID: "en-US",
+                            Title: $scope.myData[i].Title,
+                            Description: $scope.myData[i].Description,
+                            Image: $scope.myData[i].Image,
+                            Thumbnail: $scope.myData[i].Thumbnail,
+                            FullImage: $scope.myData[i].FullImage
+                        };
+                        detaillang.push(templang);
+                    }
+
+
+
+                    $http({
+                        url: "/admin/SavePhoto",
+                        method: "POST",
+                        data: JSON.stringify({
+                            photo: Photo,
+                            photoLang: PhotoLang,
+                            detail: detail,
+                            detailLang: detaillang,
+                        }),
+                        headers: { 'Content-Type': 'application/json' }
+                    }).success(function (data) {
+                        if (data.IsOk) {
+                            window.location.href = "/admin/photo";
+                        }
+                    });
+                }
+            };
+        }]);
+    </script>
+}
+
+

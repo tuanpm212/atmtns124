@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "Create Order";
+    Layout = "~/Views/Share/_Backend.cshtml";
+}
+
+<section class="vbox" ng-app="MyApp" ng-controller="MainController">
+    <section class="scrollable padder">
+        <div class="m-b-md">
+            <h3 class="m-b-none">@Resources.CreateOrder.titleForm</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.CreateOrder.lblBillAddress</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("BillAddress", (string)ViewBag.BillAddress, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.Backend.lblCity</label>
+                        <div class="col-sm-4">
+                            @Html.TextBox("City", (string)ViewBag.City, new { @class = "form-control" })
+                        </div>
+                        <label class="col-sm-1 control-label">@Resources.Backend.lblState</label>
+                        <div class="col-sm-4">
+                            @Html.TextBox("State", (string)ViewBag.State, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.Backend.lblZipCode</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("ZipCode", (string)ViewBag.ZipCode, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.Backend.lblDescription</label>
+                        <div class="col-sm-9">
+                            @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "5" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-8">
+                            <div class="checkbox">
+                                <label>
+                                    @{
+                                        bool IsCheck = Convert.ToBoolean(ViewBag.IsTemplate);
+                                        @Html.CheckBox("IsTemplate", IsCheck)<strong>@Resources.CreateOrder.lblOrdTemplate</strong>
+                                    }
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-3">
+                            <a href="/backend/order" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.CreateOrder.lblShipAddress</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("DeliveryAddress", (string)ViewBag.DeliveryAddress, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.Backend.lblCity</label>
+                        <div class="col-sm-4">
+                            @Html.TextBox("CityShip", (string)ViewBag.CityShip, new { @class = "form-control" })
+                        </div>
+                        <label class="col-sm-1 control-label">@Resources.Backend.lblState</label>
+                        <div class="col-sm-4">
+                            @Html.TextBox("StateShip", (string)ViewBag.StateShip, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">@Resources.Backend.lblZipCode</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("ZipCodeShip", (string)ViewBag.ZipCodeShip, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <div class="col-sm-12 text-right">
+                            <p class="control-label">@Resources.CreateOrder.lblNo  @Html.Label((string)@ViewBag.InvoiceNo, new { id = "lblInvoiceNo" })</></p>
+                            <p class="control-label">@Resources.CreateOrder.lblOrdDate  @Html.Label((string)@ViewBag.InvoiceDate, new { id = "lblInvoiceDate" })</p>
+                            <p class="control-label">@Resources.CreateOrder.lblAmount $@Html.Label((string)@ViewBag.Amount, new { id = "lblAmount" })</p>
+                            <p class="control-label">@Resources.CreateOrder.lblDiscount $@Html.Label((string)@ViewBag.DiscountAmount, new { id = "lblDiscountAmount" })</p>
+                            <p class="control-label">@Resources.CreateOrder.lblTaxAmount $@Html.Label((string)@ViewBag.TaxAmount, new { id = "lblTaxAmount" })</p>
+                            <p class="control-label">@Resources.CreateOrder.lblTotal $@Html.Label((string)@ViewBag.TotalAmount, new { id = "lblTotalAmount" })</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div ng-grid="gridOptions"></div>
+        </div>
+    </section>
+</section>
+@section Styles {
+    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+        var OrdID = @ViewBag.OrdID, myjson, isFristLoad=true;
+        var app = angular.module('MyApp', ['ngGrid']);
+        app.controller('MainController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [10, 20, 40],
+                pageSize:10,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+            $scope.getPagedDataAsync = function (pageSize, page, searchText) {
+                if(isFristLoad)
+                {
+                    isFristLoad=false;
+                    $http({
+                        url: "/backend/GetOrdItem?id="+ OrdID,
+                        method: "GET"
+
+                    }).success(function (data, status, headers, config) {
+                        myjson = JSON.parse(JSON.parse(data));
+                        $scope.setPagingData(myjson, page, pageSize);
+                        SumTotalAmount(myjson);
+                    }).error(function (data, status, headers, config) {
+                        alert(JSON.stringify(data));
+                    });
+                }
+                else
+                {
+                    $scope.setPagingData(myjson, page, pageSize);
+                }
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                { field: "ProdNo", displayName: '@Resources.CreateOrder.gridNo', width: "120",  enableCellEdit: false, headerClass: 'ngHeader-Center', cellClass: 'ngCellText-Center'},
+                { field: "ProductName", displayName: '@Resources.CreateOrder.gridName', pinnable: true, enableCellEdit: false},
+                { field: "Price", displayName: '@Resources.CreateOrder.gridPrice', pinnable: true, width: "120",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'},
+                { field: "Qty", displayName: '@Resources.CreateOrder.gridQty', pinnable: true, width: "120", enableCellEdit: true, cellFilter:"number:0",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'},
+                { field: "Discount", displayName: '@Resources.CreateOrder.gridDiscount', pinnable: true, width: "120",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right' },
+                { field: "Total", displayName: '@Resources.CreateOrder.gridTotal', pinnable: true, width: "150",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'}
+                ],
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                totalServerItems: "totalServerItems",
+                enableCellSelection: true,
+                enableCellEdit: true,
+                enableRowSelection: false,
+                enableColumnReordering: true,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            //---Edit value changed---//
+            $scope.$on('ngGridEventEndCellEdit', function(evt){
+                if(evt.targetScope.row.entity.Qty>=0)
+                {
+                    var total=0, discount=0, price=0, quantity=0;
+                    quantity = evt.targetScope.row.entity.Qty;
+                    price = evt.targetScope.row.entity.Price;
+                    discount = evt.targetScope.row.entity.Discount * quantity;
+                    total = quantity*price - discount;
+                    evt.targetScope.row.entity.Total = total;
+                    SumTotalAmount($scope.myData);
+                }
+                else
+                {
+                    alert('@Resources.CreateOrder.msgQuantity');
+                    evt.targetScope.row.entity.Qty = 0;
+                }
+                $scope.$apply();
+            });
+        }]);
+
+        function SumTotalAmount(json)
+        {
+            var Total=0, Discount=0, TaxAmount=0, Amount=0;
+            for(var i=0; i<json.length; i++)
+            {
+                Amount+=json[i].Price*json[i].Qty;
+            }
+            Total=Amount+TaxAmount - Discount;
+            $('#lblAmount').html(Amount);
+            $('#lblDiscountAmount').html(Discount);
+            $('#lblTaxAmount').html(TaxAmount);
+            $('#lblTotalAmount').html(Total);
+        }
+        IsEdit();
+        function IsEdit()
+        {
+            if('@ViewBag.IsEdit'=='False')
+                $(btnSave).addClass('hide');
+        }
+    </script>
+}

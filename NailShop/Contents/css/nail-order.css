@@ -1,0 +1,42 @@
+.section-orders {
+  padding: 30px 0;
+  background-color: #f9f9f9;
+}
+.section-orders h4 {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+.section-orders table {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #e0e0e0;
+}
+.section-orders table > thead > tr > td,
+.section-orders table > tbody > tr > td,
+.section-orders table > tfoot > tr > td {
+  border-color: #e0e0e0;
+}
+.section-orders table > thead > tr > td,
+.section-orders table tfoot > tr > td {
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+.section-orders table > tbody > tr > td {
+  padding-bottom: 11px;
+  padding-top: 11px;
+}
+.section-orders table > tfoot > tr > td {
+  padding-bottom: 11px;
+  padding-top: 11px;
+}
+.section-orders table > tfoot > tr > td .pagination {
+  margin-right: 30px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.section-orders table > tfoot > tr > td .pagination > li > a,
+.section-orders table > tfoot > tr > td .pagination > li > span {
+  border: 0;
+  color: rgba(0, 0, 0, 0.87);
+}

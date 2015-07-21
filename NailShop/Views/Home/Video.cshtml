@@ -1,0 +1,85 @@
+﻿@using NailShop.DataAccess;
+@model List<vw_Photo>
+@{
+    ViewBag.Title = @Resources.FormTitle.formVideo;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+<link href="~/Contents/css/nail-video.css" rel="stylesheet" />
+<div class="page-wrap">
+    <section class="section-video">
+        <div class="title-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1>@Resources.Header.linkVideo</h1>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <ol class="breadcrumb">
+                            <li><a href="/home">@Resources.Header.linkHome</a></li>
+                            <li class="active">@Resources.Header.linkVideo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="video-panel">
+                            <div class="video-player">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@Model[0].Video" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div id="videoThum" class="video-thum">
+                                <ul class="list-unstyled">
+                                    @{
+                                        bool isFirst = true;
+                                        foreach (vw_Photo row in Model)
+                                        {
+                                            if (isFirst)
+                                            {
+                                                <li class="active">
+                                                    <a href="javascript:;" data-video="@row.Video">
+                                                        <img src="http://img.youtube.com/vi/@row.Video/hqdefault.jpg">
+                                                        <p>@row.Title</p>
+                                                    </a>
+                                                </li>
+                                                isFirst = false;
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a href="javascript:;" data-video="@row.Video">
+                                                        <img src="http://img.youtube.com/vi/@row.Video/hqdefault.jpg">
+                                                        <p>@row.Title</p>
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#videoThum').find('li').each(function () {
+                $(this).click(function () {
+                    $('#videoThum').find('li').removeClass('active');
+                    $(this).addClass('active');
+                    $('.embed-responsive-item').attr('src', 'https://www.youtube.com/embed/' + $(this).find('a').attr('data-video'));
+                    //console.log();
+                });
+            });
+        });
+    </script>
+}

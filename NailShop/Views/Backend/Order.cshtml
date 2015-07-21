@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "Order List";
+    Layout = "~/Views/Share/_Backend.cshtml";
+}
+
+<section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
+    <section class="scrollable padder">
+        <div class="m-b-md">
+            <h3 class="m-b-none">Order List</h3>
+        </div>
+        <section class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label>@Resources.Order.lblFromDate</label>
+                        <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                    </div>
+                    <div class="form-group">
+                        <label>@Resources.Order.lblToDate</label>
+                        <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("Status", new SelectList(ViewBag.ListStatus, "Status", "Name", "-1"), new { @class = "form-control" })
+                    </div>
+                    <button type="submit" data-ng-click="getPagedDataAsync()" class="btn btn-primary">@Resources.Order.btnSearch</button>
+                </form>
+            </div>
+        </section>
+        <div class="table-responsive">
+            <div ng-grid="gridOptions"></div>
+        </div>
+    </section>
+</section>
+
+@section Styles {
+    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/AngularJs/moment.js"></script>
+    <script type="text/javascript">
+        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
+        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+
+        var app = angular.module('MyApp', ['ngGrid']);
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [4, 20, 40],
+                pageSize: 4,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.pagingOptions.pageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.pagingOptions.currentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/Backend/GetInvoice",
+                    method: "GET",
+                    params: {
+                        FromDate: $('#txtFromDate').val(),
+                        ToDate: $('#txtToDate').val(),
+                        Status: $('#Status').val()
+                    }
+                }).success(function (data, status, headers, config) {
+                    var myJson = JSON.parse(JSON.parse(data));
+                    $scope.myData = myJson;
+                    $scope.setPagingData(myJson, page, pageSize);
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                { field: "InvoiceNo", displayName: '@Resources.Order.gridNo', width: "7%", cellClass: 'ngCellText-Center' },
+                { field: 'InvoiceDate', displayName: '@Resources.Order.gridInvoiceDate', width: "10%", cellTemplate: '<div class="ngCellText">{{row.getProperty(col.field) | resolve_date}}</div>', cellClass: 'ngCellText-Center' },
+                { field: "Notes", displayName: '@Resources.Order.gridNotes', pinnable: true },
+                { field: "FullName", displayName: 'Customer Name', pinnable: true },
+                { field: "SubTotal", displayName: '@Resources.Order.gridAmount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: "SaleTax", displayName: '@Resources.Order.gridTaxAmount', pinnable: true, width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: "Discount", displayName: '@Resources.Order.gridDiscount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: "Total", displayName: '@Resources.Order.gridTotal', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: 'InvoiceID', displayName: '@Resources.Order.gridAction', cellTemplate: '<div class="ngCellText"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}">View</a></div>', width: "7%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                ],
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                enableCellSelection: true,
+                enableRowSelection: false,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+        }]);
+
+        app.filter('resolve_date', function () {
+            return function (text, length, end) {
+                var mResult = '', twoDigitMonth;
+                var mDate = new Date(parseInt(text.substr(6)));
+                twoDigitMonth = ((mDate.getMonth().length + 1) === 1) ? (mDate.getMonth() + 1) : '0' + (mDate.getMonth() + 1);
+                mResult = mDate.getDate() + "/" + twoDigitMonth + "/" + mDate.getFullYear();
+                return mResult;
+            };
+        });
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html class="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="truc.trg09@gmail.com">
+    <meta name="author" content="truc.truong">
+    <link rel="icon" href="../../favicon.ico">
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Contents/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Contents/css/animate.css" rel="stylesheet" />
+    <link href="~/Contents/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Contents/css/app.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <section class="vbox">
+        @Html.Partial("~/Views/Share/_HeaderBackend.cshtml")
+        <section>
+            <section class="hbox stretch">
+                <!-- .aside -->
+                <aside class="bg-dark lter b-r aside-md hidden-print" id="nav">
+                    @Html.Partial("~/Views/Share/MenuLeft.cshtml")
+                </aside>
+                <section id="content">
+                    @RenderBody()
+                </section>
+                <aside class="bg-light lter b-l aside-md hide" id="notes">
+                    <div class="wrapper">Notification</div>
+                </aside>
+            </section>
+        </section>
+    </section>
+
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/app.plugin.js"></script>
+    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+    @RenderSection("Scripts", false)
+    <script type="text/javascript">
+        $('#linkLogout').click(function () {
+            $.ajax({
+                url: '/Backend/Logout',
+                type: 'Post',
+                success: function (data) {
+                    if (data.IsOk) {
+                        window.location.href = "/Backend";
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

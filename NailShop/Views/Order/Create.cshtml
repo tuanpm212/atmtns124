@@ -1,0 +1,341 @@
+﻿@{
+    ViewBag.Title = @Resources.FormTitle.formOrder;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+<link href="~/Contents/css/nail-order.css" rel="stylesheet" />
+<link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<div ng-app="MyApp" class="page-wrap" ng-controller="MainController">
+    <section class="section-orders">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 about-content">
+                    <h4>@Resources.CreateOrder.titleForm</h4>
+                    <div class="col-md-6">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Resources.CreateOrder.lblBillAddress</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBox("BillAddress", (string)ViewBag.BillAddress, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">City</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBox("City", (string)ViewBag.City, new { @class = "form-control" })
+                                </div>
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBox("State", (string)ViewBag.State, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">ZipCode</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBox("ZipCode", (string)ViewBag.ZipCode, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Description</label>
+                                <div class="col-sm-9">
+                                    @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "5" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <div class="checkbox">
+                                        <label>
+                                            @{
+                                                bool IsCheck = Convert.ToBoolean(ViewBag.IsTemplate);
+                                                @Html.CheckBox("IsTemplate", IsCheck)<strong>@Resources.CreateOrder.lblOrdTemplate</strong>
+                                            }
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Resources.CreateOrder.lblShipAddress</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBox("DeliveryAddress", (string)ViewBag.DeliveryAddress, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">City</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBox("CityShip", (string)ViewBag.CityShip, new { @class = "form-control" })
+                                </div>
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBox("StateShip", (string)ViewBag.StateShip, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">ZipCode</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBox("ZipCodeShip", (string)ViewBag.ZipCodeShip, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="control-label">@Resources.CreateOrder.lblNo  @Html.Label((string)@ViewBag.InvoiceNo, new { id = "lblInvoiceNo" })</></p>
+                                <p class="control-label">@Resources.CreateOrder.lblOrdDate  @Html.Label((string)@ViewBag.InvoiceDate, new { id = "lblInvoiceDate" })</p>
+                                <p class="control-label">@Resources.CreateOrder.lblAmount $@Html.Label((string)@ViewBag.Amount, new { id = "lblAmount" })</p>
+                                <p class="control-label">@Resources.CreateOrder.lblDiscount $@Html.Label((string)@ViewBag.DiscountAmount, new { id = "lblDiscountAmount" })</p>
+                                <p class="control-label">@Resources.CreateOrder.lblTaxAmount $@Html.Label((string)@ViewBag.TaxAmount, new { id = "lblTaxAmount" })</p>
+                                <p class="control-label">@Resources.CreateOrder.lblTotal $@Html.Label((string)@ViewBag.TotalAmount, new { id = "lblTotalAmount" })</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <div class="col-sm-9">
+                                        <button id="btnSave" type="submit" data-ng-click="addNew()" class="btn btn-primary">@Resources.CreateOrder.btnSave</button>
+                                        <a href="/Order" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-inline">
+                        <h4>@Resources.CreateOrder.titleItems</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <div>
+                            <div ng-grid="gridOptions"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
+    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
+    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+        var OrdID = @ViewBag.OrdID, myjson, isFristLoad=true, jsonPromotion;
+        var app = angular.module('MyApp', ['ngGrid']);
+        app.controller('MainController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.filterOptions = {
+                filterText: "",
+                useExternalFilter: true
+            };
+
+            $scope.totalServerItems = 0;
+            $scope.pagingOptions = {
+                pageSizes: [10, 20, 40],
+                pageSize:10,
+                currentPage: 1
+            };
+
+            $scope.setPagingData = function (data, page, pageSize) {
+                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+                $scope.myData = pagedData;
+                $scope.totalServerItems = data.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            };
+            $scope.getPagedDataAsync = function (pageSize, page, searchText) {
+                if(isFristLoad)
+                {
+                    isFristLoad=false;
+                    $http({
+                        url: "/Order/GetOrdItem?id="+ OrdID,
+                        method: "GET"
+
+                    }).success(function (data, status, headers, config) {
+                        myjson = JSON.parse(JSON.parse(data));
+                        $scope.setPagingData(myjson, page, pageSize);
+                        SumTotalAmount(myjson);
+                    }).error(function (data, status, headers, config) {
+                        alert(JSON.stringify(data));
+                    });
+                }
+                else
+                {
+                    $scope.setPagingData(myjson, page, pageSize);
+                }
+            };
+
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+            $scope.$watch('pagingOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+            $scope.$watch('filterOptions', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+                }
+            }, true);
+
+            $scope.gridOptions = {
+                data: 'myData',
+                columnDefs: [
+                { field: "ProdNo", displayName: '@Resources.CreateOrder.gridNo', width: "120",  enableCellEdit: false, headerClass: 'ngHeader-Center', cellClass: 'ngCellText-Center'},
+                { field: "ProductName", displayName: '@Resources.CreateOrder.gridName', pinnable: true, enableCellEdit: false},
+                { field: "Price", displayName: '@Resources.CreateOrder.gridPrice', pinnable: true, width: "120",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'},
+                { field: "Qty", displayName: '@Resources.CreateOrder.gridQty', pinnable: true, width: "120", enableCellEdit: true, cellFilter:"number:0",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'},
+                { field: "Discount", displayName: '@Resources.CreateOrder.gridDiscount', pinnable: true, width: "120",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right' },
+                { field: "Total", displayName: '@Resources.CreateOrder.gridTotal', pinnable: true, width: "150",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'}
+                ],
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                filterOptions: $scope.filterOptions,
+                sortInfo: $scope.sortOptions,
+                totalServerItems: "totalServerItems",
+                enableCellSelection: true,
+                enableCellEdit: true,
+                enableRowSelection: false,
+                enableColumnReordering: true,
+                headerRowHeight: 31,
+                rowHeight: 31,
+                i18n: "en"
+            };
+
+            //--Create Order--//
+            $scope.addNew = function ()
+            {
+                isQuantity = false;
+                for(var i=0; i<myjson.length; i++)
+                {
+                    if(myjson[i].Qty>=0)
+                    {
+                        isQuantity=true;
+                        break;
+                    }
+                }
+                if(!isQuantity)
+                {
+                    alert('@Resources.CreateOrder.msgQuantity');
+                    return;
+                }
+                else
+                {
+                    var Invoice={InvoiceID: OrdID, Address: $('#BillAddress').val(), AddressAddr1S: $('#DeliveryAddress').val(), Notes: $('#Description').val(),
+                        City: $('#City').val(), State: $('#State').val(), ZipCode: $('#ZipCode').val(),
+                        CityShip: $('#CityShip').val(), StateShip: $('#StateShip').val(), ZipCodeShip: $('#ZipCodeShip').val(),
+                        SubTotal: $('#lblAmount').html(), SaleTax: $('#lblTaxAmount').html(), Discount: $('#lblDiscountAmount').html(), Total: $('#lblTotalAmount').html(), IsTemplate: $('#IsTemplate').val()};
+                    $http({
+                        url: "/Order/SaveData",
+                        method: "Post",
+                        data:{invoice: Invoice, ordItems: myjson}
+                    }).success(function (data) {
+                        if(data.IsOk)
+                            window.location.href="/Order";
+                    });
+                }
+            };
+
+            //---Edit value changed---//
+            $scope.$on('ngGridEventEndCellEdit', function(evt){
+                if(evt.targetScope.row.entity.Qty>=0)
+                {
+                    var total=0, discount=0, price=0, quantity=0;
+                    quantity = evt.targetScope.row.entity.Qty;
+                    price = evt.targetScope.row.entity.Price;
+                    discount = evt.targetScope.row.entity.Discount * quantity;
+                    total = quantity*price - discount;
+                    evt.targetScope.row.entity.Total = total;
+                    SumTotalAmount($scope.myData);
+                }
+                else
+                {
+                    alert('@Resources.CreateOrder.msgQuantity');
+                    evt.targetScope.row.entity.Qty = 0;
+                }
+                $scope.$apply();
+            });
+        }]);
+
+        function SumTotalAmount(json)
+        {
+            var mDiscount=0, mAmount=0, mPercent;
+            var Total=0, Discount=0, TaxAmount=0, Amount=0;
+            for(var i=0; i<json.length; i++)
+            {
+                mPercent = GetPromotion(json[i].CategoryID, json[i].ProductID, json[i].Qty);
+                mDiscount = (json[i].Price*mPercent/100)*json[i].Qty;
+                mAmount = json[i].Price*json[i].Qty;
+                json[i].Discount = mDiscount;
+                json[i].SubTotal = mAmount;
+                json[i].Total = mAmount-mDiscount;
+
+                Discount += mDiscount;
+                Amount += mAmount;
+            }
+            Total = Amount + TaxAmount - Discount;
+            $('#lblAmount').html(commaSeparateNumber(Amount));
+            $('#lblDiscountAmount').html(commaSeparateNumber(Discount));
+            $('#lblTaxAmount').html(commaSeparateNumber(TaxAmount));
+            $('#lblTotalAmount').html(commaSeparateNumber(Total));
+        }
+
+        function GetPromotion(CategoryID, ProductID, Quantity)
+        {
+            if(jsonPromotion==null || jsonPromotion.length==0)
+                return 0;
+
+            for(var i =0; i< jsonPromotion.length; i++)
+            {
+                if(jsonPromotion[i].CategoryID==null && jsonPromotion[i].ProductID==null && jsonPromotion[i].Quantity<=Quantity)
+                    return jsonPromotion[i].Percent;
+                else
+                {
+                    if(jsonPromotion[i].CategoryID!=null && jsonPromotion[i].CategoryID==CategoryID && jsonPromotion[i].Quantity<=Quantity)
+                        return jsonPromotion[i].Percent;
+                    if(jsonPromotion[i].ProductID!=null && jsonPromotion[i].ProductID==ProductID && jsonPromotion[i].Quantity<=Quantity)
+                        return  jsonPromotion[i].Percent;
+                }
+            }
+            return 0;
+        }
+
+        LoadPromotion();
+        IsEdit();
+
+        function LoadPromotion()
+        {
+            $.ajax({
+                url: "/Order/GetPromotionRule",
+                type: 'Get',
+                success: function (data) {
+                    if (data != null) {
+                        jsonPromotion=JSON.parse(data);
+                    }
+                }
+            });
+        }
+
+        function IsEdit()
+        {
+            if('@ViewBag.IsEdit'=='False')
+                $(btnSave).addClass('hide');
+        }
+
+        function commaSeparateNumber(val) {
+            while (/(\d+)(\d{3})/.test(val.toString())) {
+                val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+            }
+            return val;
+        }
+    </script>
+}

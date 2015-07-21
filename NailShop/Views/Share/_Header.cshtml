@@ -1,0 +1,131 @@
+﻿<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 hidden-xs">
+                    <ul class="list-unstyled">
+                        <li>
+                            <p><i class="fa fa-phone"></i>&nbsp;@Resources.Header.lblPhone: 800-398-0525</p>
+                        </li>
+                        <li>
+                            <p><i class="fa fa-envelope"></i>&nbsp;info@atsoft123.com</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 text-right header-top-right">
+                    @*<ul class="list-inline shopping-cart">
+                        <li>
+                            <a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;@Resources.Header.lblShoppingCart [0]</a>
+                        </li>
+                    </ul>*@
+
+                    @{
+                        if (Convert.ToBoolean(@ViewBag.IsLogin))
+                        {
+                            <ul class="list-inline">
+                                <li class="login">
+                                    <a href="#"><i class="fa fa-user"></i>&nbsp;@Resources.Header.lblWelcome @ViewBag.FullName</a>
+                                </li>
+                                <li>
+                                    <a id="linkLogout" class="btn btn-default text-uppercase" href="#">@Resources.Header.lblLogout</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="list-inline">
+                                <li>
+                                    <a class="btn btn-primary text-uppercase" href="#" data-toggle="modal" data-target="#modalLogin ">@Resources.Header.lblLogin</a>
+                                </li>
+                                @*<li>
+                                    <a id="linkRegister" class="btn btn-default text-uppercase" href="#">@Resources.Header.lblRegister</a>
+                                </li>*@
+                            </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="~/Contents/images/logo.png">
+                    </a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        @{
+                            if (ViewContext.RouteData.Values["Controller"].ToString().ToUpper() == "HOME" && ViewContext.RouteData.Values["action"].ToString().ToUpper() == "INDEX")
+                            {
+                                <li class="active"><a href="@(Url.Action("Index", "Home"))">@Resources.Header.linkHome</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@(Url.Action("Index", "Home"))">@Resources.Header.linkHome</a></li>
+                            }
+                            
+                            if (ViewContext.RouteData.Values["Controller"].ToString().ToUpper() == "HOME" && ViewContext.RouteData.Values["action"].ToString().ToUpper() == "ABOUT")
+                            {
+                                <li class="active"><a href="@(Url.Action("About", "Home"))">@Resources.Header.linkAbout</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@(Url.Action("About", "Home"))">@Resources.Header.linkAbout</a></li>
+                            }
+
+                            if (Convert.ToBoolean(@ViewBag.IsLogin))
+                            {
+                                if (ViewContext.RouteData.Values["Controller"].ToString().ToUpper() == "ORDER" && (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "INDEX" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATE"))
+                                {
+                                    <li class="active"><a href="@(Url.Action("Index", "Order"))">@Resources.Header.linkOrd</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@(Url.Action("Index", "Order"))">@Resources.Header.linkOrd</a></li>
+                                }
+                            }
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "GALLERY")
+                            {
+                                <li class="active"><a href="@(Url.Action("Gallery", "Home"))">@Resources.Header.linkGallery</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@(Url.Action("Gallery", "Home"))">@Resources.Header.linkGallery</a></li>
+                            }
+                            
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "VIDEO")
+                            {
+                                <li class="active"><a href="@(Url.Action("Video", "Home"))">@Resources.Header.linkVideo</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@(Url.Action("Video", "Home"))">@Resources.Header.linkVideo</a></li>
+                            }
+
+                            if (ViewContext.RouteData.Values["Controller"].ToString().ToUpper() == "HOME" && ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CONTACT")
+                            {
+                                <li class="active"><a href="@(Url.Action("Contact", "Home"))">@Resources.Header.linkContact</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@(Url.Action("Contact", "Home"))">@Resources.Header.linkContact</a></li>
+                            }
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

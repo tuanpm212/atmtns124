@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-dark">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="truc.trg09@gmail.com">
+    <meta name="author" content="truc.truong">
+    <link href="~/Contents/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Contents/css/animate.css" rel="stylesheet" />
+    <link href="~/Contents/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Contents/css/font.css" rel="stylesheet" />
+    <link href="~/Contents/css/app.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="js/ie/html5shiv.js"></script>
+      <script src="js/ie/respond.min.js"></script>
+      <script src="js/ie/excanvas.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+        <div class="container aside-xxl">
+            <a class="navbar-brand block text-uppercase" href="index.html">@Resources.Backend.backendName</a>
+            <section class="panel panel-default bg-white m-t-lg">
+                <header class="panel-heading text-center">
+                    <strong>Administrator Login</strong>
+                </header>
+                <form class="panel-body wrapper-lg">
+                    <div class="form-group">
+                        <label class="control-label">@Resources.Backend.lblUserName</label>
+                        <input id="txtLoginName" type="text" placeholder="@Resources.Backend.pldUserName" class="form-control input-lg">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">@Resources.Backend.lblPassword</label>
+                        <input id="txtPassword" type="password" placeholder="@Resources.Backend.pldPassword" class="form-control input-lg">
+                    </div>
+                    <div id="divError" class="form-group has-error hide">
+                        <div class="input-group">
+                            <p class="form-control-static control-label">@Resources.Login.msgError</p>
+                        </div>
+                    </div>
+                    <button id="btnLogin" type="submit" class="btn btn-primary">@Resources.Backend.btnSignIn</button>
+                </form>
+            </section>
+        </div>
+    </section>
+    <!-- App -->
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/app.plugin.js"></script>
+    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnLogin").click(function () {
+                var login = {
+                    LoginName: $('#txtLoginName').val(),
+                    Password: $('#txtPassword').val()
+                }
+                $.ajax({
+                    url: '/admin/Login',
+                    type: 'Post',
+                    data: JSON.stringify(login),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.IsOk) 
+                            window.location.href = "/admin/video";
+                        else
+                            $('#divError').removeClass('hide');
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</body>
+</html>

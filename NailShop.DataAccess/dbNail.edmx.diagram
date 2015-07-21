@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24bfbfd8762c448c8c67e5a302f40b4a" Name="Diagram1" ZoomLevel="46">
+        <EntityTypeShape EntityType="NailShopModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.Message" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.Product" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.Store" Width="1.5" PointX="6.75" PointY="5.625" />
+        <EntityTypeShape EntityType="NailShopModel.SynCustomer" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.SynProduct" Width="1.5" PointX="2.75" PointY="9.5" />
+        <EntityTypeShape EntityType="NailShopModel.SynOrderItem" Width="1.5" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="NailShopModel.SynInvoice" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_Brand" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_News" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.Brand" Width="1.5" PointX="12.75" PointY="7.125" />
+        <EntityTypeShape EntityType="NailShopModel.BrandLang" Width="1.5" PointX="14.75" PointY="7.125" />
+        <EntityTypeShape EntityType="NailShopModel.Language" Width="1.5" PointX="16.625" PointY="7.125" />
+        <EntityTypeShape EntityType="NailShopModel.News" Width="1.5" PointX="18.625" PointY="7.125" />
+        <EntityTypeShape EntityType="NailShopModel.NewsLang" Width="1.5" PointX="16.75" PointY="4.5" />
+        <EntityTypeShape EntityType="NailShopModel.Slide" Width="1.5" PointX="12.75" PointY="4.5" />
+        <EntityTypeShape EntityType="NailShopModel.SlideLang" Width="1.5" PointX="15" PointY="10.625" />
+        <AssociationConnector Association="NailShopModel.FK_BrandLang_Brand" />
+        <AssociationConnector Association="NailShopModel.FK_NewsLang_Language" />
+        <AssociationConnector Association="NailShopModel.FK_NewsLang_News" />
+        <AssociationConnector Association="NailShopModel.FK_SlideLang_Slide" />
+        <EntityTypeShape EntityType="NailShopModel.vw_Slide" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NailShopModel.Contact" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_About" Width="1.5" PointX="9.375" PointY="10.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_Invoice" Width="1.5" PointX="11.375" PointY="10.75" />
+        <EntityTypeShape EntityType="NailShopModel.Invoice" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_Photo" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="NailShopModel.RefNo" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="NailShopModel.OrdItem" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NailShopModel.ProductHot" Width="1.5" PointX="15.375" PointY="13.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_ProductHot" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="NailShopModel.About" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.AboutLang" Width="1.5" PointX="7.375" PointY="17.75" />
+        <EntityTypeShape EntityType="NailShopModel.Photo" Width="1.5" PointX="17.375" PointY="10.75" />
+        <EntityTypeShape EntityType="NailShopModel.PhotoDetail" Width="1.5" PointX="17.375" PointY="13.75" />
+        <EntityTypeShape EntityType="NailShopModel.PhotoLang" Width="1.5" PointX="13.375" PointY="18.75" />
+        <AssociationConnector Association="NailShopModel.FK_OrdItems_Invoices" />
+        <EntityTypeShape EntityType="NailShopModel.PhotoDetailLang" Width="1.5" PointX="17.375" PointY="16.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_PhotoDetail" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_PromotionDetail" Width="1.5" PointX="19.375" PointY="10.75" />
+        <EntityTypeShape EntityType="NailShopModel.PromotionDetail" Width="1.5" PointX="19.375" PointY="19.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_PromotionItem" Width="1.5" PointX="7.375" PointY="20.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_ProductPromotion" Width="1.5" PointX="15.375" PointY="20.75" />
+        <EntityTypeShape EntityType="NailShopModel.Promotion" Width="1.5" PointX="19.375" PointY="15.75" />
+        <EntityTypeShape EntityType="NailShopModel.Category" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NailShopModel.vw_Category" Width="1.5" PointX="21.375" PointY="3.75" />
+        <AssociationConnector Association="NailShopModel.FK_PhotoDetail_Photo" />
+        <AssociationConnector Association="NailShopModel.FK_PhotoLang_Photo" />
+        <AssociationConnector Association="NailShopModel.FK_PhotoDetailLang_PhotoDetail" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

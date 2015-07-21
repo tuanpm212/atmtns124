@@ -1,0 +1,554 @@
+@import "variables.less";
+@import "mixins.less";
+@import "nail-variables.less";
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,900,700italic,900italic&subset=latin,vietnamese);
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 390px;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: 'Roboto', sans-serif;
+
+  @media (min-width: @screen-sm-min) {
+    margin-bottom: 265px;
+  }
+
+  @media (min-width: @screen-md-min) {
+    margin-bottom: 156px;
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 390px;
+  background-color: #f5f5f5;
+
+  @media (min-width: @screen-sm-min) {
+    height: 265px;
+  }
+
+  @media (min-width: @screen-md-min) {
+    height: 156px;
+  }
+}
+
+a {
+  color: @text-black;
+
+  &:hover {
+    color: @color-blue;
+    text-decoration: none;
+  }
+}
+
+hr {
+  color: @border-gray-1;
+}
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body .page-wrap {
+  padding-top: 147px;
+
+  @media (min-width: @screen-sm-min) {
+    padding-top: 136px;
+  }
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+//
+// Buttons
+// --------------------------------------------------
+
+// Common styles
+.btn-default,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+  
+  // Reset the shadow
+  &:active,
+  &.active {
+    .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  .badge {
+    text-shadow: none;
+  }
+}
+
+// Mixin for generating new styles
+.btn-styles(@btn-color: #555) {
+  background-color: @btn-color;
+  border: none;
+  .transition(all 300ms linear);
+
+  &:hover,
+  &:focus  {
+    .box-shadow(@shadow-z1);
+    background-color: lighten(@btn-color, 1%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken(@btn-color, 12%);
+    //border-color: darken(@btn-color, 14%);
+  }
+
+  &.disabled,
+  &:disabled,
+  &[disabled] {
+    background-color: darken(@btn-color, 12%);
+    background-image: none;
+  }
+}
+
+// Common styles
+.btn {
+  border-radius: 2px;
+  &:active,
+  &.active {
+    background-image: none;
+  }
+}
+
+// Apply the mixin to the buttons
+.btn-default { .btn-styles(@btn-default-bg); text-shadow: 0 1px 0 #fff; border-color: #ccc; }
+.btn-primary { .btn-styles(@color-blue); }
+.btn-success { .btn-styles(@btn-success-bg); }
+.btn-info    { .btn-styles(@btn-info-bg); }
+.btn-warning { .btn-styles(@btn-warning-bg); }
+.btn-danger  { .btn-styles(@btn-danger-bg); }
+
+//
+// Modal
+// --------------------------------------------------
+
+.modal-content {
+  border-radius: 2px;
+  border: none;
+  .box-shadow(@shadow-z5);
+}
+
+.modal-header {
+  background-color: @color-blue;
+  border: none;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+
+  .close {
+    vertical-align: middle;
+    color: #fff;
+    opacity: 1;
+  }
+}
+
+.modal-title {
+  font-size: 24px;
+}
+
+//
+// Forms
+// --------------------------------------------------
+
+.form-control {
+  border-color: @border-gray-1;
+  border-radius: 0;
+  .box-shadow(none);
+}
+
+// Text input groups
+// -------------------------
+
+.form-control-feedback {
+  color: @input-addon-gray-1;
+}
+
+//
+// Breadcrumbs
+// --------------------------------------------------
+
+
+.breadcrumb {
+  margin-bottom: 0;
+  list-style: none;
+  background-color: transparent;
+  font-size: 12px;
+  line-height: 20px;
+
+  @media (min-width: @screen-sm-min) {
+    padding: 30px 0;
+  }
+
+  > li {
+    display: inline-block;
+
+    + li:before {
+      content: "@{breadcrumb-separator}\00a0"; // Unicode space added since inline-block means non-collapsing white-space
+      padding: 0 5px;
+      color: @text-black;
+    }
+  }
+
+  > .active {
+    color: @color-blue;
+  }
+}
+
+//
+// Navbar
+// --------------------------------------------------
+
+.navbar-fixed-top {
+  border-bottom: 0;
+  .box-shadow(@shadow-z1);
+}
+
+.navbar-right {
+  @media (min-width: @screen-sm-min) {
+    margin-right: 15px;
+  }
+}
+
+.navbar {
+  .header-top {
+    background-color: #e1f5fe;
+    height: 67px;
+    border-bottom: 1px solid #eeeeee;
+
+    @media (max-width: @screen-xs-max) {
+      .header-top-right {
+        .shopping-cart {
+          a {
+            line-height: 28px;
+          }
+        }
+      }
+    }
+
+    @media (min-width: @screen-sm-min) {
+      height: 56px;
+
+      .header-top-right {
+        ul {
+          line-height: 56px;
+          display: inline-block;
+        }
+      }
+    }
+
+    ul {
+      margin-bottom: 0;
+
+      @media (min-width: @screen-sm-min) {
+        li {
+          display: inline-block;
+          padding-right: 5px;
+          padding-left: 5px;
+        }
+      }
+    }
+
+    p {
+      line-height: 28px;
+      margin-bottom: 0;
+
+      @media (min-width: @screen-sm-min) {
+        line-height: 56px;
+      }
+    }
+  }
+
+  .header-bottom {
+    .navbar-brand {
+      height: 80px;
+      > img {
+        height: 50px;
+      }
+    }
+  }
+}
+
+.navbar-nav {
+  > li {
+    > a {
+      padding: 10px 0;
+
+      @media (max-width: @screen-xs-max) {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+.navbar-toggle {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.navbar-default {
+  .navbar-nav {
+    > li {
+      > a {
+        color: @text-black;
+        font-weight: bold;
+        text-transform: uppercase;
+        .transition(all 300ms linear);
+
+        @media (min-width: @screen-sm-min) {
+          padding-bottom: 7px;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          margin-left: 15px;
+          border-bottom: 3px solid transparent;
+        }
+      }
+
+      > a:focus, > a:hover {
+        background-color: @color-gray-hover;
+
+        @media (min-width: @screen-sm-min) {
+          background-color: transparent;
+          color: @color-blue;
+          border-color: @color-blue;
+        }
+      }
+    }
+
+    > .active { 
+      > a, > a:focus, > a:hover {
+        color: #fff;
+        background-color: @color-blue;
+
+        @media (min-width: @screen-sm-min) {
+          background-color: transparent;
+          color: @color-blue;
+          border-color: @color-blue;
+        }
+      }
+    }
+
+    > .open {
+      > a, > a:focus, > a:hover {
+        color: #fff;
+        background-color: @color-blue;
+
+        @media (min-width: @screen-sm-min) {
+          background-color: transparent;
+          color: @text-black;
+          border-color: @color-blue;
+        }
+      }
+      
+      .dropdown-menu {
+        > li {
+          > a {
+            color: @text-black;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+
+          > a:hover {
+            @media (max-width: @screen-xs-max) {
+              background-color: @color-gray-hover;
+            }
+
+            @media (min-width: @screen-sm-min) {
+              background-color: @color-blue;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+//
+// Footer
+// --------------------------------------------------
+.footer {
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+}
+
+.footer-top {
+  background-color: #2196f3;
+
+  [class^='col-sm-'] {
+    > i {
+      position: absolute;
+      text-align: right;
+      font-size: 36px;
+      height: 36px;
+      width: 36px;
+      top: 20px;
+      left: 15px;
+    }
+
+    > h4 {
+      font-size: 20px;
+      text-decoration: underline;
+      text-transform: uppercase;
+    }
+
+    > p {
+      margin-left: 40px;
+    }
+
+    > .dl-horizontal {
+      @media (max-width: @screen-xs-max) {
+        margin-left: 40px;
+      }
+      @media (min-width: @screen-sm-min) {
+        dt {
+          width: 100px;
+        }
+
+        dd {
+          margin-left: 106px;
+        }
+      }
+    }
+
+    > ul {
+      > li {
+        i {
+          font-size: 24px;
+          width: 24px;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+.footer-bottom {
+  background-color: #0d47a1;
+
+  p, a {
+    line-height: 40px;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    p, a {
+      text-align: center;
+      line-height: 28px;
+    }
+  }
+}
+
+//
+// owlCarousel
+// --------------------------------------------------
+
+.nail-carousel {
+  .owl-nav {
+    > div {
+      position: absolute;
+      top: 50%;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      line-height: 30px;
+      text-align: center;
+      width: 30px;
+      margin-top: -15px;
+    }
+
+    .owl-prev {
+      left: -30px;
+    }
+
+    .owl-next {
+      right: -30px;
+    }
+  }
+
+  .owl-dots {
+    height: 10px;
+    text-align: center;
+    margin-top: 10px;
+
+    .owl-dot {
+      display: inline-block;
+      font-size: 0;
+      margin-right: 2px;
+      margin-left: 2px;
+      vertical-align: text-top;
+
+      span {
+        display: block;
+        width: 10px;
+        height: 10px;
+        border: 2px solid #ffffff;
+        border-radius: 5px;
+      }
+
+      &.active {
+        span {
+          background-color: @color-blue;
+        }
+      }
+    }
+  }
+}
+
+//
+// Content
+// --------------------------------------------------
+
+.title-page {
+  background-color: #eeeeee;
+  border-bottom: 1px solid #bdbdbd;
+  position: relative;
+
+  @media (min-width: @screen-md-min) {
+    height: 80px;
+  }
+
+  &::after {
+    display: block;
+    width: 100%;
+    content: " ";
+    border-bottom: 1px solid #fff;
+    position: absolute;
+    bottom: 0px;
+  }
+
+  h1 {
+    font-size: 24px;
+    @media (min-width: @screen-md-min) {
+      line-height: 80px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}

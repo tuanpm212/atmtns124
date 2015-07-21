@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "CreateVideo";
+    Layout = "~/Views/Share/_Backend.cshtml";
+}
+
+<section class="scrollable padder">
+    <div class="m-b-md">
+        <h3 class="m-b-none">Create Video/View</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Title</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("Name", (string)ViewBag.Name, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("Description", (string)ViewBag.Description, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Video</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("Video", (string)ViewBag.Video, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                @{
+                                    bool IsCheck = Convert.ToBoolean(ViewBag.IsActive);
+                                    @Html.CheckBox("IsActive", IsCheck)<strong>IsActive</strong>
+                                }
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <button id="btnSave" class="btn btn-primary">Save</button>
+                        <a href="/admin/video" class="btn btn-primary">Back to Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+            var photo = {
+                ID: '@ViewBag.ID',
+                    IsPhoto: 0,
+                    Sort: 1,
+                    IsActive: $('#IsActive').val()
+                },
+                photolang = {
+                    PhotoID: '@ViewBag.ID',
+                    LangID: 'en-US',
+                    Title: $('#Name').val(),
+                    Description: $('#Description').val(),
+                    Video: $('#Video').val()
+                }
+                $.ajax({
+                    url: '/admin/SaveVideo',
+                    type: 'Post',
+                    data: JSON.stringify({ photo: photo, photolang: photolang }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.IsOk)
+                            window.location.href = "/admin/video";
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="truc.trg09@gmail.com">
+    <meta name="author" content="truc.truong">
+    <link rel="icon" href="../../favicon.ico">
+    <title>@ViewBag.Title</title>
+
+    <!-- Nail core CSS -->
+    <link href="~/Contents/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Contents/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Contents/css/nail-main.css" rel="stylesheet" />
+   
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    @Html.Partial("~/Views/Share/_Header.cshtml")
+    @RenderBody()
+    @Html.Partial("~/Views/Share/_Footer.cshtml")
+    @Html.Partial("~/Views/Home/Login.cshtml")
+
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <input id="langValue" type="hidden" value="@ViewBag.LangID" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnLogin").click(function () {
+                var login = {
+                    LoginName: $('#txtLoginName').val(),
+                    Password: $('#txtPassword').val()
+                }
+                $.ajax({
+                    url: '/Home/Login',
+                    type: 'Post',
+                    data: JSON.stringify(login),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.IsOk) {
+                            window.location.href = "/Home";
+                        }
+                        else
+                            $('#divError').removeClass('hide');
+                    }
+                });
+                e.preventDefault();
+            });
+
+            $('#linkLogout').click(function () {
+                $.ajax({
+                    url: '/Home/Logout',
+                    type: 'Post',
+                    success: function (data) {
+                        if (data.IsOk) {
+                            window.location.href = "/Home";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

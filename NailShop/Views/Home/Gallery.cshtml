@@ -1,0 +1,149 @@
+﻿@using NailShop.DataAccess;
+@model List<vw_Photo>
+@{
+    ViewBag.Title = @Resources.FormTitle.formGallery;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+<link href="~/Contents/css/owl.carousel.css" rel="stylesheet" />
+<link href="~/Contents/css/nail-gallery.css" rel="stylesheet" />
+<link href="~/Contents/css/lightbox.css" rel="stylesheet" />
+<div class="page-wrap">
+    <section class="section-gallery">
+        <div class="section-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="image-panel">
+                            <div class="image-box">
+                                <div class="carousel-padding">
+                                    <div id="eventCarousel">
+                                        @{
+                                            bool IsFirst = true;
+                                            foreach (vw_Photo row in Model)
+                                            {
+                                                if (IsFirst)
+                                                {
+                                                    <div class="item-event active" data-id="@row.ID">
+                                                        <img src="@row.Image">
+                                                        <p>@row.Title</p>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="item-event" data-id="@row.ID">
+                                                        <img src="@row.Image">
+                                                        <p>@row.Title</p>
+                                                    </div>
+                                                }
+                                                IsFirst = false;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="partialView"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    <script src="~/Scripts/lightbox.js"></script>
+    <script src="~/Scripts/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#eventCarousel').owlCarousel({
+                themeClass: "nail-carousel",
+                margin: 15,
+                responsive: {
+                    0: {
+                        items: 1,
+                        dots: true,
+                    },
+                    768: {
+                        items: 2,
+                        dots: false,
+                        nav: true,
+                        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                    },
+                    992: {
+                        items: 4,
+                        dots: false,
+                        nav: true,
+                        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                    },
+                },
+            });
+
+            loadImage(1);
+
+            $('#eventCarousel').find('.item-event').each(function () {
+                $(this).click(function () {
+                    $('#eventCarousel').find('.item-event').removeClass('active');
+                    $(this).addClass('active');
+                    loadImage($(this).attr('data-id'));
+                });
+            });
+        });
+
+        function loadImage(id) {
+            $("#partialView").load("/Home/Photo",
+            {
+                id: id,
+            }, function () {
+                $('#imageCarousel').owlCarousel({
+                    center: true,
+                    autoplay: true,
+                    loop: true,
+                    themeClass: "nail-carousel",
+                    margin: 15,
+                    responsive: {
+                        0: {
+                            items: 2,
+                            dots: true,
+                        },
+                        768: {
+                            items: 3,
+                            dots: false,
+                            nav: true,
+                            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                        },
+                        992: {
+                            items: 4,
+                            dots: false,
+                            nav: true,
+                            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                        },
+                    },
+                });
+
+                $('#imageCarousel').on('translate.owl.carousel', function (e) {
+                    changImage(e.relatedTarget.current());
+                })
+
+                eventClick();
+            });
+        };
+
+        function eventClick() {
+            $('#imageCarousel').find('.item-image').each(function () {
+                $(this).click(function () {
+                    $('#imageCarousel').find('.item-image').removeClass('active');
+                    $(this).addClass('active');
+                    $('.lightbox-content').html('<a href="' + $(this).attr('data-image') + '" data-lightbox="lightbox" data-title="' + $(this).attr('data-title') + '"><img src="' + $(this).attr('data-image') + '"><div><h5>' + $(this).attr('data-title') + '</h5></div></a>')
+                });
+            });
+        };
+
+        function changImage(index) {
+            var $curr = $('#imageCarousel').find('.owl-item').eq(index).children('.item-image');
+            $('#imageCarousel').find('.item-image').removeClass('active');
+            $curr.addClass('active');
+            $('.lightbox-content').html('<a href="' + $curr.attr('data-image') + '" data-lightbox="lightbox" data-title="' + $curr.attr('data-title') + '"><img src="' + $curr.attr('data-image') + '"><div><h5>' + $curr.attr('data-title') + '</h5></div></a>')
+        };
+    </script>
+
+}
+

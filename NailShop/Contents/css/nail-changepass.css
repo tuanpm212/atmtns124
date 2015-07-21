@@ -1,0 +1,11 @@
+.section-changepass h4 {
+  color: #2196f3;
+  margin-bottom: 15px;
+}
+.section-changepass .changepass-form {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.section-changepass .changepass-form textarea {
+  resize: none;
+}

@@ -1,0 +1,235 @@
+﻿@using NailShop.DataAccess;
+@model NailShop.Business.Model.ModelWeb.Home
+@{
+    ViewBag.Title = @Resources.FormTitle.formHome;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+<!-- Custom styles for Nail -->
+<link href="~/Contents/css/layerslider.css" rel="stylesheet" />
+<link href="~/Contents/css/owl.carousel.css" rel="stylesheet" />
+<link href="~/Contents/css/nail-home.css" rel="stylesheet" />
+<link href="~/Contents/css/magnific-popup.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { id = "home" }))
+{
+    <div class="page-wrap">
+        <section>
+            <div id="layerSlider" style="width: 100%; height: 400px;">
+                @{
+                    foreach (vw_Slide row in Model.Sliders)
+                    {
+                        <div class="ls-slide">
+                            <img src="@row.Image" class="ls-bg" alt="Slide background">
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+
+        <section class="section-wellcome">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img src="@Model.Welcome.Image">
+                    </div>
+                    <div class="col-sm-7">
+                        <h1><em>@Model.Welcome.Name</em></h1>
+                        <p class="text-justify"><em>@Html.Raw(Model.Welcome.Description)</em></p>
+                    </div>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+        </section>
+
+@{
+    int k=1;
+    foreach (Store row in Model.Stores)
+    {
+        <section class="section-product product-style-@k">
+            <div class="container">
+                <div class="row">
+                    <h3 class="text-center section-title"><em>@row.StoreName</em></h3>
+                    <div class="col-sm-12 carouselProduct">
+                        @{
+                            foreach (vw_ProductHot mRow in Model.ProductHots)
+                            {
+                                if (mRow.StoreID == row.StoreID)
+                                {
+                                    <div class="item">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <img class="embed-responsive-item" src="@mRow.Thumbnail">
+                                            <div class="embed-responsive-item hover-image" data-name="@mRow.ProductName" data-image="@mRow.LargeImage" data-description="@mRow.Description" data-price="$@mRow.Price.ToString("#,##0.00")" data-url="@mRow.Url">
+                                                <i class="fa fa-search-plus"></i>
+                                                <p>@Resources.Home.btnReadmore</p>
+                                            </div>
+                                        </div>
+                                        <h4>@mRow.ProductName</h4>
+                                        <span>Giá: $@mRow.Price.ToString("#,##0.00")</span>
+                                        <small><em>@NailShop.Utils.Utils.SplitWords(mRow.ShortDescription, 80)</em></small>
+                                        <div class="text-center">
+                                            <a target="_blank" href="@mRow.Url" class="btn-primary btn-sm">@Resources.Home.btnReadmore</a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        k++;
+        if (k > 3)
+        {
+            k = 1;
+        }
+    }
+   
+ }
+
+        <section>
+            <div id="owlCarousel">
+                @{
+    foreach (vw_Brand row in Model.Brands)
+    {
+        <div class="item">
+            <img src="@row.Image">
+        </div>
+    }
+                }
+            </div>
+        </section>
+
+        <section class="section-news" data-parallax="scroll" data-image-src="Contents/images/bg-news.jpg">
+            <div class="container">
+                <div class="row">
+                    <h3 class="text-center text-uppercase section-title"><em>@Resources.Home.titleNew</em></h3>
+                    @{
+                        int i = 0;
+                        foreach (vw_News row in Model.News)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="col-sm-6">
+                                    <div class="item-left">
+                                        <img src="@row.Image">
+                                        <div class="col-xs-10 item-panel">
+                                            <h4 class="text-uppercase"><em>@row.Title</em></h4>
+                                            <p>@row.ShortDescription</p>
+                                            @*<a href="#" class="btn btn-primary">Xem chi tiết</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                            else
+                            {
+                                <div class="col-sm-6">
+                                    <div class="item-right">
+                                        <img src="@row.Image">
+                                        <div class="col-xs-10 item-panel">
+                                            <h4 class="text-uppercase"><em>@row.Title</em></h4>
+                                            <p>@row.ShortDescription</p>
+                                            @*<a href="#" class="btn btn-primary">Xem chi tiết</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+}
+<div id="itemDetail" class="item-detail">
+    <div class="embed-responsive embed-responsive-16by9"></div>
+    <h3></h3>
+    <span></span>
+    <p class="text-justify"></p>
+    <p class="text-center"></p>
+</div>
+@section Scripts {
+    <script src="~/Scripts/greensock.js"></script>
+    <script src="~/Scripts/layerslider.transitions.js"></script>
+    <script src="~/Scripts/layerslider.kreaturamedia.jquery.js"></script>
+    <script src="~/Scripts/owl.carousel.js"></script>
+    <script src="~/Scripts/parallax.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#layerSlider').layerSlider({
+            responsiveUnder: 960,
+            layersContainer: 960,
+            skinsPath: 'Contents/skins/'
+        });
+
+        $('#owlCarousel').owlCarousel({
+            margin: 10,
+            loop: true,
+            autoWidth: true,
+            items: 4
+        });
+
+        $('.carouselProduct').on('initialized.owl.carousel', function (event) {
+            var tmp = 0, $item = $(this).find('.owl-item');
+            $item.height('auto');
+            $item.each(function () {
+                if ($(this).height() > tmp) {
+                    tmp = $(this).height();
+                };
+            });
+            $item.height(tmp);
+        });
+
+        $('.carouselProduct').owlCarousel({
+            themeClass: "nail-carousel",
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+            margin: 30,
+            items: 4,
+            responsive: {
+                0: {
+                    items: 1,
+                    dots: true,
+                },
+                768: {
+                    items: 2,
+                },
+                992: {
+                    items: 3,
+                    nav: true,
+                },
+                1200: {
+                    items: 4,
+                    nav: true,
+                }
+            }
+        });
+
+        $('.hover-image').on('click', function () {
+            var $itemDetail = $('#itemDetail'), $this = $(this), Name = $this.attr('data-name'), Image = $this.attr('data-image'), Description = $this.attr('data-description'), Price = $this.attr('data-price'), url = $this.attr('data-url');
+            $.magnificPopup.open({
+                items: {
+                    src: '#itemDetail',
+                },
+                type: 'inline',
+                callbacks: {
+                    beforeOpen: function () {
+                        $itemDetail.find('h3').html(Name);
+                        $itemDetail.find('.embed-responsive').html('<img class="embed-responsive-item" src="' + Image + '">');
+                        $itemDetail.find('span').html('@Html.Raw(Resources.Home.lblPrice)' + Price);
+                        $itemDetail.find('.text-center').html('<a target="_blank" class="btn-primary btn-sm" href="' + url + '">' + '@Html.Raw(Resources.Home.btnReadmore)' + ' </a>');
+                        $itemDetail.find('.text-justify').html(Description);
+                        },
+                    },
+                });
+            });
+        });
+    </script>
+}

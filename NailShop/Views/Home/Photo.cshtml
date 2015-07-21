@@ -1,0 +1,35 @@
+﻿@using NailShop.DataAccess;
+@model List<vw_PhotoDetail>
+<div class="image-box">
+    <div class="lightbox-content">
+        <a href="@Model[0].Image" data-lightbox="lightbox" data-title="@Model[0].Description">
+            <img src="@Model[0].Image">
+            <div>
+                <h5>@Model[0].Description</h5>
+            </div>
+        </a>
+    </div>
+    <div class="carousel-padding">
+        <div id="imageCarousel">
+            @{
+                bool IsFirst = true;
+                foreach (vw_PhotoDetail row in Model)
+                {
+                    if (IsFirst)
+                    {
+                        <div class="item-image active" data-image="@row.Image" data-title="@row.Description">
+                            <img src="@row.Image">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item-image" data-image="@row.Image" data-title="@row.Description">
+                            <img src="@row.Image">
+                        </div>
+                    }
+                    IsFirst = false;
+                }
+            }
+        </div>
+    </div>
+</div>

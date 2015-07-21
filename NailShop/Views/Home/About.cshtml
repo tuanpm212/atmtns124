@@ -1,0 +1,36 @@
+﻿@using NailShop.DataAccess;
+@model vw_About 
+@{
+    ViewBag.Title = @Resources.FormTitle.formAbout;
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+
+<div class="page-wrap">
+    <div class="title-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>@Resources.FormTitle.titleAbouts</h1>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <ol class="breadcrumb">
+                        <li><a href="/Home">@Resources.Header.linkHome</a></li>
+                        <li class="active">@Resources.Header.linkAbout</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 about-content">
+                    @Html.Raw(Model.Contents)
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    
+}
