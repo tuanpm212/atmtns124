@@ -25,7 +25,7 @@
                 <header class="panel-heading text-center">
                     <strong>Administrator Login</strong>
                 </header>
-                <form class="panel-body wrapper-lg">
+                <form id="formLogin" class="panel-body wrapper-lg">
                     <div class="form-group">
                         <label class="control-label">@Resources.Backend.lblUserName</label>
                         <input id="txtLoginName" type="text" placeholder="@Resources.Backend.pldUserName" class="form-control input-lg">
@@ -39,7 +39,7 @@
                             <p class="form-control-static control-label">@Resources.Login.msgError</p>
                         </div>
                     </div>
-                    <button id="btnLogin" type="submit" class="btn btn-primary">@Resources.Backend.btnSignIn</button>
+                    <button type="submit" class="btn btn-primary">@Resources.Backend.btnSignIn</button>
                 </form>
             </section>
         </div>
@@ -52,7 +52,7 @@
     <script src="~/Scripts/jquery.slimscroll.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#btnLogin").click(function () {
+            $("#formLogin").submit(function (event) {
                 var login = {
                     LoginName: $('#txtLoginName').val(),
                     Password: $('#txtPassword').val()
@@ -69,6 +69,7 @@
                             $('#divError').removeClass('hide');
                     }
                 });
+                event.preventDefault();
             });
         });
 
