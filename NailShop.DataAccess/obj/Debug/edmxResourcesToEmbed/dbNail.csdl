@@ -1,0 +1,1029 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NailShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="NailShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="NailShopModel.Customer" />
+    <EntitySet Name="Messages" EntityType="NailShopModel.Message" />
+    <EntitySet Name="Products" EntityType="NailShopModel.Product" />
+    <EntitySet Name="Stores" EntityType="NailShopModel.Store" />
+    <EntitySet Name="SynCustomers" EntityType="NailShopModel.SynCustomer" />
+    <EntitySet Name="SynProducts" EntityType="NailShopModel.SynProduct" />
+    <EntitySet Name="SynOrderItems" EntityType="NailShopModel.SynOrderItem" />
+    <EntitySet Name="SynInvoices" EntityType="NailShopModel.SynInvoice" />
+    <EntitySet Name="vw_Brand" EntityType="NailShopModel.vw_Brand" />
+    <EntitySet Name="vw_News" EntityType="NailShopModel.vw_News" />
+    <EntitySet Name="Brands" EntityType="NailShopModel.Brand" />
+    <EntitySet Name="BrandLangs" EntityType="NailShopModel.BrandLang" />
+    <EntitySet Name="Languages" EntityType="NailShopModel.Language" />
+    <EntitySet Name="News" EntityType="NailShopModel.News" />
+    <EntitySet Name="NewsLangs" EntityType="NailShopModel.NewsLang" />
+    <EntitySet Name="Slides" EntityType="NailShopModel.Slide" />
+    <EntitySet Name="SlideLangs" EntityType="NailShopModel.SlideLang" />
+    <AssociationSet Name="FK_BrandLang_Brand" Association="NailShopModel.FK_BrandLang_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="BrandLang" EntitySet="BrandLangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsLang_Language" Association="NailShopModel.FK_NewsLang_Language">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="NewsLang" EntitySet="NewsLangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsLang_News" Association="NailShopModel.FK_NewsLang_News">
+      <End Role="News" EntitySet="News" />
+      <End Role="NewsLang" EntitySet="NewsLangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SlideLang_Slide" Association="NailShopModel.FK_SlideLang_Slide">
+      <End Role="Slide" EntitySet="Slides" />
+      <End Role="SlideLang" EntitySet="SlideLangs" />
+    </AssociationSet>
+    <EntitySet Name="vw_Slide" EntityType="NailShopModel.vw_Slide" />
+    <EntitySet Name="Contacts" EntityType="NailShopModel.Contact" />
+    <EntitySet Name="vw_About" EntityType="NailShopModel.vw_About" />
+    <EntitySet Name="vw_Invoice" EntityType="NailShopModel.vw_Invoice" />
+    <EntitySet Name="Invoices" EntityType="NailShopModel.Invoice" />
+    <EntitySet Name="vw_Photo" EntityType="NailShopModel.vw_Photo" />
+    <EntitySet Name="RefNoes" EntityType="NailShopModel.RefNo" />
+    <EntitySet Name="OrdItems" EntityType="NailShopModel.OrdItem" />
+    <FunctionImport Name="GetOrdItem" IsComposable="true" ReturnType="Collection(NailShopModel.GetOrdItem_Result)">
+      <Parameter Name="StoreID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int64" />
+      <Parameter Name="InvoiceID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="ProductHots" EntityType="NailShopModel.ProductHot" />
+    <EntitySet Name="vw_ProductHot" EntityType="NailShopModel.vw_ProductHot" />
+    <EntitySet Name="Abouts" EntityType="NailShopModel.About" />
+    <EntitySet Name="AboutLangs" EntityType="NailShopModel.AboutLang" />
+    <EntitySet Name="Photos" EntityType="NailShopModel.Photo" />
+    <EntitySet Name="PhotoDetails" EntityType="NailShopModel.PhotoDetail" />
+    <EntitySet Name="PhotoLangs" EntityType="NailShopModel.PhotoLang" />
+    <AssociationSet Name="FK_OrdItems_Invoices" Association="NailShopModel.FK_OrdItems_Invoices">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="OrdItem" EntitySet="OrdItems" />
+    </AssociationSet>
+    <FunctionImport Name="GetOrdItemByID" IsComposable="true" ReturnType="Collection(NailShopModel.GetOrdItemByID_Result)">
+      <Parameter Name="InvoiceID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="PhotoDetailLangs" EntityType="NailShopModel.PhotoDetailLang" />
+    <EntitySet Name="vw_PhotoDetail" EntityType="NailShopModel.vw_PhotoDetail" />
+    <EntitySet Name="vw_PromotionDetail" EntityType="NailShopModel.vw_PromotionDetail" />
+    <EntitySet Name="PromotionDetails" EntityType="NailShopModel.PromotionDetail" />
+    <EntitySet Name="vw_PromotionItem" EntityType="NailShopModel.vw_PromotionItem" />
+    <EntitySet Name="vw_ProductPromotion" EntityType="NailShopModel.vw_ProductPromotion" />
+    <EntitySet Name="Promotions" EntityType="NailShopModel.Promotion" />
+    <EntitySet Name="Categories" EntityType="NailShopModel.Category" />
+    <EntitySet Name="vw_Category" EntityType="NailShopModel.vw_Category" />
+    <AssociationSet Name="FK_PhotoDetail_Photo" Association="NailShopModel.FK_PhotoDetail_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="PhotoDetail" EntitySet="PhotoDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoLang_Photo" Association="NailShopModel.FK_PhotoLang_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="PhotoLang" EntitySet="PhotoLangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoDetailLang_PhotoDetail" Association="NailShopModel.FK_PhotoDetailLang_PhotoDetail">
+      <End Role="PhotoDetail" EntitySet="PhotoDetails" />
+      <End Role="PhotoDetailLang" EntitySet="PhotoDetailLangs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="LocalID" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="International" Type="Boolean" />
+    <Property Name="Country" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="HomePhone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="CellPhone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="PriceLevel" Type="Int32" />
+    <Property Name="TotalSpend" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CustSince" Type="DateTime" Precision="3" />
+    <Property Name="LastVisit" Type="DateTime" Precision="3" />
+    <Property Name="NumVisit" Type="Int32" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Messages" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="LocalID" Type="Int32" Nullable="false" />
+    <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price1" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price2" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price3" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ProdType" Type="Int32" />
+    <Property Name="ProductUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UnitsInStock" Type="Int32" />
+    <Property Name="InItem" Type="Boolean" />
+    <Property Name="NoTax" Type="Boolean" />
+    <Property Name="EditSequence" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+    <Property Name="IsHost" Type="Boolean" Nullable="false" />
+    <Property Name="CategoryID" Type="Int64" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="LoginName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StoreCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StoreName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActvie" Type="Boolean" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Precision="3" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NickName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SynCustomer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="RecordState" />
+    </Key>
+    <Property Name="CustomerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="International" Type="Boolean" />
+    <Property Name="Country" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="HomePhone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="CellPhone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="PriceLevel" Type="Int32" />
+    <Property Name="TotalSpend" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CustSince" Type="DateTime" Precision="3" />
+    <Property Name="LastVisit" Type="DateTime" Precision="3" />
+    <Property Name="NumVisit" Type="Int32" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SynProduct">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="RecordState" />
+      <PropertyRef Name="IsHost" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price1" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price2" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price3" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ProdType" Type="Int32" />
+    <Property Name="ProductUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UnitsInStock" Type="Int32" />
+    <Property Name="InItem" Type="Boolean" />
+    <Property Name="NoTax" Type="Boolean" />
+    <Property Name="EditSequence" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+    <Property Name="IsHost" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SynOrderItem">
+    <Key>
+      <PropertyRef Name="OrdItemID" />
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="OrdItemID" Type="Int64" Nullable="false" />
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProdType" Type="Int32" />
+    <Property Name="NoTax" Type="Boolean" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RecordState" Type="Int32" />
+  </EntityType>
+  <EntityType Name="SynInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="LocalID" />
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="RecordState" />
+      <PropertyRef Name="InvoiceStatus" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="LocalID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="IsPaid" Type="Boolean" />
+    <Property Name="IsPending" Type="Boolean" />
+    <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="SkipTax" Type="Boolean" />
+    <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="SaleTax" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Deposit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AmtPaid" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AmtCredit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Voided" Type="Boolean" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceStatus" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="BrandID" Type="Int64" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="ShortDescription" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="LangID" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="NewsID" Type="Int64" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageThumbnail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BrandLangs" Relationship="NailShopModel.FK_BrandLang_Brand" FromRole="Brand" ToRole="BrandLang" />
+  </EntityType>
+  <EntityType Name="BrandLang">
+    <Key>
+      <PropertyRef Name="BrandID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="BrandID" Type="Int64" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Brand" Relationship="NailShopModel.FK_BrandLang_Brand" FromRole="BrandLang" ToRole="Brand" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Language1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NewsLangs" Relationship="NailShopModel.FK_NewsLang_Language" FromRole="Language" ToRole="NewsLang" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="NewsLangs" Relationship="NailShopModel.FK_NewsLang_News" FromRole="News" ToRole="NewsLang" />
+  </EntityType>
+  <EntityType Name="NewsLang">
+    <Key>
+      <PropertyRef Name="NewsID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="NewsID" Type="Int64" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageThumbnail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Language" Relationship="NailShopModel.FK_NewsLang_Language" FromRole="NewsLang" ToRole="Language" />
+    <NavigationProperty Name="News" Relationship="NailShopModel.FK_NewsLang_News" FromRole="NewsLang" ToRole="News" />
+  </EntityType>
+  <EntityType Name="Slide">
+    <Key>
+      <PropertyRef Name="SlideID" />
+    </Key>
+    <Property Name="SlideID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SlideLangs" Relationship="NailShopModel.FK_SlideLang_Slide" FromRole="Slide" ToRole="SlideLang" />
+  </EntityType>
+  <EntityType Name="SlideLang">
+    <Key>
+      <PropertyRef Name="SlideID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="SlideID" Type="Int64" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Slide" Relationship="NailShopModel.FK_SlideLang_Slide" FromRole="SlideLang" ToRole="Slide" />
+  </EntityType>
+  <Association Name="FK_BrandLang_Brand">
+    <End Type="NailShopModel.Brand" Role="Brand" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.BrandLang" Role="BrandLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="BrandID" />
+      </Principal>
+      <Dependent Role="BrandLang">
+        <PropertyRef Name="BrandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsLang_Language">
+    <End Type="NailShopModel.Language" Role="Language" Multiplicity="1" />
+    <End Type="NailShopModel.NewsLang" Role="NewsLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LangID" />
+      </Principal>
+      <Dependent Role="NewsLang">
+        <PropertyRef Name="LangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsLang_News">
+    <End Type="NailShopModel.News" Role="News" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.NewsLang" Role="NewsLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News">
+        <PropertyRef Name="NewsID" />
+      </Principal>
+      <Dependent Role="NewsLang">
+        <PropertyRef Name="NewsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SlideLang_Slide">
+    <End Type="NailShopModel.Slide" Role="Slide" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.SlideLang" Role="SlideLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slide">
+        <PropertyRef Name="SlideID" />
+      </Principal>
+      <Dependent Role="SlideLang">
+        <PropertyRef Name="SlideID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vw_Slide">
+    <Key>
+      <PropertyRef Name="SlideID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="SlideID" Type="Int64" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Content" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_About">
+    <Key>
+      <PropertyRef Name="AboutID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Contents" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="AboutID" Type="Int32" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="LocalID" />
+      <PropertyRef Name="RecordState" />
+      <PropertyRef Name="InvoiceStatus" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="LocalID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int64" />
+    <Property Name="IsPaid" Type="Boolean" />
+    <Property Name="IsPending" Type="Boolean" />
+    <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="SkipTax" Type="Boolean" />
+    <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="SaleTax" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Deposit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AmtPaid" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AmtCredit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Voided" Type="Boolean" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceStatus" Type="Int32" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="CityShip" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="StateShip" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCodeShip" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="LocalID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int64" />
+    <Property Name="IsPaid" Type="Boolean" />
+    <Property Name="IsPending" Type="Boolean" />
+    <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr1S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr2S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr3S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr4S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddr5S" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="SkipTax" Type="Boolean" />
+    <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="SaleTax" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Deposit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AmtPaid" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AmtCredit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Voided" Type="Boolean" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecordState" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceStatus" Type="Int32" Nullable="false" />
+    <Property Name="IsTemplate" Type="Boolean" Nullable="false" />
+    <Property Name="CityShip" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="StateShip" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCodeShip" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrdItems" Relationship="NailShopModel.FK_OrdItems_Invoices" FromRole="Invoice" ToRole="OrdItem" />
+  </EntityType>
+  <EntityType Name="vw_Photo">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IsPhoto" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="LangID" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="IsPhoto" Type="Boolean" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Video" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="RefNo">
+    <Key>
+      <PropertyRef Name="RefType" />
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="RefType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="FormatString" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Length" Type="Int32" Nullable="false" />
+    <Property Name="CurrNumber" Type="Int64" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrdItem">
+    <Key>
+      <PropertyRef Name="OrdItemID" />
+    </Key>
+    <Property Name="OrdItemID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProdType" Type="Int32" />
+    <Property Name="NoTax" Type="Boolean" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RecordState" Type="Int32" />
+    <NavigationProperty Name="Invoice" Relationship="NailShopModel.FK_OrdItems_Invoices" FromRole="OrdItem" ToRole="Invoice" />
+  </EntityType>
+  <ComplexType Name="GetOrdItem_Result">
+    <Property Type="Int64" Name="OrdItemID" Nullable="true" />
+    <Property Type="Int64" Name="InvoiceID" Nullable="true" />
+    <Property Type="Int64" Name="ProductID" Nullable="true" />
+    <Property Type="String" Name="ProdNo" Nullable="true" MaxLength="64" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Int32" Name="ProdType" Nullable="true" />
+    <Property Type="Boolean" Name="NoTax" Nullable="true" />
+    <Property Type="Int32" Name="Qty" Nullable="true" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Discount" Nullable="true" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="RecordState" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="ProductHot">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProductName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Thumbnail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="LargeImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_ProductHot">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="LargeImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Thumbnail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="About">
+    <Key>
+      <PropertyRef Name="AboutID" />
+    </Key>
+    <Property Name="AboutID" Type="Int32" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AboutLang">
+    <Key>
+      <PropertyRef Name="AboutID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="AboutID" Type="Int32" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IsPhoto" Type="Boolean" Nullable="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PhotoDetails" Relationship="NailShopModel.FK_PhotoDetail_Photo" FromRole="Photo" ToRole="PhotoDetail" />
+    <NavigationProperty Name="PhotoLangs" Relationship="NailShopModel.FK_PhotoLang_Photo" FromRole="Photo" ToRole="PhotoLang" />
+  </EntityType>
+  <EntityType Name="PhotoDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhotoID" Type="Int64" Nullable="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Photo" Relationship="NailShopModel.FK_PhotoDetail_Photo" FromRole="PhotoDetail" ToRole="Photo" />
+    <NavigationProperty Name="PhotoDetailLangs" Relationship="NailShopModel.FK_PhotoDetailLang_PhotoDetail" FromRole="PhotoDetail" ToRole="PhotoDetailLang" />
+  </EntityType>
+  <EntityType Name="PhotoLang">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="PhotoID" Type="Int64" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Video" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Photo" Relationship="NailShopModel.FK_PhotoLang_Photo" FromRole="PhotoLang" ToRole="Photo" />
+  </EntityType>
+  <Association Name="FK_OrdItems_Invoices">
+    <End Type="NailShopModel.Invoice" Role="Invoice" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.OrdItem" Role="OrdItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="OrdItem">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetOrdItemByID_Result">
+    <Property Type="Int64" Name="OrdItemID" Nullable="true" />
+    <Property Type="Int64" Name="InvoiceID" Nullable="true" />
+    <Property Type="Int64" Name="ProductID" Nullable="true" />
+    <Property Type="String" Name="ProdNo" Nullable="true" MaxLength="64" />
+    <Property Type="String" Name="ProductName" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Int32" Name="ProdType" Nullable="true" />
+    <Property Type="Boolean" Name="NoTax" Nullable="true" />
+    <Property Type="Int32" Name="Qty" Nullable="true" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Discount" Nullable="true" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="RecordState" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="PhotoDetailLang">
+    <Key>
+      <PropertyRef Name="DetailID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="DetailID" Type="Int64" Nullable="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Video" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Thumbnail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="FullImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PhotoDetail" Relationship="NailShopModel.FK_PhotoDetailLang_PhotoDetail" FromRole="PhotoDetailLang" ToRole="PhotoDetail" />
+  </EntityType>
+  <EntityType Name="vw_PhotoDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+      <PropertyRef Name="PhotoID" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="LangID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="DetailID" Type="Int64" Nullable="false" />
+    <Property Name="PhotoID" Type="Int64" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Video" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="Thumbnail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="FullImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_PromotionDetail">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="FromDate" />
+      <PropertyRef Name="ToDate" />
+      <PropertyRef Name="Percent" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="IsItem" />
+    </Key>
+    <Property Name="PromotionID" Type="Int64" Nullable="false" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CategoryID" Type="Int64" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="Percent" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsItem" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PromotionDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PromotionID" Type="Int64" Nullable="false" />
+    <Property Name="CategoryID" Type="Int64" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_PromotionItem">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="Percent" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsItem" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="PromotionID" Type="Int64" Nullable="false" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Percent" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="IsItem" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_ProductPromotion">
+    <Key>
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="checker" Type="Boolean" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price1" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price2" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price3" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+    </Key>
+    <Property Name="PromotionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" Nullable="false" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="PromotionName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Percent" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsItem" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+      <PropertyRef Name="LocalID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="CategoryName" />
+    </Key>
+    <Property Name="CategoryID" Type="Int64" Nullable="false" />
+    <Property Name="LocalID" Type="Int32" Nullable="false" />
+    <Property Name="StoreID" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="CategoryName" />
+      <PropertyRef Name="PromotionID" />
+    </Key>
+    <Property Name="checker" Type="Boolean" />
+    <Property Name="CategoryID" Type="Int64" Nullable="false" />
+    <Property Name="StoreID" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="PromotionID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PhotoDetail_Photo">
+    <End Type="NailShopModel.Photo" Role="Photo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.PhotoDetail" Role="PhotoDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhotoDetail">
+        <PropertyRef Name="PhotoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoLang_Photo">
+    <End Type="NailShopModel.Photo" Role="Photo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.PhotoLang" Role="PhotoLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhotoLang">
+        <PropertyRef Name="PhotoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoDetailLang_PhotoDetail">
+    <End Type="NailShopModel.PhotoDetail" Role="PhotoDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="NailShopModel.PhotoDetailLang" Role="PhotoDetailLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoDetail">
+        <PropertyRef Name="DetailID" />
+      </Principal>
+      <Dependent Role="PhotoDetailLang">
+        <PropertyRef Name="DetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,1369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NailShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="About">
+    <Key>
+      <PropertyRef Name="AboutID" />
+    </Key>
+    <Property Name="AboutID" Type="int" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AboutLang">
+    <Key>
+      <PropertyRef Name="AboutID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="AboutID" Type="int" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Contents" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BrandLang">
+    <Key>
+      <PropertyRef Name="BrandID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="BrandID" Type="bigint" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.Category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+      <PropertyRef Name="LocalID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="CategoryName" />
+    </Key>
+    <Property Name="CategoryID" Type="bigint" Nullable="false" />
+    <Property Name="LocalID" Type="int" Nullable="false" />
+    <Property Name="StoreID" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="LocalID" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="LoginName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="64" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="64" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="64" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="64" />
+    <Property Name="Address" Type="nvarchar" MaxLength="64" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" />
+    <Property Name="State" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="16" />
+    <Property Name="AddressAddr1" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5S" Type="nvarchar" MaxLength="64" />
+    <Property Name="International" Type="bit" />
+    <Property Name="Country" Type="nvarchar" MaxLength="64" />
+    <Property Name="HomePhone" Type="nvarchar" MaxLength="16" />
+    <Property Name="CellPhone" Type="nvarchar" MaxLength="16" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="PriceLevel" Type="int" />
+    <Property Name="TotalSpend" Type="money" />
+    <Property Name="CustSince" Type="datetime" />
+    <Property Name="LastVisit" Type="datetime" />
+    <Property Name="NumVisit" Type="int" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="LocalID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="bigint" />
+    <Property Name="IsPaid" Type="bit" />
+    <Property Name="IsPending" Type="bit" />
+    <Property Name="InvoiceDate" Type="datetime" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="16" />
+    <Property Name="BusinessName" Type="nvarchar" MaxLength="64" />
+    <Property Name="Address" Type="nvarchar" MaxLength="64" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" />
+    <Property Name="State" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="16" />
+    <Property Name="CityShip" Type="nvarchar" MaxLength="64" />
+    <Property Name="StateShip" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCodeShip" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5S" Type="nvarchar" MaxLength="64" />
+    <Property Name="SkipTax" Type="bit" />
+    <Property Name="SubTotal" Type="money" />
+    <Property Name="SaleTax" Type="money" />
+    <Property Name="Deposit" Type="money" />
+    <Property Name="AmtPaid" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="AmtCredit" Type="money" />
+    <Property Name="Shipping" Type="money" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Voided" Type="bit" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Memo" Type="nvarchar(max)" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+    <Property Name="InvoiceStatus" Type="int" Nullable="false" />
+    <Property Name="IsTemplate" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Messages" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsLang">
+    <Key>
+      <PropertyRef Name="NewsID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="NewsID" Type="bigint" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="LongDescription" Type="ntext" />
+    <Property Name="ImageThumbnail" Type="varchar" MaxLength="250" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="OrdItems">
+    <Key>
+      <PropertyRef Name="OrdItemID" />
+    </Key>
+    <Property Name="OrdItemID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceID" Type="bigint" Nullable="false" />
+    <Property Name="ProductID" Type="bigint" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ProdType" Type="int" />
+    <Property Name="NoTax" Type="bit" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="Total" Type="money" />
+    <Property Name="RecordState" Type="int" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsPhoto" Type="bit" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhotoID" Type="bigint" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoDetailLang">
+    <Key>
+      <PropertyRef Name="DetailID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="DetailID" Type="bigint" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="250" />
+    <Property Name="FullImage" Type="varchar" MaxLength="250" />
+    <Property Name="Video" Type="varchar" MaxLength="250" />
+    <Property Name="Link" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PhotoLang">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="PhotoID" Type="bigint" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Video" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="ProductHot">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="ProductCode" Type="varchar" MaxLength="50" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="ntext" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="250" />
+    <Property Name="LargeImage" Type="varchar" MaxLength="250" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="LocalID" Type="int" Nullable="false" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+    <Property Name="CategoryID" Type="bigint" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Price1" Type="money" />
+    <Property Name="Price2" Type="money" />
+    <Property Name="Price3" Type="money" />
+    <Property Name="ProdType" Type="int" />
+    <Property Name="ProductUrl" Type="nvarchar(max)" />
+    <Property Name="UnitsInStock" Type="int" />
+    <Property Name="InItem" Type="bit" />
+    <Property Name="NoTax" Type="bit" />
+    <Property Name="EditSequence" Type="nvarchar" MaxLength="32" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+    <Property Name="IsHost" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+    </Key>
+    <Property Name="PromotionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="PromotionName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="FromDate" Type="date" Nullable="false" />
+    <Property Name="ToDate" Type="date" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Percent" Type="money" Nullable="false" />
+    <Property Name="IsItem" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PromotionDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PromotionID" Type="bigint" Nullable="false" />
+    <Property Name="CategoryID" Type="bigint" />
+    <Property Name="ProductID" Type="bigint" />
+    <Property Name="Quantity" Type="money" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefNo">
+    <Key>
+      <PropertyRef Name="RefType" />
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="RefType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="FormatString" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="false" />
+    <Property Name="CurrNumber" Type="bigint" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Slide">
+    <Key>
+      <PropertyRef Name="SlideID" />
+    </Key>
+    <Property Name="SlideID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SlideLang">
+    <Key>
+      <PropertyRef Name="SlideID" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="SlideID" Type="bigint" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="ntext" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Stores">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="LoginName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="NickName" Type="nvarchar" MaxLength="100" />
+    <Property Name="StoreCode" Type="varchar" MaxLength="50" />
+    <Property Name="StoreName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerName" Type="nvarchar" MaxLength="250" />
+    <Property Name="OwnerMobile" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerAddress" Type="nvarchar" MaxLength="250" />
+    <Property Name="FromDate" Type="datetime" />
+    <Property Name="ToDate" Type="datetime" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="IsActvie" Type="bit" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.SynCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SynCustomer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="RecordState" />
+    </Key>
+    <Property Name="CustomerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="LoginName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="64" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="64" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="64" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="64" />
+    <Property Name="Address" Type="nvarchar" MaxLength="64" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" />
+    <Property Name="State" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="16" />
+    <Property Name="AddressAddr1" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5S" Type="nvarchar" MaxLength="64" />
+    <Property Name="International" Type="bit" />
+    <Property Name="Country" Type="nvarchar" MaxLength="64" />
+    <Property Name="HomePhone" Type="nvarchar" MaxLength="16" />
+    <Property Name="CellPhone" Type="nvarchar" MaxLength="16" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="PriceLevel" Type="int" />
+    <Property Name="TotalSpend" Type="money" />
+    <Property Name="CustSince" Type="datetime" />
+    <Property Name="LastVisit" Type="datetime" />
+    <Property Name="NumVisit" Type="int" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.SynInvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SynInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="LocalID" />
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="RecordState" />
+      <PropertyRef Name="InvoiceStatus" />
+    </Key>
+    <Property Name="InvoiceID" Type="bigint" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="LocalID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" />
+    <Property Name="IsPending" Type="bit" />
+    <Property Name="InvoiceDate" Type="datetime" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="16" />
+    <Property Name="BusinessName" Type="nvarchar" MaxLength="64" />
+    <Property Name="Address" Type="nvarchar" MaxLength="64" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" />
+    <Property Name="State" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="16" />
+    <Property Name="AddressAddr1" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5S" Type="nvarchar" MaxLength="64" />
+    <Property Name="SkipTax" Type="bit" />
+    <Property Name="SubTotal" Type="money" />
+    <Property Name="SaleTax" Type="money" />
+    <Property Name="Deposit" Type="money" />
+    <Property Name="AmtPaid" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="AmtCredit" Type="money" />
+    <Property Name="Shipping" Type="money" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Voided" Type="bit" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Memo" Type="nvarchar(max)" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+    <Property Name="InvoiceStatus" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.SynOrderItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SynOrderItems">
+    <Key>
+      <PropertyRef Name="OrdItemID" />
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="OrdItemID" Type="bigint" Nullable="false" />
+    <Property Name="InvoiceID" Type="bigint" Nullable="false" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="16" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ProdType" Type="int" />
+    <Property Name="NoTax" Type="bit" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="Total" Type="money" />
+    <Property Name="RecordState" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.SynProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SynProduct">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="RecordState" />
+      <PropertyRef Name="IsHost" />
+    </Key>
+    <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Price1" Type="money" />
+    <Property Name="Price2" Type="money" />
+    <Property Name="Price3" Type="money" />
+    <Property Name="ProdType" Type="int" />
+    <Property Name="ProductUrl" Type="nvarchar(max)" />
+    <Property Name="UnitsInStock" Type="int" />
+    <Property Name="InItem" Type="bit" />
+    <Property Name="NoTax" Type="bit" />
+    <Property Name="EditSequence" Type="nvarchar" MaxLength="32" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+    <Property Name="IsHost" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_About' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_About">
+    <Key>
+      <PropertyRef Name="AboutID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Contents" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="AboutID" Type="int" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Contents" Type="ntext" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_Brand' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="BrandID" Type="bigint" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_Category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Category">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+      <PropertyRef Name="CategoryID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="CategoryName" />
+    </Key>
+    <Property Name="checker" Type="bit" />
+    <Property Name="PromotionID" Type="bigint" Nullable="false" />
+    <Property Name="CategoryID" Type="bigint" Nullable="false" />
+    <Property Name="StoreID" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_Invoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="LocalID" />
+      <PropertyRef Name="RecordState" />
+      <PropertyRef Name="InvoiceStatus" />
+    </Key>
+    <Property Name="InvoiceID" Type="bigint" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="LocalID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="bigint" />
+    <Property Name="IsPaid" Type="bit" />
+    <Property Name="IsPending" Type="bit" />
+    <Property Name="InvoiceDate" Type="datetime" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="16" />
+    <Property Name="BusinessName" Type="nvarchar" MaxLength="64" />
+    <Property Name="Address" Type="nvarchar" MaxLength="64" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" />
+    <Property Name="State" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="16" />
+    <Property Name="CityShip" Type="nvarchar" MaxLength="64" />
+    <Property Name="StateShip" Type="nvarchar" MaxLength="64" />
+    <Property Name="ZipCodeShip" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr1S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr2S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr3S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr4S" Type="nvarchar" MaxLength="64" />
+    <Property Name="AddressAddr5S" Type="nvarchar" MaxLength="64" />
+    <Property Name="SkipTax" Type="bit" />
+    <Property Name="SubTotal" Type="money" />
+    <Property Name="SaleTax" Type="money" />
+    <Property Name="Deposit" Type="money" />
+    <Property Name="AmtPaid" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="AmtCredit" Type="money" />
+    <Property Name="Shipping" Type="money" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Voided" Type="bit" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Memo" Type="nvarchar(max)" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+    <Property Name="InvoiceStatus" Type="int" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="64" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="64" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="64" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="64" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_News' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="ShortDescription" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="LangID" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="NewsID" Type="bigint" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="LongDescription" Type="ntext" />
+    <Property Name="ImageThumbnail" Type="varchar" MaxLength="250" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_Photo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Photo">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IsPhoto" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="LangID" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="IsPhoto" Type="bit" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Video" Type="varchar" MaxLength="250" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_PhotoDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_PhotoDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+      <PropertyRef Name="PhotoID" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="LangID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="DetailID" Type="bigint" Nullable="false" />
+    <Property Name="PhotoID" Type="bigint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="250" />
+    <Property Name="FullImage" Type="varchar" MaxLength="250" />
+    <Property Name="Video" Type="varchar" MaxLength="250" />
+    <Property Name="Link" Type="varchar" MaxLength="250" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_ProductHot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_ProductHot">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ProductID" Type="bigint" Nullable="false" />
+    <Property Name="ProductCode" Type="varchar" MaxLength="50" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="LargeImage" Type="varchar" MaxLength="250" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="250" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_ProductPromotion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_ProductPromotion">
+    <Key>
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="checker" Type="bit" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Price1" Type="money" />
+    <Property Name="Price2" Type="money" />
+    <Property Name="Price3" Type="money" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_PromotionDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_PromotionDetail">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+      <PropertyRef Name="StoreID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="FromDate" />
+      <PropertyRef Name="ToDate" />
+      <PropertyRef Name="Percent" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsItem" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="PromotionID" Type="bigint" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="ToDate" Type="datetime" Nullable="false" />
+    <Property Name="CategoryID" Type="bigint" />
+    <Property Name="ProductID" Type="bigint" />
+    <Property Name="Percent" Type="money" Nullable="false" />
+    <Property Name="Quantity" Type="money" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsItem" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_PromotionItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_PromotionItem">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="Percent" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsItem" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="PromotionID" Type="bigint" Nullable="false" />
+    <Property Name="ProductID" Type="bigint" Nullable="false" />
+    <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="Percent" Type="money" Nullable="false" />
+    <Property Name="Quantity" Type="money" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsItem" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Slide">
+    <Key>
+      <PropertyRef Name="SlideID" />
+      <PropertyRef Name="SiteID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="LangID" />
+    </Key>
+    <Property Name="SlideID" Type="bigint" Nullable="false" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="varchar" MaxLength="250" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="LangID" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BrandLang_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="BrandLang" Type="Self.BrandLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="BrandID" />
+      </Principal>
+      <Dependent Role="BrandLang">
+        <PropertyRef Name="BrandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsLang_Language">
+    <End Role="Language" Type="Self.Language" Multiplicity="1" />
+    <End Role="NewsLang" Type="Self.NewsLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LangID" />
+      </Principal>
+      <Dependent Role="NewsLang">
+        <PropertyRef Name="LangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsLang_News">
+    <End Role="News" Type="Self.News" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NewsLang" Type="Self.NewsLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News">
+        <PropertyRef Name="NewsID" />
+      </Principal>
+      <Dependent Role="NewsLang">
+        <PropertyRef Name="NewsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdItems_Invoices">
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrdItems" Type="Self.OrdItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="OrdItems">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoDetail_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PhotoDetail" Type="Self.PhotoDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhotoDetail">
+        <PropertyRef Name="PhotoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoDetailLang_PhotoDetail">
+    <End Role="PhotoDetail" Type="Self.PhotoDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PhotoDetailLang" Type="Self.PhotoDetailLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoDetail">
+        <PropertyRef Name="DetailID" />
+      </Principal>
+      <Dependent Role="PhotoDetailLang">
+        <PropertyRef Name="DetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoLang_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PhotoLang" Type="Self.PhotoLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhotoLang">
+        <PropertyRef Name="PhotoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SlideLang_Slide">
+    <End Role="Slide" Type="Self.Slide" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SlideLang" Type="Self.SlideLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slide">
+        <PropertyRef Name="SlideID" />
+      </Principal>
+      <Dependent Role="SlideLang">
+        <PropertyRef Name="SlideID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetOrdItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StoreID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="bigint" Mode="In" />
+    <Parameter Name="InvoiceID" Type="bigint" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="OrdItemID" Type="bigint" />
+          <Property Name="InvoiceID" Type="bigint" />
+          <Property Name="ProductID" Type="bigint" />
+          <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+          <Property Name="ProductName" Type="nvarchar(max)" />
+          <Property Name="CategoryID" Type="bigint" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ProdType" Type="int" />
+          <Property Name="NoTax" Type="bit" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Discount" Type="money" />
+          <Property Name="Total" Type="money" />
+          <Property Name="RecordState" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="GetOrdItemByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceID" Type="bigint" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="OrdItemID" Type="bigint" />
+          <Property Name="InvoiceID" Type="bigint" />
+          <Property Name="ProductID" Type="bigint" />
+          <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+          <Property Name="ProductName" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ProdType" Type="int" />
+          <Property Name="NoTax" Type="bit" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Discount" Type="money" />
+          <Property Name="Total" Type="money" />
+          <Property Name="RecordState" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <EntityContainer Name="NailShopModelStoreContainer">
+    <EntitySet Name="About" EntityType="Self.About" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AboutLang" EntityType="Self.AboutLang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BrandLang" EntityType="Self.BrandLang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewsLang" EntityType="Self.NewsLang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrdItems" EntityType="Self.OrdItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhotoDetail" EntityType="Self.PhotoDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhotoDetailLang" EntityType="Self.PhotoDetailLang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhotoLang" EntityType="Self.PhotoLang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductHot" EntityType="Self.ProductHot" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PromotionDetail" EntityType="Self.PromotionDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RefNo" EntityType="Self.RefNo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Slide" EntityType="Self.Slide" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlideLang" EntityType="Self.SlideLang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Category].[CategoryID] AS [CategoryID], 
+    [Category].[LocalID] AS [LocalID], 
+    [Category].[StoreID] AS [StoreID], 
+    [Category].[Code] AS [Code], 
+    [Category].[CategoryName] AS [CategoryName]
+    FROM [dbo].[Category] AS [Category]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SynCustomer" EntityType="Self.SynCustomer" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SynCustomer].[CustomerID] AS [CustomerID], 
+    [SynCustomer].[Active] AS [Active], 
+    [SynCustomer].[LoginName] AS [LoginName], 
+    [SynCustomer].[Password] AS [Password], 
+    [SynCustomer].[BarCode] AS [BarCode], 
+    [SynCustomer].[FullName] AS [FullName], 
+    [SynCustomer].[FirstName] AS [FirstName], 
+    [SynCustomer].[MiddleName] AS [MiddleName], 
+    [SynCustomer].[LastName] AS [LastName], 
+    [SynCustomer].[Address] AS [Address], 
+    [SynCustomer].[City] AS [City], 
+    [SynCustomer].[State] AS [State], 
+    [SynCustomer].[ZipCode] AS [ZipCode], 
+    [SynCustomer].[AddressAddr1] AS [AddressAddr1], 
+    [SynCustomer].[AddressAddr2] AS [AddressAddr2], 
+    [SynCustomer].[AddressAddr3] AS [AddressAddr3], 
+    [SynCustomer].[AddressAddr4] AS [AddressAddr4], 
+    [SynCustomer].[AddressAddr5] AS [AddressAddr5], 
+    [SynCustomer].[AddressAddr1S] AS [AddressAddr1S], 
+    [SynCustomer].[AddressAddr2S] AS [AddressAddr2S], 
+    [SynCustomer].[AddressAddr3S] AS [AddressAddr3S], 
+    [SynCustomer].[AddressAddr4S] AS [AddressAddr4S], 
+    [SynCustomer].[AddressAddr5S] AS [AddressAddr5S], 
+    [SynCustomer].[International] AS [International], 
+    [SynCustomer].[Country] AS [Country], 
+    [SynCustomer].[HomePhone] AS [HomePhone], 
+    [SynCustomer].[CellPhone] AS [CellPhone], 
+    [SynCustomer].[Notes] AS [Notes], 
+    [SynCustomer].[Email] AS [Email], 
+    [SynCustomer].[BirthDay] AS [BirthDay], 
+    [SynCustomer].[PriceLevel] AS [PriceLevel], 
+    [SynCustomer].[TotalSpend] AS [TotalSpend], 
+    [SynCustomer].[CustSince] AS [CustSince], 
+    [SynCustomer].[LastVisit] AS [LastVisit], 
+    [SynCustomer].[NumVisit] AS [NumVisit], 
+    [SynCustomer].[RecordState] AS [RecordState]
+    FROM [dbo].[SynCustomer] AS [SynCustomer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SynInvoice" EntityType="Self.SynInvoice" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SynInvoice].[InvoiceID] AS [InvoiceID], 
+    [SynInvoice].[StoreID] AS [StoreID], 
+    [SynInvoice].[LocalID] AS [LocalID], 
+    [SynInvoice].[CustomerID] AS [CustomerID], 
+    [SynInvoice].[IsPaid] AS [IsPaid], 
+    [SynInvoice].[IsPending] AS [IsPending], 
+    [SynInvoice].[InvoiceDate] AS [InvoiceDate], 
+    [SynInvoice].[InvoiceNo] AS [InvoiceNo], 
+    [SynInvoice].[BusinessName] AS [BusinessName], 
+    [SynInvoice].[Address] AS [Address], 
+    [SynInvoice].[City] AS [City], 
+    [SynInvoice].[State] AS [State], 
+    [SynInvoice].[ZipCode] AS [ZipCode], 
+    [SynInvoice].[AddressAddr1] AS [AddressAddr1], 
+    [SynInvoice].[AddressAddr2] AS [AddressAddr2], 
+    [SynInvoice].[AddressAddr3] AS [AddressAddr3], 
+    [SynInvoice].[AddressAddr4] AS [AddressAddr4], 
+    [SynInvoice].[AddressAddr5] AS [AddressAddr5], 
+    [SynInvoice].[AddressAddr1S] AS [AddressAddr1S], 
+    [SynInvoice].[AddressAddr2S] AS [AddressAddr2S], 
+    [SynInvoice].[AddressAddr3S] AS [AddressAddr3S], 
+    [SynInvoice].[AddressAddr4S] AS [AddressAddr4S], 
+    [SynInvoice].[AddressAddr5S] AS [AddressAddr5S], 
+    [SynInvoice].[SkipTax] AS [SkipTax], 
+    [SynInvoice].[SubTotal] AS [SubTotal], 
+    [SynInvoice].[SaleTax] AS [SaleTax], 
+    [SynInvoice].[Deposit] AS [Deposit], 
+    [SynInvoice].[AmtPaid] AS [AmtPaid], 
+    [SynInvoice].[Discount] AS [Discount], 
+    [SynInvoice].[AmtCredit] AS [AmtCredit], 
+    [SynInvoice].[Shipping] AS [Shipping], 
+    [SynInvoice].[Balance] AS [Balance], 
+    [SynInvoice].[Total] AS [Total], 
+    [SynInvoice].[Voided] AS [Voided], 
+    [SynInvoice].[Notes] AS [Notes], 
+    [SynInvoice].[Memo] AS [Memo], 
+    [SynInvoice].[RecordState] AS [RecordState], 
+    [SynInvoice].[InvoiceStatus] AS [InvoiceStatus]
+    FROM [dbo].[SynInvoice] AS [SynInvoice]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SynOrderItems" EntityType="Self.SynOrderItems" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SynOrderItems].[OrdItemID] AS [OrdItemID], 
+    [SynOrderItems].[InvoiceID] AS [InvoiceID], 
+    [SynOrderItems].[InvoiceNo] AS [InvoiceNo], 
+    [SynOrderItems].[BarCode] AS [BarCode], 
+    [SynOrderItems].[ProdNo] AS [ProdNo], 
+    [SynOrderItems].[ProductID] AS [ProductID], 
+    [SynOrderItems].[ProductName] AS [ProductName], 
+    [SynOrderItems].[Description] AS [Description], 
+    [SynOrderItems].[ProdType] AS [ProdType], 
+    [SynOrderItems].[NoTax] AS [NoTax], 
+    [SynOrderItems].[Qty] AS [Qty], 
+    [SynOrderItems].[Price] AS [Price], 
+    [SynOrderItems].[Discount] AS [Discount], 
+    [SynOrderItems].[Total] AS [Total], 
+    [SynOrderItems].[RecordState] AS [RecordState]
+    FROM [dbo].[SynOrderItems] AS [SynOrderItems]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SynProduct" EntityType="Self.SynProduct" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SynProduct].[ProductID] AS [ProductID], 
+    [SynProduct].[BarCode] AS [BarCode], 
+    [SynProduct].[ProdNo] AS [ProdNo], 
+    [SynProduct].[ProductName] AS [ProductName], 
+    [SynProduct].[Description] AS [Description], 
+    [SynProduct].[Price] AS [Price], 
+    [SynProduct].[Price1] AS [Price1], 
+    [SynProduct].[Price2] AS [Price2], 
+    [SynProduct].[Price3] AS [Price3], 
+    [SynProduct].[ProdType] AS [ProdType], 
+    [SynProduct].[ProductUrl] AS [ProductUrl], 
+    [SynProduct].[UnitsInStock] AS [UnitsInStock], 
+    [SynProduct].[InItem] AS [InItem], 
+    [SynProduct].[NoTax] AS [NoTax], 
+    [SynProduct].[EditSequence] AS [EditSequence], 
+    [SynProduct].[RecordState] AS [RecordState], 
+    [SynProduct].[IsHost] AS [IsHost]
+    FROM [dbo].[SynProduct] AS [SynProduct]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_About" EntityType="Self.vw_About" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_About].[AboutID] AS [AboutID], 
+    [vw_About].[SiteID] AS [SiteID], 
+    [vw_About].[Contents] AS [Contents], 
+    [vw_About].[Sort] AS [Sort], 
+    [vw_About].[IsActive] AS [IsActive], 
+    [vw_About].[LangID] AS [LangID]
+    FROM [dbo].[vw_About] AS [vw_About]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Brand" EntityType="Self.vw_Brand" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Brand].[BrandID] AS [BrandID], 
+    [vw_Brand].[SiteID] AS [SiteID], 
+    [vw_Brand].[Name] AS [Name], 
+    [vw_Brand].[Description] AS [Description], 
+    [vw_Brand].[Image] AS [Image], 
+    [vw_Brand].[Url] AS [Url], 
+    [vw_Brand].[Sort] AS [Sort], 
+    [vw_Brand].[IsActive] AS [IsActive], 
+    [vw_Brand].[LangID] AS [LangID]
+    FROM [dbo].[vw_Brand] AS [vw_Brand]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Category" EntityType="Self.vw_Category" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Category].[checker] AS [checker], 
+    [vw_Category].[PromotionID] AS [PromotionID], 
+    [vw_Category].[CategoryID] AS [CategoryID], 
+    [vw_Category].[StoreID] AS [StoreID], 
+    [vw_Category].[Code] AS [Code], 
+    [vw_Category].[CategoryName] AS [CategoryName]
+    FROM [dbo].[vw_Category] AS [vw_Category]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Invoice" EntityType="Self.vw_Invoice" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Invoice].[InvoiceID] AS [InvoiceID], 
+    [vw_Invoice].[StoreID] AS [StoreID], 
+    [vw_Invoice].[LocalID] AS [LocalID], 
+    [vw_Invoice].[CustomerID] AS [CustomerID], 
+    [vw_Invoice].[IsPaid] AS [IsPaid], 
+    [vw_Invoice].[IsPending] AS [IsPending], 
+    [vw_Invoice].[InvoiceDate] AS [InvoiceDate], 
+    [vw_Invoice].[InvoiceNo] AS [InvoiceNo], 
+    [vw_Invoice].[BusinessName] AS [BusinessName], 
+    [vw_Invoice].[Address] AS [Address], 
+    [vw_Invoice].[City] AS [City], 
+    [vw_Invoice].[State] AS [State], 
+    [vw_Invoice].[ZipCode] AS [ZipCode], 
+    [vw_Invoice].[CityShip] AS [CityShip], 
+    [vw_Invoice].[StateShip] AS [StateShip], 
+    [vw_Invoice].[ZipCodeShip] AS [ZipCodeShip], 
+    [vw_Invoice].[AddressAddr1] AS [AddressAddr1], 
+    [vw_Invoice].[AddressAddr2] AS [AddressAddr2], 
+    [vw_Invoice].[AddressAddr3] AS [AddressAddr3], 
+    [vw_Invoice].[AddressAddr4] AS [AddressAddr4], 
+    [vw_Invoice].[AddressAddr5] AS [AddressAddr5], 
+    [vw_Invoice].[AddressAddr1S] AS [AddressAddr1S], 
+    [vw_Invoice].[AddressAddr2S] AS [AddressAddr2S], 
+    [vw_Invoice].[AddressAddr3S] AS [AddressAddr3S], 
+    [vw_Invoice].[AddressAddr4S] AS [AddressAddr4S], 
+    [vw_Invoice].[AddressAddr5S] AS [AddressAddr5S], 
+    [vw_Invoice].[SkipTax] AS [SkipTax], 
+    [vw_Invoice].[SubTotal] AS [SubTotal], 
+    [vw_Invoice].[SaleTax] AS [SaleTax], 
+    [vw_Invoice].[Deposit] AS [Deposit], 
+    [vw_Invoice].[AmtPaid] AS [AmtPaid], 
+    [vw_Invoice].[Discount] AS [Discount], 
+    [vw_Invoice].[AmtCredit] AS [AmtCredit], 
+    [vw_Invoice].[Shipping] AS [Shipping], 
+    [vw_Invoice].[Balance] AS [Balance], 
+    [vw_Invoice].[Total] AS [Total], 
+    [vw_Invoice].[Voided] AS [Voided], 
+    [vw_Invoice].[Notes] AS [Notes], 
+    [vw_Invoice].[Memo] AS [Memo], 
+    [vw_Invoice].[RecordState] AS [RecordState], 
+    [vw_Invoice].[InvoiceStatus] AS [InvoiceStatus], 
+    [vw_Invoice].[FullName] AS [FullName], 
+    [vw_Invoice].[FirstName] AS [FirstName], 
+    [vw_Invoice].[MiddleName] AS [MiddleName], 
+    [vw_Invoice].[LastName] AS [LastName]
+    FROM [dbo].[vw_Invoice] AS [vw_Invoice]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_News" EntityType="Self.vw_News" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_News].[NewsID] AS [NewsID], 
+    [vw_News].[SiteID] AS [SiteID], 
+    [vw_News].[Title] AS [Title], 
+    [vw_News].[ShortDescription] AS [ShortDescription], 
+    [vw_News].[LongDescription] AS [LongDescription], 
+    [vw_News].[ImageThumbnail] AS [ImageThumbnail], 
+    [vw_News].[Image] AS [Image], 
+    [vw_News].[Url] AS [Url], 
+    [vw_News].[Sort] AS [Sort], 
+    [vw_News].[LangID] AS [LangID], 
+    [vw_News].[IsActive] AS [IsActive]
+    FROM [dbo].[vw_News] AS [vw_News]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Photo" EntityType="Self.vw_Photo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Photo].[ID] AS [ID], 
+    [vw_Photo].[IsPhoto] AS [IsPhoto], 
+    [vw_Photo].[Title] AS [Title], 
+    [vw_Photo].[Description] AS [Description], 
+    [vw_Photo].[Image] AS [Image], 
+    [vw_Photo].[Video] AS [Video], 
+    [vw_Photo].[LangID] AS [LangID], 
+    [vw_Photo].[Sort] AS [Sort], 
+    [vw_Photo].[IsActive] AS [IsActive]
+    FROM [dbo].[vw_Photo] AS [vw_Photo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_PhotoDetail" EntityType="Self.vw_PhotoDetail" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_PhotoDetail].[DetailID] AS [DetailID], 
+    [vw_PhotoDetail].[PhotoID] AS [PhotoID], 
+    [vw_PhotoDetail].[IsActive] AS [IsActive], 
+    [vw_PhotoDetail].[Title] AS [Title], 
+    [vw_PhotoDetail].[Description] AS [Description], 
+    [vw_PhotoDetail].[Image] AS [Image], 
+    [vw_PhotoDetail].[Thumbnail] AS [Thumbnail], 
+    [vw_PhotoDetail].[FullImage] AS [FullImage], 
+    [vw_PhotoDetail].[Video] AS [Video], 
+    [vw_PhotoDetail].[Link] AS [Link], 
+    [vw_PhotoDetail].[LangID] AS [LangID], 
+    [vw_PhotoDetail].[Sort] AS [Sort]
+    FROM [dbo].[vw_PhotoDetail] AS [vw_PhotoDetail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_ProductHot" EntityType="Self.vw_ProductHot" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_ProductHot].[ProductID] AS [ProductID], 
+    [vw_ProductHot].[ProductCode] AS [ProductCode], 
+    [vw_ProductHot].[StoreID] AS [StoreID], 
+    [vw_ProductHot].[SiteID] AS [SiteID], 
+    [vw_ProductHot].[ProductName] AS [ProductName], 
+    [vw_ProductHot].[ShortDescription] AS [ShortDescription], 
+    [vw_ProductHot].[Description] AS [Description], 
+    [vw_ProductHot].[Price] AS [Price], 
+    [vw_ProductHot].[LargeImage] AS [LargeImage], 
+    [vw_ProductHot].[Thumbnail] AS [Thumbnail], 
+    [vw_ProductHot].[Url] AS [Url], 
+    [vw_ProductHot].[Sort] AS [Sort], 
+    [vw_ProductHot].[IsActive] AS [IsActive]
+    FROM [dbo].[vw_ProductHot] AS [vw_ProductHot]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_ProductPromotion" EntityType="Self.vw_ProductPromotion" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_ProductPromotion].[checker] AS [checker], 
+    [vw_ProductPromotion].[StoreID] AS [StoreID], 
+    [vw_ProductPromotion].[ProductID] AS [ProductID], 
+    [vw_ProductPromotion].[ProdNo] AS [ProdNo], 
+    [vw_ProductPromotion].[ProductName] AS [ProductName], 
+    [vw_ProductPromotion].[Price] AS [Price], 
+    [vw_ProductPromotion].[Price1] AS [Price1], 
+    [vw_ProductPromotion].[Price2] AS [Price2], 
+    [vw_ProductPromotion].[Price3] AS [Price3]
+    FROM [dbo].[vw_ProductPromotion] AS [vw_ProductPromotion]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_PromotionDetail" EntityType="Self.vw_PromotionDetail" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_PromotionDetail].[PromotionID] AS [PromotionID], 
+    [vw_PromotionDetail].[StoreID] AS [StoreID], 
+    [vw_PromotionDetail].[SiteID] AS [SiteID], 
+    [vw_PromotionDetail].[FromDate] AS [FromDate], 
+    [vw_PromotionDetail].[ToDate] AS [ToDate], 
+    [vw_PromotionDetail].[CategoryID] AS [CategoryID], 
+    [vw_PromotionDetail].[ProductID] AS [ProductID], 
+    [vw_PromotionDetail].[Percent] AS [Percent], 
+    [vw_PromotionDetail].[Quantity] AS [Quantity], 
+    [vw_PromotionDetail].[Sort] AS [Sort], 
+    [vw_PromotionDetail].[IsItem] AS [IsItem], 
+    [vw_PromotionDetail].[IsActive] AS [IsActive]
+    FROM [dbo].[vw_PromotionDetail] AS [vw_PromotionDetail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_PromotionItem" EntityType="Self.vw_PromotionItem" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_PromotionItem].[PromotionID] AS [PromotionID], 
+    [vw_PromotionItem].[ProductID] AS [ProductID], 
+    [vw_PromotionItem].[ProdNo] AS [ProdNo], 
+    [vw_PromotionItem].[ProductName] AS [ProductName], 
+    [vw_PromotionItem].[Percent] AS [Percent], 
+    [vw_PromotionItem].[Quantity] AS [Quantity], 
+    [vw_PromotionItem].[Sort] AS [Sort], 
+    [vw_PromotionItem].[IsItem] AS [IsItem], 
+    [vw_PromotionItem].[IsActive] AS [IsActive]
+    FROM [dbo].[vw_PromotionItem] AS [vw_PromotionItem]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Slide" EntityType="Self.vw_Slide" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Slide].[SlideID] AS [SlideID], 
+    [vw_Slide].[SiteID] AS [SiteID], 
+    [vw_Slide].[Type] AS [Type], 
+    [vw_Slide].[Name] AS [Name], 
+    [vw_Slide].[Description] AS [Description], 
+    [vw_Slide].[Image] AS [Image], 
+    [vw_Slide].[Url] AS [Url], 
+    [vw_Slide].[Sort] AS [Sort], 
+    [vw_Slide].[IsActive] AS [IsActive], 
+    [vw_Slide].[LangID] AS [LangID]
+    FROM [dbo].[vw_Slide] AS [vw_Slide]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_BrandLang_Brand" Association="Self.FK_BrandLang_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="BrandLang" EntitySet="BrandLang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsLang_Language" Association="Self.FK_NewsLang_Language">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="NewsLang" EntitySet="NewsLang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsLang_News" Association="Self.FK_NewsLang_News">
+      <End Role="News" EntitySet="News" />
+      <End Role="NewsLang" EntitySet="NewsLang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdItems_Invoices" Association="Self.FK_OrdItems_Invoices">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="OrdItems" EntitySet="OrdItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoDetail_Photo" Association="Self.FK_PhotoDetail_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="PhotoDetail" EntitySet="PhotoDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoDetailLang_PhotoDetail" Association="Self.FK_PhotoDetailLang_PhotoDetail">
+      <End Role="PhotoDetail" EntitySet="PhotoDetail" />
+      <End Role="PhotoDetailLang" EntitySet="PhotoDetailLang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoLang_Photo" Association="Self.FK_PhotoLang_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="PhotoLang" EntitySet="PhotoLang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SlideLang_Slide" Association="Self.FK_SlideLang_Slide">
+      <End Role="Slide" EntitySet="Slide" />
+      <End Role="SlideLang" EntitySet="SlideLang" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
