@@ -293,6 +293,24 @@ namespace NailShop.Controllers
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
 
+                public JsonResult GetOrderByStoreID(DateTime FromDate, DateTime ToDate, int Status)
+                {
+                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                    {
+                        string jsonData = "[]";
+                        IOrder _order = new OrderBO();
+                        List<vw_Invoice> data;
+                        data = _order.GetOrderByStoreID(_session.StoreID, FromDate, ToDate, Status);
+                        if (data != null)
+                            jsonData = new JavaScriptSerializer().Serialize(data);
+                        return Json(jsonData, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                        RedirectToAction("index", "backend");
+                    return Json("[]", JsonRequestBehavior.AllowGet);
+                }
+
+
                 public JsonResult GetItemForPromotion(int StoreID, string TextSearch)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
