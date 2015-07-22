@@ -15,30 +15,72 @@
                     @{
                         if (ViewBag.IsAdmin)
                         {
-                            <li class="active">
-                                <a href="/admin/video">
-                                    <i class="fa fa-video-camera icon">
-                                        <b class="bg-info dker"></b>
-                                    </i>
-                                    <span>Video</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/photo">
-                                    <i class="fa fa-photo icon">
-                                        <b class="bg-primary dker"></b>
-                                    </i>
-                                    <span>Photo</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/about">
-                                    <i class="fa fa-info-circle icon">
-                                        <b class="bg-danger"></b>
-                                    </i>
-                                    <span>About</span>
-                                </a>
-                            </li>
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "VIDEO")
+                            {
+                                <li class="active">
+                                    <a href="/admin/video">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Video</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/video">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Video</span>
+                                    </a>
+                                </li>
+                            }
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PHOTO")
+                            {
+                                <li class="active">
+                                    <a href="/admin/photo">
+                                        <i class="fa fa-photo icon">
+                                            <b class="bg-primary dker"></b>
+                                        </i>
+                                        <span>Photo</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/photo">
+                                        <i class="fa fa-photo icon">
+                                            <b class="bg-primary dker"></b>
+                                        </i>
+                                        <span>Photo</span>
+                                    </a>
+                                </li>
+                            }
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "ABOUT")
+                            {
+                                <li class="active">
+                                    <a href="/admin/about">
+                                        <i class="fa fa-info-circle icon">
+                                            <b class="bg-danger"></b>
+                                        </i>
+                                        <span>About</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/about">
+                                        <i class="fa fa-info-circle icon">
+                                            <b class="bg-danger"></b>
+                                        </i>
+                                        <span>About</span>
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {

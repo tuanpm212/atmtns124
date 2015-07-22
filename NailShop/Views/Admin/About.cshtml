@@ -8,7 +8,7 @@
     <div class="m-b-md">
         <h3 class="m-b-none">@Resources.Backend.headAbout</h3>
     </div>
-    <form class="form-horizontal">
+    <form id="formAbout" class="form-horizontal">
         <div class="form-group">
             <div id="divValue" class="col-sm-12">
                 @*<textarea id="description" style="height:450px">@Model.Contents</textarea>*@
@@ -69,9 +69,8 @@
 
         var editor = $("#description").data("kendoEditor");
 
-        $('#btnSave').click(function () {
-            /*alert($('#description').text());
-            alert($('#divValue').text())*/
+        $('#formAbout').submit(function (event) {
+            event.preventDefault();
             var aboutlang = {
                 AboutID: 1,
                 LangID: 'en-US',
