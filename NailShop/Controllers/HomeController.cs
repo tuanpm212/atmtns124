@@ -17,6 +17,13 @@ namespace NailShop.Controllers
 
             public ActionResult Index()
             {
+                if ((_session.IsLogin && _session.IsStore) || (_session.IsLogin && _session.IsAdmin))
+                {
+                    _session.IsLogin = false;
+                    _session.StoreID = -1;
+                    _session.FullName = null;
+                    return RedirectToAction("Index", "Home");
+                }
                 IHome iHome = new HomeBO();
                 Business.Model.ModelWeb.Home model = new Business.Model.ModelWeb.Home();
                 model = iHome.GetHomeData(_session.SiteID, _session.LangID);

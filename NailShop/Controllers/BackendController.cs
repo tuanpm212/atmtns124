@@ -284,6 +284,15 @@ namespace NailShop.Controllers
                     return Json("[]", JsonRequestBehavior.AllowGet);
                 }
 
+                public JsonResult GetOrdForBackend(long ID)
+                {
+                    string jsonData = "";
+                    IOrder _ord = new OrderBO();
+                    var data = _ord.GetOrdItemByID(ID);
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    return Json(jsonData, JsonRequestBehavior.AllowGet);
+                }
+
                 public JsonResult GetItemForPromotion(int StoreID, string TextSearch)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)

@@ -140,20 +140,22 @@
                 {
                     isFristLoad=false;
                     $http({
-                        url: "/backend/GetOrdItem?id="+ OrdID,
-                        method: "GET"
-
+                        url: "/Backend/GetOrdForBackend",
+                        method: "GET",
+                        params: {
+                            ID: OrdID
+                        }
                     }).success(function (data, status, headers, config) {
-                        myjson = JSON.parse(JSON.parse(data));
-                        $scope.setPagingData(myjson, page, pageSize);
-                        SumTotalAmount(myjson);
+                        var myJson = JSON.parse(JSON.parse(data));
+                        $scope.setPagingData(myJson, page, pageSize);
+                        SumTotalAmount(myJson);
                     }).error(function (data, status, headers, config) {
                         alert(JSON.stringify(data));
                     });
                 }
                 else
                 {
-                    $scope.setPagingData(myjson, page, pageSize);
+                    $scope.setPagingData(myJson, page, pageSize);
                 }
             };
 
