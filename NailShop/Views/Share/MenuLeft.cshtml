@@ -84,30 +84,72 @@
                         }
                         else
                         {
-                            <li>
-                                <a href="/backend/order">
-                                    <i class="fa fa-shopping-cart icon">
-                                        <b class="bg-warning"></b>
-                                    </i>
-                                    <span>Order</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/backend/promotion">
-                                    <i class="fa fa-bullhorn icon">
-                                        <b class="bg-success dker"></b>
-                                    </i>
-                                    <span>Promotion Item</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/backend/PromotionCategory">
-                                    <i class="fa fa-certificate icon">
-                                        <b class="bg-success dker"></b>
-                                    </i>
-                                    <span>Promotion Category</span>
-                                </a>
-                            </li>
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "ORDER")
+                            {
+                                <li class="active">
+                                    <a href="/backend/order">
+                                        <i class="fa fa-shopping-cart icon">
+                                            <b class="bg-warning"></b>
+                                        </i>
+                                        <span>Order</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/backend/order">
+                                        <i class="fa fa-shopping-cart icon">
+                                            <b class="bg-warning"></b>
+                                        </i>
+                                        <span>Order</span>
+                                    </a>
+                                </li>
+                            }
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PROMOTION")
+                            {
+                                <li class="active">
+                                    <a href="/backend/promotion">
+                                        <i class="fa fa-bullhorn icon">
+                                            <b class="bg-success dker"></b>
+                                        </i>
+                                        <span>Promotion Item</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/backend/promotion">
+                                        <i class="fa fa-bullhorn icon">
+                                            <b class="bg-success dker"></b>
+                                        </i>
+                                        <span>Promotion Item</span>
+                                    </a>
+                                </li>
+                            }
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PROMOTION")
+                            {
+                                <li class="active">
+                                    <a href="/backend/PromotionCategory">
+                                        <i class="fa fa-certificate icon">
+                                            <b class="bg-success dker"></b>
+                                        </i>
+                                        <span>Promotion Category</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/backend/PromotionCategory">
+                                        <i class="fa fa-certificate icon">
+                                            <b class="bg-success dker"></b>
+                                        </i>
+                                        <span>Promotion Category</span>
+                                    </a>
+                                </li>
+                            }
                         }
                     }
                 </ul>
