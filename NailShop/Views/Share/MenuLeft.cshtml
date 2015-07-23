@@ -84,7 +84,7 @@
                         }
                         else
                         {
-                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "ORDER")
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "ORDER" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEORDER")
                             {
                                 <li class="active">
                                     <a href="/backend/order">
@@ -106,7 +106,7 @@
                                     </a>
                                 </li>
                             }
-                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PROMOTION")
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PROMOTION" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEPROMOTION")
                             {
                                 <li class="active">
                                     <a href="/backend/promotion">
@@ -128,7 +128,7 @@
                                     </a>
                                 </li>
                             }
-                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PROMOTIONCATEGORY")
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PROMOTIONCATEGORY" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEPROMOTIONCATEGORY")
                             {
                                 <li class="active">
                                     <a href="/backend/PromotionCategory">

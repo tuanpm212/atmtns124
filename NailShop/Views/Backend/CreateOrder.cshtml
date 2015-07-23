@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@Resources.Backend.lblDescription</label>
                         <div class="col-sm-9">
-                            @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "5" })
+                            @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "6" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -51,11 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-3">
-                            <a href="/backend/order" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="col-md-6 text-right">
@@ -90,6 +86,17 @@
                             <p class="control-label">@Resources.CreateOrder.lblDiscount $@Html.Label((string)@ViewBag.DiscountAmount, new { id = "lblDiscountAmount" })</p>
                             <p class="control-label">@Resources.CreateOrder.lblTaxAmount $@Html.Label((string)@ViewBag.TaxAmount, new { id = "lblTaxAmount" })</p>
                             <p class="control-label">@Resources.CreateOrder.lblTotal $@Html.Label((string)@ViewBag.TotalAmount, new { id = "lblTotalAmount" })</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-3">
+                            <a href="/backend/order" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                         </div>
                     </div>
                 </div>

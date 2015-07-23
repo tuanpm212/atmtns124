@@ -13,8 +13,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Promotion Name</label>
                         <div class="col-sm-10">
-                            <input id="Name" type="text" class="form-control" ng-model="Name" />
-                            <span ng-show="promotionForm.Name.$error.required">Username is required.</span>
+                            <input id="Name" type="text" class="form-control" name="Name" required />
+                            <span>promotionForm.Name.$valid = {{promotionForm.Name.$valid}}</span>
+                            <span class="error" ng-show="myForm.input.$error.required">
+                                Required!
+                            </span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,14 +40,21 @@
                         <label class="col-sm-2 control-label">Discount Percent(%)</label>
                         <div class="col-sm-10">
                             <input id="Percent" type="number" class="form-control" required="required" />
-                            <input id="chkIsActvie" type="checkbox" />
-                            <label class="control-label">IsActive</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="chkIsActvie" type="checkbox" />IsActive
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="promotionForm.name.$dirty && promotionForm.name.$invalid">@Resources.CreateOrder.btnSave</button>
-                            <button type="submit" data-ng-click="AddItemPromotion()" class="btn btn-primary">Add Item</button>
+                            <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">Add Item</button>
                             <a href="/backend/promotioncategory" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                         </div>
                     </div>
