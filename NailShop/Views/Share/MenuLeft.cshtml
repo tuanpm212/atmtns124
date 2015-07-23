@@ -15,7 +15,7 @@
                     @{
                         if (ViewBag.IsAdmin)
                         {
-                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "VIDEO")
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "VIDEO" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEVIDEO")
                             {
                                 <li class="active">
                                     <a href="/admin/video">
@@ -37,7 +37,7 @@
                                     </a>
                                 </li>
                             }
-                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PHOTO")
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PHOTO" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEPHOTO")
                             {
                                 <li class="active">
                                     <a href="/admin/photo">
