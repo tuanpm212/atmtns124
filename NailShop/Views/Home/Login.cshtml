@@ -8,7 +8,7 @@
                 <h4 class="modal-title">@Resources.Login.title</h4>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @name = "loginForm", ng_controller = "loginCtrl" }))
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @name = "loginForm"}))
                 {
                     <div class="form-group has-feedback" ng-class="{ 'has-error': loginForm.userName.$invalid && loginForm.userName.$dirty }">
                         <input id="txtLoginName" type="text" class="form-control" placeholder="@Resources.Login.placeholderUser" name="userName" ng-model="userName" aria-describedby="basic-addon2" autofocus required>
