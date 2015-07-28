@@ -151,6 +151,22 @@ namespace NailShop.Controllers
             }
         #endregion
 
+        #region Welcome
+
+            public ActionResult Welcome()
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    IWelcome _cls = new WelcomeBO();
+                    var model = _cls.GetWelcome(_session.LangID);
+                    return View(model);
+                }
+                else
+                    return RedirectToAction("index", "admin");
+            }
+
+        #endregion
+
         #region JsonResult
 
             [HttpPost]

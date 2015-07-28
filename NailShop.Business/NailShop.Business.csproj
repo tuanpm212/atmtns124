@@ -61,6 +61,7 @@
     <Compile Include="Business\PromotionBO.cs" />
     <Compile Include="Business\SlideBO.cs" />
     <Compile Include="Business\StoreBO.cs" />
+    <Compile Include="Business\WelcomeBO.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="IBusiness\IAbout.cs" />
     <Compile Include="IBusiness\IBrand.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="IBusiness\IPromotion.cs" />
     <Compile Include="IBusiness\ISlide.cs" />
     <Compile Include="IBusiness\IStore.cs" />
+    <Compile Include="IBusiness\IWelcome.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\ModelWeb.cs" />

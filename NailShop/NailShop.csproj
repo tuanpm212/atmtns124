@@ -519,6 +519,7 @@
     <Content Include="Views\Admin\CreateVideo.cshtml" />
     <Content Include="Views\Admin\Slide.cshtml" />
     <Content Include="Views\Admin\CreateSlide.cshtml" />
+    <Content Include="Views\Admin\Welcome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

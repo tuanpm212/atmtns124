@@ -48,7 +48,7 @@
                 type: 'Post',
                 success: function (data) {
                     if (data.IsOk) {
-                        window.location.href = "/Backend";
+                        window.location.href = '@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))';
                     }
                 }
             });
