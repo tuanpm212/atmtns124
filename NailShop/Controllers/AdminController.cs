@@ -477,6 +477,20 @@ namespace NailShop.Controllers
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
+            public JsonResult SaveWelcome(Slide slide, SlideLang slideLang)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    slide.SiteID = _session.SiteID;
+                    slideLang.LangID = _session.LangID;
+                    IWelcome _cls = new WelcomeBO();
+                    var IsResult = _cls.SaveWelcome(slide, slideLang);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "admin");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
 
         #endregion
     }
