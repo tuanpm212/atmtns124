@@ -450,8 +450,8 @@ namespace NailShop.Controllers
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
-                    IPhoto _cls = new PhotoBO();
-                    var IsResult = _cls.AddNewPhoto(photo, photoLang, detail, detailLang);
+                    ISlide _cls = new SlideBO();
+                    var IsResult = _cls.SaveSlide(slide, slideLang);
                     return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
                 }
                 else

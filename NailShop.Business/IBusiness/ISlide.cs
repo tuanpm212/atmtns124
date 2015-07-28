@@ -18,5 +18,7 @@ namespace NailShop.Business
         bool Delete(long ID);
 
         List<vw_Slide> GetSlide(string LangID, string Type);
+
+        bool SaveSlide(Slide slide, SlideLang slideLang);
     }
 }
