@@ -17,7 +17,7 @@
       <script src="js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-app="app" ng-controller="appCtrl">
     <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
         <div class="container aside-xxl">
             <a class="navbar-brand block text-uppercase" href="index.html">@Resources.Backend.backendName</a>
@@ -25,54 +25,55 @@
                 <header class="panel-heading text-center">
                     <strong>Administrator Login</strong>
                 </header>
-                <form id="formLogin" class="panel-body wrapper-lg">
-                    <div class="form-group">
+                <form id="formLogin" class="panel-body wrapper-lg" name="loginForm" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': loginForm.UserName.$invalid && loginForm.UserName.$dirty }">
                         <label class="control-label">@Resources.Backend.lblUserName</label>
-                        <input id="txtLoginName" type="text" placeholder="@Resources.Backend.pldUserName" class="form-control input-lg">
+                        <input id="txtLoginName" type="text" placeholder="@Resources.Backend.pldUserName" class="form-control input-lg" name="UserName" ng-model="login.username" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': loginForm.Password.$invalid && loginForm.Password.$dirty }">
                         <label class="control-label">@Resources.Backend.lblPassword</label>
-                        <input id="txtPassword" type="password" placeholder="@Resources.Backend.pldPassword" class="form-control input-lg">
+                        <input id="txtPassword" type="password" placeholder="@Resources.Backend.pldPassword" class="form-control input-lg" name="Password" ng-model="login.password" required>
                     </div>
                     <div id="divError" class="form-group has-error hide">
                         <div class="input-group">
                             <p class="form-control-static control-label">@Resources.Login.msgError</p>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">@Resources.Backend.btnSignIn</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!loginForm.$valid">@Resources.Backend.btnSignIn</button>
                 </form>
             </section>
         </div>
     </section>
     <!-- App -->
     <script src="~/Scripts/jquery-1.11.3.js"></script>
+    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/app.js"></script>
     <script src="~/Scripts/app.plugin.js"></script>
     <script src="~/Scripts/jquery.slimscroll.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#formLogin").submit(function (event) {
-                var login = {
-                    LoginName: $('#txtLoginName').val(),
-                    Password: $('#txtPassword').val()
+        $("#formLogin").submit(function (event) {
+            var login = {
+                LoginName: $('#txtLoginName').val(),
+                Password: $('#txtPassword').val()
+            }
+            $.ajax({
+                url: '/admin/Login',
+                type: 'Post',
+                data: JSON.stringify(login),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.IsOk)
+                        window.location.href = "/admin/video";
+                    else
+                        $('#divError').removeClass('hide');
                 }
-                $.ajax({
-                    url: '/admin/Login',
-                    type: 'Post',
-                    data: JSON.stringify(login),
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-                        if (data.IsOk) 
-                            window.location.href = "/admin/video";
-                        else
-                            $('#divError').removeClass('hide');
-                    }
-                });
-                event.preventDefault();
             });
+            event.preventDefault();
         });
 
+        angular.module('app', []).controller('appCtrl', ['$scope', function ($scope) {
+        }]);
     </script>
 
 </body>

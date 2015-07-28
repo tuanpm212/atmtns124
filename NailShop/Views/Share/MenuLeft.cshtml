@@ -86,8 +86,8 @@
                             {
                                 <li class="active">
                                     <a href="/admin/slide">
-                                        <i class="fa fa-info-circle icon">
-                                            <b class="bg-danger"></b>
+                                        <i class="fa fa-play-circle icon">
+                                            <b class="bg-warning"></b>
                                         </i>
                                         <span>Slider</span>
                                     </a>
@@ -97,10 +97,33 @@
                             {
                                 <li>
                                     <a href="/admin/slide">
-                                        <i class="fa fa-info-circle icon">
-                                            <b class="bg-danger"></b>
+                                        <i class="fa fa-play-circle icon">
+                                            <b class="bg-warning"></b>
                                         </i>
                                         <span>Slider</span>
+                                    </a>
+                                </li>
+                            }
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "WELCOME")
+                            {
+                                <li class="active">
+                                    <a href="/admin/welcome">
+                                        <i class="fa fa-smile-o icon">
+                                            <b class="bg-success"></b>
+                                        </i>
+                                        <span>Welcome</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/welcome">
+                                        <i class="fa fa-smile-o icon">
+                                            <b class="bg-success"></b>
+                                        </i>
+                                        <span>Welcome</span>
                                     </a>
                                 </li>
                             }
