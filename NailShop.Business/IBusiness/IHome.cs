@@ -10,5 +10,6 @@ namespace NailShop.Business
     public interface IHome: IRepository<vw_Slide>
     {
         Model.ModelWeb.Home GetHomeData(int SiteID, string LangID);
+
     }
 }

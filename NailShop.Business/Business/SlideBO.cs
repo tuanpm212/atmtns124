@@ -57,5 +57,38 @@ namespace NailShop.Business
                 }
             }
         }
+
+        public vw_Slide GetData(long ID)
+        {
+            using (var db = new NailShopEntities())
+            {
+                var select = from c in db.vw_Slide
+                             where c.SlideID == ID
+                             select c;
+                return select.First();
+            }
+        }
+
+        public bool Delete(long ID)
+        {
+            using (var db = new NailShopEntities())
+            {
+                var row = db.Slides.Find(ID);
+                db.Entry(row).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public List<vw_Slide> GetSlide(string LangID, string Type)
+        {
+            using (var db = new NailShopEntities())
+            {
+                var select = from c in db.vw_Slide
+                             where c.LangID == LangID && c.Type == Type
+                             select c;
+                return select.ToList();
+            }
+        }
     }
 }

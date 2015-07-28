@@ -119,6 +119,37 @@ namespace NailShop.Controllers
 
         #endregion
 
+        #region Slider
+            public ActionResult Slide()
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                    return View();
+                else
+                    return RedirectToAction("index", "backend");
+            }
+
+            public ActionResult CreateSlide(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    ViewBag.Image = "~/Uploads/Default/default.png";
+                    vw_Slide model = new vw_Slide();
+                    if (id != -1)
+                    {
+                        ISlide cls = new SlideBO();
+                        model = cls.GetData(id);
+                        if (model == null)
+                            model = new vw_Slide();
+                        else
+                            ViewBag.Image = model.Image;
+                    }
+                    return View(model);
+                }
+                else
+                    return RedirectToAction("index", "backend");
+            }
+        #endregion
+
         #region JsonResult
 
             [HttpPost]
@@ -246,7 +277,6 @@ namespace NailShop.Controllers
                     RedirectToAction("index", "admin");
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
-
 
             [HttpPost]
             public JsonResult DeletePhoto(long id)
@@ -389,6 +419,46 @@ namespace NailShop.Controllers
                 // Return relative file path
                 return relativeFileAndPath + "/" + fileNameFull;
             }
+
+
+            public JsonResult GetSlider()
+            {
+                string jsonData = "[]";
+                ISlide _cls = new SlideBO();
+                var data = _cls.GetSlide(_session.LangID, "SLIDE_TOP");
+                if (data != null)
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult DeleteSlide(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    ISlide _cls = new SlideBO();
+                    var IsResult = _cls.Delete(id);
+                    return Json(new { IsOk = IsResult}, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json(new { IsOk = false}, JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult SaveSlide(Slide slide, SlideLang slideLang)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    IPhoto _cls = new PhotoBO();
+                    var IsResult = _cls.AddNewPhoto(photo, photoLang, detail, detailLang);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
 
         #endregion
     }

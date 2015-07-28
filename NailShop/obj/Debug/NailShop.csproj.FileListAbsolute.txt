@@ -1,85 +1,3 @@
-D:\Source Web\atmtns124\NailShop\bin\NailShop.dll.config
-D:\Source Web\atmtns124\NailShop\bin\NailShop.dll
-D:\Source Web\atmtns124\NailShop\bin\NailShop.pdb
-D:\Source Web\atmtns124\NailShop\bin\vi-vn\NailShop.resources.dll
-D:\Source Web\atmtns124\NailShop\bin\EntityFramework.dll
-D:\Source Web\atmtns124\NailShop\bin\EntityFramework.SqlServer.dll
-D:\Source Web\atmtns124\NailShop\bin\ImageResizer.dll
-D:\Source Web\atmtns124\NailShop\bin\NailShop.Business.dll
-D:\Source Web\atmtns124\NailShop\bin\NailShop.DataAccess.dll
-D:\Source Web\atmtns124\NailShop\bin\NailSyn.DataAccess.dll
-D:\Source Web\atmtns124\NailShop\bin\Newtonsoft.Json.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Net.Http.Formatting.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Helpers.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Http.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Http.WebHost.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Mvc.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Razor.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Webpages.Deployment.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Webpages.dll
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Webpages.Razor.dll
-D:\Source Web\atmtns124\NailShop\bin\NailShop.Business.pdb
-D:\Source Web\atmtns124\NailShop\bin\NailShop.DataAccess.pdb
-D:\Source Web\atmtns124\NailShop\bin\EntityFramework.xml
-D:\Source Web\atmtns124\NailShop\bin\EntityFramework.SqlServer.xml
-D:\Source Web\atmtns124\NailShop\bin\ImageResizer.xml
-D:\Source Web\atmtns124\NailShop\bin\Newtonsoft.Json.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Net.Http.Formatting.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Http.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Http.WebHost.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Razor.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Webpages.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Webpages.Deployment.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Webpages.Razor.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Helpers.xml
-D:\Source Web\atmtns124\NailShop\bin\System.Web.Mvc.xml
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.csprojResolveAssemblyReference.cache
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Backend.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.ChangePassword.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Contact.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.CreateOrder.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.DefaultValue.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.EmailTemplate.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Footer.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.FormTitle.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Header.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Home.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Login.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Order.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Contact.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.DefaultValue.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.EmailTemplate.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Footer.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.FormTitle.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Header.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Home.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.Resources.Login.vi-vn.resources
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.csproj.GenerateResource.Cache
-D:\Source Web\atmtns124\NailShop\obj\Debug\vi-vn\NailShop.resources.dll
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.dll
-D:\Source Web\atmtns124\NailShop\obj\Debug\NailShop.pdb
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.csprojResolveAssemblyReference.cache
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Backend.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.ChangePassword.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Contact.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.CreateOrder.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.DefaultValue.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.EmailTemplate.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Footer.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.FormTitle.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Header.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Home.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Login.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Order.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Contact.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.DefaultValue.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.EmailTemplate.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Footer.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.FormTitle.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Header.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Home.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Login.vi-vn.resources
-D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.csproj.GenerateResource.Cache
 D:\MyData\Web\Nail\atmtns124\NailShop\bin\NailShop.dll.config
 D:\MyData\Web\Nail\atmtns124\NailShop\bin\NailShop.dll
 D:\MyData\Web\Nail\atmtns124\NailShop\bin\NailShop.pdb
@@ -115,6 +33,28 @@ D:\MyData\Web\Nail\atmtns124\NailShop\bin\System.Web.Webpages.Deployment.xml
 D:\MyData\Web\Nail\atmtns124\NailShop\bin\System.Web.Webpages.Razor.xml
 D:\MyData\Web\Nail\atmtns124\NailShop\bin\System.Web.Helpers.xml
 D:\MyData\Web\Nail\atmtns124\NailShop\bin\System.Web.Mvc.xml
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.csprojResolveAssemblyReference.cache
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Backend.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.ChangePassword.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Contact.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.CreateOrder.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.DefaultValue.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.EmailTemplate.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Footer.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.FormTitle.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Header.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Home.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Login.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Order.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Contact.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.DefaultValue.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.EmailTemplate.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Footer.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.FormTitle.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Header.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Home.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.Resources.Login.vi-vn.resources
+D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.csproj.GenerateResource.Cache
 D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\vi-vn\NailShop.resources.dll
 D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.dll
 D:\MyData\Web\Nail\atmtns124\NailShop\obj\Debug\NailShop.pdb

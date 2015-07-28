@@ -81,6 +81,29 @@
                                     </a>
                                 </li>
                             }
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "SLIDE" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATESLIDE")
+                            {
+                                <li class="active">
+                                    <a href="/admin/slide">
+                                        <i class="fa fa-info-circle icon">
+                                            <b class="bg-danger"></b>
+                                        </i>
+                                        <span>Slider</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/slide">
+                                        <i class="fa fa-info-circle icon">
+                                            <b class="bg-danger"></b>
+                                        </i>
+                                        <span>Slider</span>
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {
