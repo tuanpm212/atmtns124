@@ -105,6 +105,7 @@
                                 </li>
                             }
 
+<<<<<<< HEAD
                             if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "WELCOME")
                             {
                                 <li class="active">
@@ -113,17 +114,36 @@
                                             <b class="bg-success"></b>
                                         </i>
                                         <span>Welcome</span>
+=======
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "BRAND" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEBRAND")
+                            {
+                                <li class="active">
+                                    <a href="/admin/brand">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Brands</span>
+>>>>>>> 15f41a13e98889008d2ac47673ef80e0df652291
                                     </a>
                                 </li>
                             }
                             else
                             {
                                 <li>
+<<<<<<< HEAD
                                     <a href="/admin/welcome">
                                         <i class="fa fa-smile-o icon">
                                             <b class="bg-success"></b>
                                         </i>
                                         <span>Welcome</span>
+=======
+                                    <a href="/admin/brand">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Brands</span>
+>>>>>>> 15f41a13e98889008d2ac47673ef80e0df652291
                                     </a>
                                 </li>
                             }

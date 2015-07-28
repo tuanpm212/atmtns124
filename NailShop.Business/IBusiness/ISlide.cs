@@ -9,10 +9,6 @@ namespace NailShop.Business
 {
     public interface ISlide : IRepository<vw_Slide>
     {
-        bool AddNew(Slide slide, SlideLang slideLang);
-
-        bool Edit(Slide slide, SlideLang slideLang);
-
         vw_Slide GetData(long ID);
 
         bool Delete(long ID);

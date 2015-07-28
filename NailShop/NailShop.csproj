@@ -520,6 +520,8 @@
     <Content Include="Views\Admin\Slide.cshtml" />
     <Content Include="Views\Admin\CreateSlide.cshtml" />
     <Content Include="Views\Admin\Welcome.cshtml" />
+    <Content Include="Views\Admin\Brand.cshtml" />
+    <Content Include="Views\Admin\CreateBrand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
