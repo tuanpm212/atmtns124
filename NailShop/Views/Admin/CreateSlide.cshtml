@@ -28,14 +28,14 @@
                 <label class="col-sm-2 control-label">Image Cover</label>
                 <div class="col-sm-10">
                     <div id="boxCover" class="dropfile visible-lg">
-                        <img id="imgUpload" src="@ViewBag.Image" style="width: 240px; height: 173px" />
+                        <img id="imgUpload" src="@ViewBag.Image" style="width: 1200px; height: 300px" />
                         <a id="imgCover" href="#"></a>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-10 col-sm-offset-2">
-                    <button type="button" class="btn btn-primary" data-ng-click="saveCover()">Save</button>
+                    <button id="btnSave" type="button" class="btn btn-primary">Save</button>
                     <a class="btn btn-primary" href="/admin/slide">Back</a>
                 </div>
             </div>
@@ -50,29 +50,59 @@
 <script src="~/Scripts/jquery.uploadfile.js"></script>
 <script src="~/Scripts/jquery.form.js"></script>
 <script>
-        var photoID = '@ViewBag.ID';
-        $("#imgCover").uploadFile({
-            url: '/admin/UploadCover',
-            multiple: false,
-            dragDrop: false,
-            allowedTypes: 'jpg,png,bmp,gif',
-            maxFileSize: 2100000,
-            onSuccess: function (files, response, xhr) {
-                var data = $.parseJSON(response);
-                $('#boxCover').find('img').attr('src', data.file);
-            },
-        });
+    var slideID = '@ViewBag.ID';
+    $("#imgCover").uploadFile({
+        url: '/admin/UploadCover',
+        multiple: false,
+        dragDrop: false,
+        allowedTypes: 'jpg,png,bmp,gif',
+        maxFileSize: 2100000,
+        onSuccess: function (files, response, xhr) {
+            var data = $.parseJSON(response);
+            $('#boxCover').find('img').attr('src', data.file);
+        },
+    });
 
-        $("#imgPhoto").uploadFile({
-            url: '/admin/UploadPhoto',
-            multiple: false,
-            dragDrop: false,
-            allowedTypes: 'jpg,png,bmp,gif',
-            maxFileSize: 2100000,
-            onSuccess: function (files, response, xhr) {
-                var data = $.parseJSON(response);
-                $('#boxPhoto').find('img').attr({ 'src': data.file, 'data-id': data.id });
-            },
+    $("#imgPhoto").uploadFile({
+        url: '/admin/UploadPhoto',
+        multiple: false,
+        dragDrop: false,
+        allowedTypes: 'jpg,png,bmp,gif',
+        maxFileSize: 2100000,
+        onSuccess: function (files, response, xhr) {
+            var data = $.parseJSON(response);
+            $('#boxPhoto').find('img').attr({ 'src': data.file, 'data-id': data.id });
+        },
+    });
+
+    $("#btnSave").click(function () {
+        var slide = {
+
+            SlideID: '@ViewBag.ID',
+            SiteID: 1,
+            Type: 1,
+            Url: null,
+            Sort: 1,
+            IsActive: 1
+        },
+            slidelang = {
+                SlideID: '@ViewBag.ID',
+                LangID: 'en-US',
+                Name: $('#Name').val(),
+                Description: $('#Description').val(),
+                Image: $('#boxPhoto').find('img').attr('src').val()
+            };
+
+        $.ajax({
+            url: '/admin/SaveSlide',
+            type: 'Post',
+            data: JSON.stringify({ slide: slide, slidelang: slidelang }),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IsOk)
+                    window.location.href = "/admin/slide";
+            }
         });
+    });
     </script>
 }

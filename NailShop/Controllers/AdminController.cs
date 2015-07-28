@@ -132,6 +132,7 @@ namespace NailShop.Controllers
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
+                    ViewBag.ID = id;
                     ViewBag.Image = "~/Uploads/Default/default.png";
                     vw_Slide model = new vw_Slide();
                     if (id != -1)
