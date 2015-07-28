@@ -167,6 +167,28 @@ namespace NailShop.Controllers
 
         #endregion
 
+        #region Brand
+
+            public ActionResult Brand()
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                    return View();
+                else
+                    return RedirectToAction("index", "admin");
+            }
+
+            public ActionResult CreateBrand(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    ViewBag.ID = id;
+                    return View();
+                }
+                else
+                    return RedirectToAction("index", "admin");
+            }
+        #endregion
+
         #region JsonResult
 
             [HttpPost]
@@ -490,6 +512,47 @@ namespace NailShop.Controllers
                 else
                     RedirectToAction("index", "admin");
                 return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
+
+            public JsonResult GetBrand()
+            {
+                string jsonData = "[]";
+                IBrand _cls = new BrandBO();
+                var data = _cls.GetData(_session.LangID);
+                if (data != null)
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult SaveBrand(Brand brand, BrandLang brandLang)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    brand.SiteID = _session.SiteID;
+                    brandLang.LangID = _session.LangID;
+                    IBrand _cls = new BrandBO();
+                    var IsResult = _cls.Save(brand, brandLang);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "admin");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult DeleteBrand(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    IBrand _cls = new BrandBO();
+                    var IsResult = _cls.Delete(id);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
             }
 
         #endregion

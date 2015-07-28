@@ -9,7 +9,10 @@ namespace NailShop.Business
 {
     public interface IBrand : IRepository<vw_Brand>
     {
-        bool AddNew(Brand brand, BrandLang brandLang);
-        bool Edit(Brand brand, BrandLang brandLang);
+        bool Save(Brand brand, BrandLang brandLang);
+
+        vw_Brand GetData(string LangID, long ID);
+
+        List<vw_Brand> GetData(string LangID);
     }
 }

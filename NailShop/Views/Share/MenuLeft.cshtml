@@ -104,6 +104,30 @@
                                     </a>
                                 </li>
                             }
+
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "BRAND" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEBRAND")
+                            {
+                                <li class="active">
+                                    <a href="/admin/brand">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Brands</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/brand">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Brands</span>
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {
