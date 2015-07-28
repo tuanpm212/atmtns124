@@ -80,7 +80,7 @@
 
             SlideID: '@ViewBag.ID',
             SiteID: 1,
-            Type: 1,
+            Type: 'SLIDE_TOP',
             Url: null,
             Sort: 1,
             IsActive: 1
@@ -90,9 +90,8 @@
                 LangID: 'en-US',
                 Name: $('#Name').val(),
                 Description: $('#Description').val(),
-                Image: $('#boxPhoto').find('img').attr('src').val()
+                Image: $('#imgUpload').attr('src')
             };
-
         $.ajax({
             url: '/admin/SaveSlide',
             type: 'Post',

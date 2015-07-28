@@ -27,7 +27,7 @@ namespace NailShop.Controllers
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                     return View();
                 else
-                    return RedirectToAction("index", "backend");
+                    return RedirectToAction("index", "admin");
             }
 
             public ActionResult CreatePhoto(long id)
@@ -38,7 +38,7 @@ namespace NailShop.Controllers
                     return View();
                 }
                 else
-                    return RedirectToAction("index", "backend");
+                    return RedirectToAction("index", "admin");
             }
         #endregion
 
@@ -75,7 +75,7 @@ namespace NailShop.Controllers
                     return View();
                 }
                 else
-                    return View();
+                    return RedirectToAction("index", "admin");
             }
 
             [HttpPost]
@@ -98,7 +98,7 @@ namespace NailShop.Controllers
                     return View(model);
                 }
                 else
-                    return RedirectToAction("index", "backend");
+                    return RedirectToAction("index", "admin");
             }
 
             [HttpPost]
@@ -125,7 +125,7 @@ namespace NailShop.Controllers
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                     return View();
                 else
-                    return RedirectToAction("index", "backend");
+                    return RedirectToAction("index", "admin");
             }
 
             public ActionResult CreateSlide(long id)
@@ -147,7 +147,7 @@ namespace NailShop.Controllers
                     return View(model);
                 }
                 else
-                    return RedirectToAction("index", "backend");
+                    return RedirectToAction("index", "admin");
             }
         #endregion
 
@@ -421,7 +421,6 @@ namespace NailShop.Controllers
                 return relativeFileAndPath + "/" + fileNameFull;
             }
 
-
             public JsonResult GetSlider()
             {
                 string jsonData = "[]";
@@ -451,12 +450,14 @@ namespace NailShop.Controllers
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
+                    slide.SiteID = _session.SiteID;
+                    slideLang.LangID = _session.LangID;
                     ISlide _cls = new SlideBO();
                     var IsResult = _cls.SaveSlide(slide, slideLang);
                     return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
                 }
                 else
-                    RedirectToAction("index", "backend");
+                    RedirectToAction("index", "admin");
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
