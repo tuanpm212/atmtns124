@@ -77,17 +77,16 @@
 
 @section Scripts {
     <script>
-        angular.module('app', [])
-          .controller('pageCtrl', ['$scope', function ($scope) {
-              $scope.resetForm = function () {
-                  // Set the field values back to the original default values
-                  $scope.defaultFormData = angular.copy($scope.resetCopy);
-                  $scope.contactForm.$setPristine();
-                  $scope.contactForm.$setValidity();
-                  $scope.contactForm.$setUntouched();
-                  // in my case I had to call $apply to refresh the page, you may also need this.
-                  //$scope.$apply();
-              }
-          }]);
+        angular.module('app', []).controller('pageCtrl', ['$scope', function ($scope) {
+            $scope.resetForm = function () {
+                // Set the field values back to the original default values
+                $scope.defaultFormData = angular.copy($scope.resetCopy);
+                $scope.contactForm.$setPristine();
+                $scope.contactForm.$setValidity();
+                $scope.contactForm.$setUntouched();
+                // in my case I had to call $apply to refresh the page, you may also need this.
+                //$scope.contactForm.$apply();
+            }
+        }]);
     </script>
 }
