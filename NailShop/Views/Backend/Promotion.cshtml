@@ -12,11 +12,11 @@
                 <form class="form-inline" name="promotionForm">
                     <div class="form-group" ng-class="{ 'has-error': promotionForm.fromDate.$invalid }">
                         <label>@Resources.Order.lblFromDate</label>
-                        <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="fromDate" ng-model="order.fromDate" required>
+                        <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="fromDate" ng-model="promotion.fromDate" required>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': promotionForm.fromDate.$invalid }">
+                    <div class="form-group" ng-class="{ 'has-error': promotionForm.toDate.$invalid }">
                         <label>@Resources.Order.lblToDate</label>
-                        <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="toDate" ng-model="order.toDate" required>
+                        <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="toDate" ng-model="promotion.toDate" required>
                     </div>
                     <button class="btn btn-primary" type="submit" ng-disabled="!orderForm.$valid" data-ng-click="getPagedDataAsync()">@Resources.Order.btnSearch</button>
                     <a class="btn btn-primary" href="/backend/CreatePromotion?ID=-1">@Resources.Order.btnCreate</a>
