@@ -181,8 +181,14 @@ namespace NailShop.Controllers
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
+                    vw_Brand model = new vw_Brand();
                     ViewBag.ID = id;
-                    return View();
+                    if(id!=-1)
+                    {
+                        IBrand cls = new BrandBO();
+                        model = cls.GetData(_session.LangID, id);
+                    }
+                    return View(model);
                 }
                 else
                     return RedirectToAction("index", "admin");
