@@ -37,6 +37,7 @@
                                     </a>
                                 </li>
                             }
+
                             if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PHOTO" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEPHOTO")
                             {
                                 <li class="active">
@@ -59,6 +60,7 @@
                                     </a>
                                 </li>
                             }
+
                             if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "ABOUT")
                             {
                                 <li class="active">
@@ -105,7 +107,6 @@
                                 </li>
                             }
 
-<<<<<<< HEAD
                             if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "WELCOME")
                             {
                                 <li class="active">
@@ -114,7 +115,20 @@
                                             <b class="bg-success"></b>
                                         </i>
                                         <span>Welcome</span>
-=======
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/welcome">
+                                        <i class="fa fa-smile-o icon">
+                                            <b class="bg-success"></b>
+                                        </i>
+                                        <span>Welcome</span>
+                                    </a>
+                                </li>
+                            }
 
                             if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "BRAND" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEBRAND")
                             {
@@ -124,26 +138,18 @@
                                             <b class="bg-info dker"></b>
                                         </i>
                                         <span>Brands</span>
->>>>>>> 15f41a13e98889008d2ac47673ef80e0df652291
                                     </a>
                                 </li>
                             }
                             else
                             {
                                 <li>
-<<<<<<< HEAD
-                                    <a href="/admin/welcome">
-                                        <i class="fa fa-smile-o icon">
-                                            <b class="bg-success"></b>
-                                        </i>
-                                        <span>Welcome</span>
-=======
+
                                     <a href="/admin/brand">
                                         <i class="fa fa-video-camera icon">
                                             <b class="bg-info dker"></b>
                                         </i>
                                         <span>Brands</span>
->>>>>>> 15f41a13e98889008d2ac47673ef80e0df652291
                                     </a>
                                 </li>
                             }
