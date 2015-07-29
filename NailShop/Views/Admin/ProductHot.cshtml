@@ -1,18 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Brand";
+    ViewBag.Title = "ProductHot";
     Layout = "~/Views/Share/_Backend.cshtml";
 }
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
-            <h3 class="m-b-none">BRAND LIST</h3>
+            <h3 class="m-b-none">PRODUCT HOT</h3>
         </div>
         <div class="table-responsive">
             <div ng-grid="gridOptions"></div>
         </div>
         <div>
-            <a href="/admin/createbrand?id=-1" class="btn btn-primary">Add New</a>
+            <a href="/admin/createproducthot?id=-1" class="btn btn-primary">Add New</a>
         </div>
     </section>
 
@@ -78,7 +78,7 @@
                     page = 1;
                 }
                 $http({
-                    url: "/admin/GetBrand",
+                    url: "/admin/GetProductHot",
                     method: "GET"
                 }).success(function (data, status, headers, config) {
                     var myJson = JSON.parse(JSON.parse(data));
@@ -90,7 +90,6 @@
             };
 
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
 
             $scope.$watch('pagingOptions', function (newVal, oldVal) {
                 if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
@@ -106,10 +105,10 @@
             $scope.gridOptions = {
                 data: 'myData',
                 columnDefs: [
-                { field: 'Name', displayName: 'Name', width: "25%" },
+                { field: 'ProductCode', displayName: 'ProductCode', width: "10%", cellClass: 'ngCellText-Center' },
+                { field: 'ProductName', displayName: 'ProductName', width: "10%" },
                 { field: 'Description', displayName: 'Description' },
-                { field: 'Image', displayName: 'Image', width: "20%" },
-                 { field: 'Url', displayName: 'Url', width: "20%" },
+                { field: 'Price', displayName: 'Price', width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
                 { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,

@@ -195,6 +195,34 @@ namespace NailShop.Controllers
             }
         #endregion
 
+        #region Product
+
+            public ActionResult ProductHot()
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                    return View();
+                else
+                    return RedirectToAction("index", "admin");
+            }
+
+            public ActionResult CreateProductHot(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    vw_Brand model = new vw_Brand();
+                    ViewBag.ID = id;
+                    if (id != -1)
+                    {
+                        IBrand cls = new BrandBO();
+                        model = cls.GetData(_session.LangID, id);
+                    }
+                    return View(model);
+                }
+                else
+                    return RedirectToAction("index", "admin");
+            }
+            #endregion
+
         #region JsonResult
 
             [HttpPost]
@@ -335,7 +363,7 @@ namespace NailShop.Controllers
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
                 else
-                    RedirectToAction("index", "backend");
+                    RedirectToAction("index", "admin");
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
@@ -485,7 +513,7 @@ namespace NailShop.Controllers
                     return Json(new { IsOk = IsResult}, JsonRequestBehavior.AllowGet);
                 }
                 else
-                    RedirectToAction("index", "backend");
+                    RedirectToAction("index", "admin");
                 return Json(new { IsOk = false}, JsonRequestBehavior.AllowGet);
             }
 
@@ -519,7 +547,6 @@ namespace NailShop.Controllers
                     RedirectToAction("index", "admin");
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
-
 
             public JsonResult GetBrand()
             {
@@ -557,7 +584,32 @@ namespace NailShop.Controllers
                     return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
                 }
                 else
-                    RedirectToAction("index", "backend");
+                    RedirectToAction("index", "admin");
+                return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            public JsonResult GetProductHot()
+            {
+                string jsonData = "[]";
+                IProductHot _cls = new ProductHotBO();
+                var data = _cls.GetData(1);
+                if (data != null)
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult DeleteProductHot(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    IProductHot _cls = new ProductHotBO();
+                    var IsResult = _cls.Delete(id);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "admin");
                 return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
             }
 

@@ -153,6 +153,30 @@
                                     </a>
                                 </li>
                             }
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "PRODUCTHOT" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATEPRODUCTHOT")
+                            {
+                                <li class="active">
+                                    <a href="/admin/producthot">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Brands</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+
+                                    <a href="/admin/producthot">
+                                        <i class="fa fa-video-camera icon">
+                                            <b class="bg-info dker"></b>
+                                        </i>
+                                        <span>Product Hot</span>
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {

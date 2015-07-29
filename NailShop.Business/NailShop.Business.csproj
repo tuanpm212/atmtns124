@@ -58,6 +58,7 @@
     <Compile Include="Business\BrandBO.cs" />
     <Compile Include="Business\OrderBO.cs" />
     <Compile Include="Business\PhotoBO.cs" />
+    <Compile Include="Business\ProductHotBO.cs" />
     <Compile Include="Business\PromotionBO.cs" />
     <Compile Include="Business\SlideBO.cs" />
     <Compile Include="Business\StoreBO.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="IBusiness\INews.cs" />
     <Compile Include="IBusiness\IOrder.cs" />
     <Compile Include="IBusiness\IPhoto.cs" />
+    <Compile Include="IBusiness\IProductHot.cs" />
     <Compile Include="IBusiness\IPromotion.cs" />
     <Compile Include="IBusiness\ISlide.cs" />
     <Compile Include="IBusiness\IStore.cs" />
