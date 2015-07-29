@@ -53,8 +53,8 @@
 
             $scope.totalServerItems = 0;
             $scope.pagingOptions = {
-                pageSizes: [4, 20, 40],
-                pageSize: 4,
+                pageSizes: [20, 40],
+                pageSize: 20,
                 currentPage: 1
             };
 
@@ -69,8 +69,8 @@
 
             $scope.getPagedDataAsync = function (pageSize, page) {
                 if (pageSize == null) {
-                    $scope.pagingOptions.pageSize = 10;
-                    pageSize = 10;
+                    $scope.pagingOptions.pageSize = 20;
+                    pageSize = 20;
                 }
                 if (page == null) {
                     $scope.pagingOptions.currentPage = 1;
@@ -89,7 +89,6 @@
             };
 
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
 
             $scope.$watch('pagingOptions', function (newVal, oldVal) {
                 if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
