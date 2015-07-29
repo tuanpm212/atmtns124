@@ -11,6 +11,8 @@ namespace NailShop.Business
     {
         bool Save(Brand brand, BrandLang brandLang);
 
+        bool Delete(long ID);
+
         vw_Brand GetData(string LangID, long ID);
 
         List<vw_Brand> GetData(string LangID);

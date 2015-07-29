@@ -47,6 +47,18 @@ namespace NailShop.Business
             }
         }
 
+        public bool Delete(long ID)
+        {
+            using (var db = new NailShopEntities())
+            {
+                var row = db.Brands.Find(ID);
+                db.Entry(row).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+
         public vw_Brand GetData(string LangID, long ID)
         {
             using (var db = new NailShopEntities())
