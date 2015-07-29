@@ -10,19 +10,19 @@
         </div>
         <section class="panel panel-default">
             <div class="panel-body">
-                <form class="form-inline" role="form">
-                    <div class="form-group">
+                <form class="form-inline" name="orderForm">
+                    <div class="form-group" ng-class="{ 'has-error': orderForm.fromDate.$invalid }">
                         <label>@Resources.Order.lblFromDate</label>
-                        <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                        <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="fromDate" ng-model="order.fromDate" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': orderForm.toDate.$invalid }">
                         <label>@Resources.Order.lblToDate</label>
-                        <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
+                        <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="toDate" ng-model="order.toDate" required>
                     </div>
                     <div class="form-group">
                         @Html.DropDownList("Status", new SelectList(ViewBag.ListStatus, "Status", "Name", "-1"), new { @class = "form-control" })
                     </div>
-                    <button type="submit" data-ng-click="getPagedDataAsync()" class="btn btn-primary">@Resources.Order.btnSearch</button>
+                    <button class="btn btn-primary" type="submit" ng-disabled="!orderForm.$valid" data-ng-click="getPagedDataAsync()">@Resources.Order.btnSearch</button>
                 </form>
             </div>
         </section>
@@ -61,8 +61,8 @@
 
             $scope.totalServerItems = 0;
             $scope.pagingOptions = {
-                pageSizes: [4, 20, 40],
-                pageSize: 4,
+                pageSizes: [10, 20, 40],
+                pageSize: 10,
                 currentPage: 1
             };
 
