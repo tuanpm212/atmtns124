@@ -49,11 +49,15 @@
             format: 'mm/dd/yyyy',
             language: 'en',
         });
-        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
-        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+
+        $('#txtFromDate').datepicker().on("changeDate", function (e) {
+            console.log((e.date).toLocaleDateString('en-US'));
+        });
 
         var app = angular.module('MyApp', ['ngGrid']);
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.order = { fromDate: "@ViewBag.FromDate", toDate: "@ViewBag.ToDate" };
+
             $scope.filterOptions = {
                 filterText: "",
                 useExternalFilter: true
@@ -88,9 +92,9 @@
                     url: "/Backend/GetOrderByStoreID",
                     method: "GET",
                     params: {
-                        FromDate: $('#txtFromDate').val(),
-                        ToDate: $('#txtToDate').val(),
-                        Status: $('#Status').val()
+                        FromDate: $scope.order.fromDate,
+                        ToDate: $scope.order.toDate,
+                        Status: $('#Status').val(),
                     }
                 }).success(function (data, status, headers, config) {
                     var myJson = JSON.parse(JSON.parse(data));
@@ -118,14 +122,14 @@
                 data: 'myData',
                 columnDefs: [
                 { field: "InvoiceNo", displayName: '@Resources.Order.gridNo', width: "7%", cellClass: 'ngCellText-Center' },
-                { field: 'InvoiceDate', displayName: '@Resources.Order.gridInvoiceDate', width: "10%", cellTemplate: '<div class="ngCellText">{{row.getProperty(col.field) | resolve_date}}</div>', cellClass: 'ngCellText-Center' },
-                { field: "Notes", displayName: '@Resources.Order.gridNotes', pinnable: true },
-                { field: "FullName", displayName: 'Customer Name', pinnable: true },
-                { field: "SubTotal", displayName: '@Resources.Order.gridAmount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-                { field: "SaleTax", displayName: '@Resources.Order.gridTaxAmount', pinnable: true, width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-                { field: "Discount", displayName: '@Resources.Order.gridDiscount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-                { field: "Total", displayName: '@Resources.Order.gridTotal', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-                { field: 'InvoiceID', displayName: '@Resources.Order.gridAction', cellTemplate: '<div class="ngCellText"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}">View</a></div>', width: "7%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+        { field: 'InvoiceDate', displayName: '@Resources.Order.gridInvoiceDate', width: "10%", cellTemplate: '<div class="ngCellText">{{row.getProperty(col.field) | resolve_date}}</div>', cellClass: 'ngCellText-Center' },
+        { field: "Notes", displayName: '@Resources.Order.gridNotes', pinnable: true },
+        { field: "FullName", displayName: 'Customer Name', pinnable: true },
+        { field: "SubTotal", displayName: '@Resources.Order.gridAmount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+        { field: "SaleTax", displayName: '@Resources.Order.gridTaxAmount', pinnable: true, width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+        { field: "Discount", displayName: '@Resources.Order.gridDiscount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+        { field: "Total", displayName: '@Resources.Order.gridTotal', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+        { field: 'InvoiceID', displayName: '@Resources.Order.gridAction', cellTemplate: '<div class="ngCellText"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}">View</a></div>', width: "7%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,
                 showFooter: true,
