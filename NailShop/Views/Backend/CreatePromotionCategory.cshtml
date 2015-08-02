@@ -12,8 +12,8 @@
                 <form class="form-horizontal" name="promotionForm">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Promotion Name</label>
-                        <div class="col-sm-10">
-                            <input id="Name" type="text" class="form-control" name="Name" required />
+                        <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.Name.$invalid && promotionForm.Name.$dirty }">
+                            <input id="Name" type="text" class="form-control" name="Name" ng-model="Name" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -34,8 +34,8 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Discount Percent(%)</label>
-                        <div class="col-sm-10">
-                            <input id="Percent" type="number" class="form-control" required="required" />
+                        <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.discount.$invalid && promotionForm.discount.$dirty }">
+                            <input id="Percent" type="number" class="form-control" name="discount" ng-model="Discount" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="promotionForm.name.$dirty && promotionForm.name.$invalid">@Resources.CreateOrder.btnSave</button>
+                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="!promotionForm.$valid">@Resources.CreateOrder.btnSave</button>
                             <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">Add Item</button>
                             <a href="/backend/promotioncategory" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                         </div>

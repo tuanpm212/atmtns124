@@ -305,6 +305,7 @@
     <Content Include="fonts\ui-grid.eot" />
     <None Include="Properties\PublishProfiles\NailShop.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\angular-bootstrap-datepicker.js" />
     <Content Include="Scripts\AngularJs\1.0.2.angular.min.js" />
     <Content Include="Scripts\AngularJs\angular-grid.js" />
     <Content Include="Scripts\AngularJs\angular.js" />
