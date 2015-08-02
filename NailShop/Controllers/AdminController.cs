@@ -195,7 +195,7 @@ namespace NailShop.Controllers
             }
         #endregion
 
-        #region Product
+        #region Product Hot
 
             public ActionResult ProductHot()
             {
@@ -209,12 +209,12 @@ namespace NailShop.Controllers
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
-                    vw_Brand model = new vw_Brand();
+                    vw_ProductHot model = new vw_ProductHot();
                     ViewBag.ID = id;
                     if (id != -1)
                     {
-                        IBrand cls = new BrandBO();
-                        model = cls.GetData(_session.LangID, id);
+                        IProductHot cls = new ProductHotBO();
+                        model = cls.GetData(id);
                     }
                     return View(model);
                 }
@@ -588,14 +588,28 @@ namespace NailShop.Controllers
                 return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
             }
 
-
-            public JsonResult GetProductHot()
+            public JsonResult GetProductHot(int StoreID)
             {
                 string jsonData = "[]";
                 IProductHot _cls = new ProductHotBO();
-                var data = _cls.GetData(1);
+                var data = _cls.GetData(StoreID);
                 if (data != null)
                     jsonData = new JavaScriptSerializer().Serialize(data);
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+
+            public JsonResult GetStore()
+            {
+                string jsonData = "[]";
+                IStore _cls = new StoreBO();
+                var data = _cls.GetStores();
+                if (data == null)
+                    data = new List<Store>();
+                Store defaultValue = new Store();
+                defaultValue.StoreID = -1;
+                defaultValue.StoreName = "--All--";
+                data.Insert(0, defaultValue);
+                jsonData = new JavaScriptSerializer().Serialize(data);
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
 

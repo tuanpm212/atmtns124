@@ -10,5 +10,6 @@ namespace NailShop.Business
     public interface IStore : IRepository<Store>
     {
         Store Login(string LoginName, string Password);
+        List<Store> GetStores();
     }
 }

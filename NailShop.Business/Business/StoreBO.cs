@@ -21,5 +21,19 @@ namespace NailShop.Business
                 return null;
             }
         }
+
+        public List<Store> GetStores()
+        {
+            using (var db = new NailShopEntities())
+            {
+                var select = from c in db.Stores
+                             where c.IsActvie && c.IsAdmin == false
+                             select c;
+                if (select.Count() > 0)
+                    return select.ToList();
+                return null;
+            }
+        }
+
     }
 }

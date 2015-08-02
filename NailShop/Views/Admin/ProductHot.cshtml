@@ -8,14 +8,19 @@
         <div class="m-b-md">
             <h3 class="m-b-none">PRODUCT HOT</h3>
         </div>
+        <div class="form-group">
+            <label>Choose Store</label>
+            <select name="StoreID" ng-model="selectedOption" class="form-control" ng-change="ChangeStore(this)">
+                <option ng:repeat="store in Stores" value="{{store.StoreID}}">{{store.StoreName}}</option>
+            </select>  
+        </div>
         <div class="table-responsive">
             <div ng-grid="gridOptions"></div>
         </div>
         <div>
-            <a href="/admin/createproducthot?id=-1" class="btn btn-primary">Add New</a>
+            <a href="/admin/CreateProductHot?id=-1" class="btn btn-primary">Add New</a>
         </div>
     </section>
-
     <div class="modal fade" id="modalConfirm" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -27,7 +32,7 @@
                     <p>Are you sure to delete?</p>
                 </div>
                 <div class="modal-footer">
-                    <button id="btnOk" ng-click="DeleteBrand()" class="btn btn-primary">@Resources.Backend.btnOk</button>
+                    <button id="btnOk" ng-click="DeleteProductHot()" class="btn btn-primary">@Resources.Backend.btnOk</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">@Resources.Backend.btnCancel</button>
                 </div>
             </div>
@@ -45,7 +50,7 @@
     <script src="~/Scripts/AngularJs/moment.js"></script>
     <script type="text/javascript">
 
-        var app = angular.module('MyApp', ['ngGrid']), ID;
+        var app = angular.module('MyApp', ['ngGrid']), ID, StoreID =-1;
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.filterOptions = {
                 filterText: "",
@@ -79,6 +84,7 @@
                 }
                 $http({
                     url: "/admin/GetProductHot",
+                    params:{StoreID : StoreID},
                     method: "GET"
                 }).success(function (data, status, headers, config) {
                     var myJson = JSON.parse(JSON.parse(data));
@@ -105,11 +111,12 @@
             $scope.gridOptions = {
                 data: 'myData',
                 columnDefs: [
-                { field: 'ProductCode', displayName: 'ProductCode', width: "10%", cellClass: 'ngCellText-Center' },
-                { field: 'ProductName', displayName: 'ProductName', width: "10%" },
-                { field: 'Description', displayName: 'Description' },
+                { field: 'ProductCode', displayName: 'Code', width: "8%", cellClass: 'ngCellText-Center' },
+                { field: 'ProductName', displayName: 'Name', width: "20%" },
+                { field: 'ShortDescription', displayName: 'Short Description' },
                 { field: 'Price', displayName: 'Price', width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                { field: 'IsActive', displayName: 'Active', width: "8%", cellClass: 'ngCellText-Right' },
+                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,
                 showFooter: true,
@@ -126,18 +133,36 @@
 
             $scope.Delete = function (row) {
                 $('#modalConfirm').modal('show');
-                ID = row.entity.BrandID;
+                ID = row.entity.ProductID;
             };
 
-            $scope.DeleteBrand = function () {
+            $scope.DeleteProductHot = function () {
                 $http({
-                    url: "/admin/DeleteBrand",
+                    url: "/admin/DeleteProductHot",
                     method: "POST",
                     params: { ID: ID }
                 }).success(function (data) {
                     $('#modalConfirm').modal('hide');
                     $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
                 });
+            };
+
+            $scope.GetStore = function()
+            {
+                $http({
+                    url: "/admin/GetStore",
+                    method: "GET",
+                }).success(function (data) {
+                    $scope.Stores = JSON.parse(JSON.parse(data));
+                    $scope.selectedOption = $scope.Stores[0].StoreID;
+                });
+            };
+            $scope.GetStore();
+
+            $scope.ChangeStore = function (item) {
+                StoreID = item.selectedOption;
+                $scope.pagingOptions.currentPage = 1;
+                $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
             };
         }]);
     </script>
