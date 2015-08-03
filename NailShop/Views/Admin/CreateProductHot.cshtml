@@ -8,20 +8,26 @@
 
 <section class="scrollable padder" ng-app="MyApp" ng-controller="CtrlController">
     <div class="m-b-md">
-        <h3 class="m-b-none">Create/View Product</h3>
+        <h3 class="m-b-none">Create/View Product Hot</h3>
     </div>
     @using (Html.BeginForm("CreateProductHot", "admin", FormMethod.Post, new { id = "formCreateProduct", @class = "form-horizontal", @name = "formProduct" }))
     {
         <div class="form-group" ng-class="{ 'has-error': formProduct.ProductCode.$invalid && formProduct.ProductCode.$dirty }">
             <label class="col-sm-2 control-label">Code</label>
             <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.ProductCode, new { id = "Code", @class = "form-control", ng_model = "product.code", @required = "true" })
+                @Html.TextBoxFor(m => m.ProductCode, new { id = "ProductCode", @class = "form-control" })
             </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error': formProduct.ProductName.$invalid && formProduct.ProductName.$dirty }">
             <label class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-                @Html.TextBoxFor(m => m.ProductName, new { id = "ProductName", @class = "form-control", ng_model = "product.productName", @required = "true" })
+                @Html.TextBoxFor(m => m.ProductName, new { id = "ProductName", @class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': formProduct.ProductName.$invalid && formProduct.Url.$dirty }">
+            <label class="col-sm-2 control-label">Url link</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Url, new { id = "Url", @class = "form-control"})
             </div>
         </div>
         <div class="form-group">
@@ -38,26 +44,26 @@
         </div>
         <div class="form-group" ng-class="{ 'has-error': formProduct.Price.$invalid && formProduct.Price.$dirty }">
             <label class="col-sm-2 control-label">Price</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(m => m.Price, new { id = "Price", @type = "number", @class = "form-control", ng_model = "product.price", @required = "true" })
+            <div class="col-sm-2">
+                @Html.TextBoxFor(m => m.Price, new { id = "Price", @type = "number", @class = "form-control"})
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-sm-2">
-                <div class="checkbox">
-                    <label>
-                        @Html.CheckBoxFor(m => m.IsActive, new { id = "IsActive" })Active
-                    </label>
-                </div>
+            <label class="col-sm-1 control-label">Priority</label>
+            <div class="col-sm-2">
+                @Html.TextBoxFor(m => m.Sort, new { id = "Sort", @type = "number", @class = "form-control"})
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Image</label>
             <div class="col-sm-2">
                 <div id="boxCover" class="dropfile visible-lg">
-                    <img id="imgUpload" src="@ViewBag.Image" style="width: 200px; height: 150px" />
+                    <img id="imgUpload" src="@Model.Thumbnail" style="width: 200px; height: 120px" />
                     <a id="imgCover" href="#"></a>
                 </div>
+            </div>
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.IsActive, new { id = "IsActive" })Active
+                </label>
             </div>
         </div>
         <div class="form-group">
@@ -107,32 +113,25 @@
                 ProductID: @ViewBag.ID,
                 SiteID: 1,
                 StoreID: @ViewBag.StoreID,
-                ProductCode: $('#Code').val(),
-                ProductName: $('#Name').val(),
+                ProductCode: $('#ProductCode').val(),
+                ProductName: $('#ProductName').val(),
                 ShortDescription: $('#ShortDescription').val(),
                 Description: $('#Description').val(),
-                Thumbnail: $('#Thumbnail').val(),
-                LargeImage: "",
-                Url: "",
-                Price: "",
-                Sort: "",
-                IsActive: "",
-            },
-                slidelang = {
-                    SlideID: '@ViewBag.ID',
-                    LangID: 'en-US',
-                    Name: $('#Name').val(),
-                    Description: $('#Description').val(),
-                    Image: $('#imgUpload').attr('src')
-                };
+                Thumbnail: $('#imgUpload').attr("src"),
+                LargeImage: $('#imgUpload').attr("src"),
+                Url: $('#Url').val(),
+                Price: $('#Price').val(),
+                Sort: $('#Sort').val(),
+                IsActive: $('#IsActive').is(':checked'),
+            }
             $.ajax({
-                url: '/admin/SaveSlide',
+                url: '/admin/SaveProductHot',
                 type: 'Post',
-                data: JSON.stringify({ slide: slide, slidelang: slidelang }),
+                data: JSON.stringify({ product: product }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     if (data.IsOk)
-                        window.location.href = "/admin/slide";
+                        window.location.href = "/admin/producthot";
                 }
             });
         });

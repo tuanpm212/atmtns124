@@ -7,11 +7,20 @@
 
 <section class="scrollable padder">
     <div class="m-b-md">
-        <h3 class="m-b-none">@Resources.Backend.headAbout</h3>
+        <h3 class="m-b-none">Welcome</h3>
     </div>
     <form id="formWelcome" class="form-horizontal">
         <div class="form-group">
-            <div id="divValue" class="col-sm-12" data-id="@Model.SlideID">
+            <label class="control-label">Image</label>
+            <div class="col-sm-2">
+                <div id="boxCover" class="dropfile visible-lg">
+                    <img id="imgUpload" src="@Model.Image" style="width: 200px; height: 120px" />
+                    <a id="imgCover" href="#"></a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div id="divValue" class="col-sm-12" data-id="@Model.SlideID" style="height:450px">
                 @Html.TextArea("description", @Model.Description)
             </div>
         </div>
@@ -44,13 +53,15 @@
 @section Styles {
     <link href="~/contents/assets/css/kendo.common.css" rel=" stylesheet" />
     <link href="~/contents/assets/css/kendo.default.css" rel=" stylesheet" />
+    <link href="~/Contents/css/uploadfile.css" rel="stylesheet" />
 }
-
 @section Scripts {
     <script src="~/contents/assets/js/kendo.js"></script>
     <script src="~/contents/assets/js/function.js"></script>
+<script src="~/Scripts/jquery.uploadfile.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
     <script>
-        $("#description").kendoEditor({
+       $("#description").kendoEditor({
             resizable: {
                 content: false,
                 toolbar: true
@@ -85,6 +96,30 @@
                     }
                 }
             });
+        });
+
+        $("#imgCover").uploadFile({
+            url: '/admin/UploadCover',
+            multiple: false,
+            dragDrop: false,
+            allowedTypes: 'jpg,png,bmp,gif',
+            maxFileSize: 2100000,
+            onSuccess: function (files, response, xhr) {
+                var data = $.parseJSON(response);
+                $('#boxCover').find('img').attr('src', data.file);
+            },
+        });
+
+        $("#imgPhoto").uploadFile({
+            url: '/admin/UploadPhoto',
+            multiple: false,
+            dragDrop: false,
+            allowedTypes: 'jpg,png,bmp,gif',
+            maxFileSize: 2100000,
+            onSuccess: function (files, response, xhr) {
+                var data = $.parseJSON(response);
+                $('#boxPhoto').find('img').attr({ 'src': data.file, 'data-id': data.id });
+            },
         });
     </script>
 }

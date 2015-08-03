@@ -5,6 +5,6 @@ D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.dll
 D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
 D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.xml
 D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.csprojResolveAssemblyReference.cache
 D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.dll
 D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.pdb
-D:\MyData\Web\Nail\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.csprojResolveAssemblyReference.cache

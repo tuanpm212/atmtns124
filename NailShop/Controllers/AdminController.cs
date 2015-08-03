@@ -205,12 +205,13 @@ namespace NailShop.Controllers
                     return RedirectToAction("index", "admin");
             }
 
-            public ActionResult CreateProductHot(long id)
+            public ActionResult CreateProductHot(int store, long id)
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
                     vw_ProductHot model = new vw_ProductHot();
                     ViewBag.ID = id;
+                    @ViewBag.StoreID = store;
                     if (id != -1)
                     {
                         IProductHot cls = new ProductHotBO();
@@ -605,10 +606,6 @@ namespace NailShop.Controllers
                 var data = _cls.GetStores();
                 if (data == null)
                     data = new List<Store>();
-                Store defaultValue = new Store();
-                defaultValue.StoreID = -1;
-                defaultValue.StoreName = "--All--";
-                data.Insert(0, defaultValue);
                 jsonData = new JavaScriptSerializer().Serialize(data);
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
@@ -626,6 +623,22 @@ namespace NailShop.Controllers
                     RedirectToAction("index", "admin");
                 return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
             }
+
+            [HttpPost]
+            public JsonResult SaveProductHot(ProductHot product)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    product.SiteID = _session.SiteID;
+                    IProductHot _cls = new ProductHotBO();
+                    var IsResult = _cls.Save(product);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "admin");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
 
         #endregion
     }

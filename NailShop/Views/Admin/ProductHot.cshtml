@@ -10,15 +10,15 @@
         </div>
         <div class="form-group">
             <label>Choose Store</label>
-            <select name="StoreID" ng-model="selectedOption" class="form-control" ng-change="ChangeStore(this)">
-                <option ng:repeat="store in Stores" value="{{store.StoreID}}">{{store.StoreName}}</option>
-            </select>  
+            <select id="drStore" class="form-control">
+                <option data-ng-repeat="t in Stores" value="{{t.StoreID}}">{{t.StoreName}}</option>
+            </select>
         </div>
         <div class="table-responsive">
             <div ng-grid="gridOptions"></div>
         </div>
         <div>
-            <a href="/admin/CreateProductHot?id=-1" class="btn btn-primary">Add New</a>
+            <button id="btnAddNew" class="btn btn-primary">Add New</button>
         </div>
     </section>
     <div class="modal fade" id="modalConfirm" role="dialog">
@@ -50,8 +50,22 @@
     <script src="~/Scripts/AngularJs/moment.js"></script>
     <script type="text/javascript">
 
-        var app = angular.module('MyApp', ['ngGrid']), ID, StoreID =-1;
+        var app = angular.module('MyApp', ['ngGrid']), ID, StoreID;
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+
+            $scope.GetStore = function () {
+                $http({
+                    url: "/admin/GetStore",
+                    method: "GET",
+                }).success(function (data) {
+                    $scope.Stores = JSON.parse(JSON.parse(data));
+                    $scope.selectedItem = $scope.Stores[0].StoreID;
+                    StoreID = $scope.Stores[0].StoreID;
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                });
+            };
+            $scope.GetStore();
+
             $scope.filterOptions = {
                 filterText: "",
                 useExternalFilter: true
@@ -82,17 +96,19 @@
                     $scope.pagingOptions.currentPage = 1;
                     page = 1;
                 }
-                $http({
-                    url: "/admin/GetProductHot",
-                    params:{StoreID : StoreID},
-                    method: "GET"
-                }).success(function (data, status, headers, config) {
-                    var myJson = JSON.parse(JSON.parse(data));
-                    $scope.myData = myJson;
-                    $scope.setPagingData(myJson, page, pageSize);
-                }).error(function (myJson, status, headers, config) {
-                    alert(JSON.stringify(myJson));
-                });
+                if (StoreID != null) {
+                    $http({
+                        url: "/admin/GetProductHot",
+                        params: { StoreID: StoreID },
+                        method: "GET"
+                    }).success(function (data, status, headers, config) {
+                        var myJson = JSON.parse(JSON.parse(data));
+                        $scope.myData = myJson;
+                        $scope.setPagingData(myJson, page, pageSize);
+                    }).error(function (myJson, status, headers, config) {
+                        alert(JSON.stringify(myJson));
+                    });
+                }
             };
 
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
@@ -116,7 +132,7 @@
                 { field: 'ShortDescription', displayName: 'Short Description' },
                 { field: 'Price', displayName: 'Price', width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
                 { field: 'IsActive', displayName: 'Active', width: "8%", cellClass: 'ngCellText-Right' },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,
                 showFooter: true,
@@ -147,24 +163,18 @@
                 });
             };
 
-            $scope.GetStore = function()
-            {
-                $http({
-                    url: "/admin/GetStore",
-                    method: "GET",
-                }).success(function (data) {
-                    $scope.Stores = JSON.parse(JSON.parse(data));
-                    $scope.selectedOption = $scope.Stores[0].StoreID;
-                });
-            };
-            $scope.GetStore();
-
-            $scope.ChangeStore = function (item) {
-                StoreID = item.selectedOption;
+            $("#drStore").change(function () {
+                StoreID = this.value;
                 $scope.pagingOptions.currentPage = 1;
                 $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-            };
+            });
+
+            $('#btnAddNew').click(function () {
+                window.location.href = "/admin/CreateProductHot?store=" + $("#drStore").val() + "&id=-1";
+            });
         }]);
+
+       
     </script>
 }
 
