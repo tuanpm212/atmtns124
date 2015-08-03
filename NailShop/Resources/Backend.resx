@@ -123,6 +123,12 @@
   <data name="btnAdd" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="btnAddPhoto" xml:space="preserve">
+    <value>Add Photo</value>
+  </data>
+  <data name="btnBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="btnCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -135,20 +141,110 @@
   <data name="btnSave" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="btnSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="btnSignIn" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="chooseStore" xml:space="preserve">
+    <value>Choose Store</value>
   </data>
   <data name="headAbout" xml:space="preserve">
     <value>ABOUT US</value>
   </data>
+  <data name="headAlbumsList" xml:space="preserve">
+    <value>ALBUMS LIST</value>
+  </data>
+  <data name="headBrand" xml:space="preserve">
+    <value>BRAND LIST</value>
+  </data>
+  <data name="headCreateBrand" xml:space="preserve">
+    <value>Create/View Brand</value>
+  </data>
+  <data name="headCreatePhoto" xml:space="preserve">
+    <value>Create/View Photo</value>
+  </data>
+  <data name="headCreateProductHot" xml:space="preserve">
+    <value>Create/View Product Hot</value>
+  </data>
+  <data name="headCreatePromotion" xml:space="preserve">
+    <value>Create/View Promotion</value>
+  </data>
+  <data name="headCreateSlider" xml:space="preserve">
+    <value>Create/View Slider</value>
+  </data>
+  <data name="headCreateVideo" xml:space="preserve">
+    <value>Create/View Video</value>
+  </data>
+  <data name="headProductHot" xml:space="preserve">
+    <value>PRODUCT HOT</value>
+  </data>
+  <data name="headSlide" xml:space="preserve">
+    <value>SLIDER</value>
+  </data>
+  <data name="headVideoList" xml:space="preserve">
+    <value>VIDEO LIST</value>
+  </data>
+  <data name="headWelcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="lblActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="lblBrandUrl" xml:space="preserve">
+    <value>Brand Url</value>
+  </data>
   <data name="lblCity" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="lblCode" xml:space="preserve">
+    <value>Code</value>
   </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="lblDiscountPercent" xml:space="preserve">
+    <value>Discount Percent(%)</value>
+  </data>
+  <data name="lblFromDate" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="lblImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="lblImageCover" xml:space="preserve">
+    <value>Image cover</value>
+  </data>
+  <data name="lblImagePhoto" xml:space="preserve">
+    <value>Image photo</value>
+  </data>
+  <data name="lblLongDescription" xml:space="preserve">
+    <value>Long Description</value>
+  </data>
+  <data name="lblName" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="lblPassword" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="lblPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblPriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="lblProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="lblPromotionName" xml:space="preserve">
+    <value>Promotion Name</value>
+  </data>
+  <data name="lblQuantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="lblShortDescription" xml:space="preserve">
+    <value>Short Description</value>
   </data>
   <data name="lblSignIn" xml:space="preserve">
     <value>Sing In</value>
@@ -156,11 +252,35 @@
   <data name="lblState" xml:space="preserve">
     <value>State</value>
   </data>
+  <data name="lblTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="lblToDate" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="lblUrlLink" xml:space="preserve">
+    <value>Url link</value>
+  </data>
   <data name="lblUserName" xml:space="preserve">
     <value>Email/Login Name</value>
   </data>
+  <data name="lblVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
   <data name="lblZipCode" xml:space="preserve">
     <value>ZipCode</value>
+  </data>
+  <data name="messDelete" xml:space="preserve">
+    <value>Are you sure to delete?</value>
+  </data>
+  <data name="messPhotoDetail" xml:space="preserve">
+    <value>Photo Detail</value>
+  </data>
+  <data name="mesSuccess" xml:space="preserve">
+    <value>You save sucessfull!</value>
+  </data>
+  <data name="mesTitleWarring" xml:space="preserve">
+    <value>Warring</value>
   </data>
   <data name="pldPassword" xml:space="preserve">
     <value>Password</value>

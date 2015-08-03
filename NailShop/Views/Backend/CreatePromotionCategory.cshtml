@@ -13,27 +13,27 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Promotion Name</label>
                         <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.Name.$invalid && promotionForm.Name.$dirty }">
-                            <input id="Name" type="text" class="form-control" name="Name" ng-model="Name" required />
+                            <input id="Name" type="text" class="form-control" name="Name" ng-model="@Resources.Backend.lblName" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Description</label>
+                        <label class="col-sm-2 control-label">@Resources.Backend.lblDescription</label>
                         <div class="col-sm-10">
                             <input id="Description" type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">From Date</label>
+                        <label class="col-sm-2 control-label">@Resources.Backend.lblFromDate</label>
                         <div class="col-sm-4">
                             <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
                         </div>
-                        <label class="col-sm-2 control-label">To Date</label>
+                        <label class="col-sm-2 control-label">@Resources.Backend.lblToDate</label>
                         <div class="col-sm-4">
                             <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Discount Percent(%)</label>
+                        <label class="col-sm-2 control-label">@Resources.Backend.lblDiscountPercent</label>
                         <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.discount.$invalid && promotionForm.discount.$dirty }">
                             <input id="Percent" type="number" class="form-control" name="discount" ng-model="Discount" required />
                         </div>
@@ -42,7 +42,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input id="chkIsActvie" type="checkbox" />IsActive
+                                    <input id="chkIsActvie" type="checkbox" />@Resources.Backend.lblActive
                                 </label>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="!promotionForm.$valid">@Resources.CreateOrder.btnSave</button>
-                            <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">Add Item</button>
+                            <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">@Resources.Backend.btnAdd</button>
                             <a href="/backend/promotioncategory" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                         </div>
                     </div>
@@ -66,12 +66,12 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-warning"></i> Warning</h4>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> @Resources.Backend.mesTitleWarring</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Product Name</label>
+                            <label class="col-sm-2 control-label">@Resources.Backend.mesTitleWarring</label>
                             <div class="col-sm-4">
                                 <input id="txtSearch" type="text" class="form-control" placeholder="Search product" />
                             </div>

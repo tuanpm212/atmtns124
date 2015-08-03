@@ -5,74 +5,75 @@
     Layout = "~/Views/Share/_Backend.cshtml";
 }
 
-
-<section class="scrollable padder" ng-app="MyApp" ng-controller="CtrlController">
-    <div class="m-b-md">
-        <h3 class="m-b-none">Create/View Product Hot</h3>
-    </div>
-    @using (Html.BeginForm("CreateProductHot", "admin", FormMethod.Post, new { id = "formCreateProduct", @class = "form-horizontal", @name = "formProduct" }))
-    {
-        <div class="form-group" ng-class="{ 'has-error': formProduct.ProductCode.$invalid && formProduct.ProductCode.$dirty }">
-            <label class="col-sm-2 control-label">Code</label>
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.ProductCode, new { id = "ProductCode", @class = "form-control" })
-            </div>
+<section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
+    <section class="scrollable padder">
+        <div class="m-b-md">
+            <h3 class="m-b-none">@Resources.Backend.headCreateProductHot</h3>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': formProduct.ProductName.$invalid && formProduct.ProductName.$dirty }">
-            <label class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(m => m.ProductName, new { id = "ProductName", @class = "form-control"})
-            </div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': formProduct.ProductName.$invalid && formProduct.Url.$dirty }">
-            <label class="col-sm-2 control-label">Url link</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(m => m.Url, new { id = "Url", @class = "form-control"})
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Short Description</label>
-            <div class="col-sm-10">
-                @Html.TextAreaFor(m => m.ShortDescription, new { id = "ShortDescription", @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Long Description</label>
-            <div class="col-sm-10">
-                @Html.TextAreaFor(m => m.Description, new { id = "Description", @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': formProduct.Price.$invalid && formProduct.Price.$dirty }">
-            <label class="col-sm-2 control-label">Price</label>
-            <div class="col-sm-2">
-                @Html.TextBoxFor(m => m.Price, new { id = "Price", @type = "number", @class = "form-control"})
-            </div>
-            <label class="col-sm-1 control-label">Priority</label>
-            <div class="col-sm-2">
-                @Html.TextBoxFor(m => m.Sort, new { id = "Sort", @type = "number", @class = "form-control"})
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Image</label>
-            <div class="col-sm-2">
-                <div id="boxCover" class="dropfile visible-lg">
-                    <img id="imgUpload" src="@Model.Thumbnail" style="width: 200px; height: 120px" />
-                    <a id="imgCover" href="#"></a>
+        @using (Html.BeginForm("CreateProductHot", "admin", FormMethod.Post, new { id = "formCreateProduct", @class = "form-horizontal", @name = "formProduct" }))
+        {
+            <div class="form-group" ng-class="{ 'has-error': formProduct.ProductCode.$invalid && formProduct.ProductCode.$dirty }">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblCode</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.ProductCode, new { id = "ProductCode", @class = "form-control" })
                 </div>
             </div>
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.IsActive, new { id = "IsActive" })Active
-                </label>
+            <div class="form-group" ng-class="{ 'has-error': formProduct.ProductName.$invalid && formProduct.ProductName.$dirty }">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblName</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.ProductName, new { id = "ProductName", @class = "form-control" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-                <button id="btnSave" type="button" class="btn btn-primary" ng-disabled="!formProduct.$valid">Save</button>
-                <a class="btn btn-primary" href="/admin/ProductHot">Back</a>
+            <div class="form-group" ng-class="{ 'has-error': formProduct.ProductName.$invalid && formProduct.Url.$dirty }">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblUrlLink</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Url, new { id = "Url", @class = "form-control" })
+                </div>
             </div>
-        </div>
-    }
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblShortDescription</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.ShortDescription, new { id = "ShortDescription", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblLongDescription</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Description, new { id = "Description", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': formProduct.Price.$invalid && formProduct.Price.$dirty }">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblPrice</label>
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(m => m.Price, new { id = "Price", @type = "number", @class = "form-control" })
+                </div>
+                <label class="col-sm-1 control-label">@Resources.Backend.lblPriority</label>
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(m => m.Sort, new { id = "Sort", @type = "number", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@Resources.Backend.lblImage</label>
+                <div class="col-sm-2">
+                    <div id="boxCover" class="dropfile visible-lg">
+                        <img id="imgUpload" src="@Model.Thumbnail" style="width: 200px; height: 120px" />
+                        <a id="imgCover" href="#"></a>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.IsActive, new { id = "IsActive" })@Resources.Backend.lblActive
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button id="btnSave" type="button" class="btn btn-primary" ng-disabled="!formProduct.$valid">@Resources.Backend.btnSave</button>
+                    <a class="btn btn-primary" href="/admin/ProductHot">@Resources.Backend.btnBack</a>
+                </div>
+            </div>
+        }
+    </section>
 </section>
 @section Styles {
     <link href="~/Contents/css/uploadfile.css" rel="stylesheet" />
@@ -139,5 +140,3 @@
         angular.module('MyApp', []).controller('CtrlController', ['$scope', function ($scope) { }]);
     </script>
 }
-
-

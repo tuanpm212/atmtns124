@@ -1,15 +1,14 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ProductHot";
     Layout = "~/Views/Share/_Backend.cshtml";
 }
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
-            <h3 class="m-b-none">PRODUCT HOT</h3>
+            <h3 class="m-b-none">@Resources.Backend.headProductHot</h3>
         </div>
         <div class="form-group">
-            <label>Choose Store</label>
+            <label>@Resources.Backend.chooseStore</label>
             <select id="drStore" class="form-control">
                 <option data-ng-repeat="t in Stores" value="{{t.StoreID}}">{{t.StoreName}}</option>
             </select>
@@ -18,7 +17,7 @@
             <div ng-grid="gridOptions"></div>
         </div>
         <div>
-            <button id="btnAddNew" class="btn btn-primary">Add New</button>
+            <button id="btnAddNew" class="btn btn-primary">@Resources.Backend.btnAdd</button>
         </div>
     </section>
     <div class="modal fade" id="modalConfirm" role="dialog">
@@ -26,10 +25,10 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h5 class="modal-title"><i class="fa fa-warning"></i> Warning</h5>
+                    <h5 class="modal-title"><i class="fa fa-warning"></i> @Resources.Backend.mesTitleWarring</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure to delete?</p>
+                    <p>@Resources.Backend.messDelete</p>
                 </div>
                 <div class="modal-footer">
                     <button id="btnOk" ng-click="DeleteProductHot()" class="btn btn-primary">@Resources.Backend.btnOk</button>
@@ -174,7 +173,7 @@
             });
         }]);
 
-       
+
     </script>
 }
 
