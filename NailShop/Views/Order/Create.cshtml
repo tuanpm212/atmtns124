@@ -21,23 +21,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">City</label>
+                                    <label class="col-sm-3 control-label">@Resources.Backend.lblCity</label>
                                     <div class="col-sm-4">
                                         @Html.TextBox("City", (string)ViewBag.City, new { @class = "form-control" })
                                     </div>
-                                    <label class="col-sm-1 control-label">State</label>
+                                    <label class="col-sm-1 control-label">@Resources.Backend.lblState</label>
                                     <div class="col-sm-4">
                                         @Html.TextBox("State", (string)ViewBag.State, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">ZipCode</label>
+                                    <label class="col-sm-3 control-label">@Resources.Backend.lblZipCode</label>
                                     <div class="col-sm-9">
                                         @Html.TextBox("ZipCode", (string)ViewBag.ZipCode, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Description</label>
+                                    <label class="col-sm-3 control-label">@Resources.Backend.lblDescription</label>
                                     <div class="col-sm-9">
                                         @Html.TextArea("Description", (string)ViewBag.Description, new { @class = "form-control", rows = "5" })
                                     </div>
@@ -69,17 +69,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">City</label>
+                                    <label class="col-sm-3 control-label">@Resources.Backend.lblCity</label>
                                     <div class="col-sm-4">
                                         @Html.TextBox("CityShip", (string)ViewBag.CityShip, new { @class = "form-control" })
                                     </div>
-                                    <label class="col-sm-1 control-label">State</label>
+                                    <label class="col-sm-1 control-label">@Resources.Backend.lblState</label>
                                     <div class="col-sm-4">
                                         @Html.TextBox("StateShip", (string)ViewBag.StateShip, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">ZipCode</label>
+                                    <label class="col-sm-3 control-label">@Resources.Backend.lblZipCode</label>
                                     <div class="col-sm-9">
                                         @Html.TextBox("ZipCodeShip", (string)ViewBag.ZipCodeShip, new { @class = "form-control" })
                                     </div>
@@ -111,7 +111,6 @@
     <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
     <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
     <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
-
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();

@@ -123,6 +123,9 @@
   <data name="lblPrice" xml:space="preserve">
     <value>Price : </value>
   </data>
+  <data name="titleGallery" xml:space="preserve">
+    <value>GALLERY</value>
+  </data>
   <data name="titleNew" xml:space="preserve">
     <value>News</value>
   </data>

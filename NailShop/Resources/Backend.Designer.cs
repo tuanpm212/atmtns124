@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create/View Promotion Category.
+        /// </summary>
+        public static string headCreatePromotionCategory {
+            get {
+                return ResourceManager.GetString("headCreatePromotionCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create/View Slider.
         /// </summary>
         public static string headCreateSlider {
@@ -241,11 +250,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order List.
+        /// </summary>
+        public static string headOrderList {
+            get {
+                return ResourceManager.GetString("headOrderList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PRODUCT HOT.
         /// </summary>
         public static string headProductHot {
             get {
                 return ResourceManager.GetString("headProductHot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion Category List.
+        /// </summary>
+        public static string headPromotionCategoryList {
+            get {
+                return ResourceManager.GetString("headPromotionCategoryList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion List.
+        /// </summary>
+        public static string headPromotionList {
+            get {
+                return ResourceManager.GetString("headPromotionList", resourceCulture);
             }
         }
         
@@ -561,6 +597,15 @@ namespace Resources {
         public static string pldPassword {
             get {
                 return ResourceManager.GetString("pldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search product.
+        /// </summary>
+        public static string pldSearchProduct {
+            get {
+                return ResourceManager.GetString("pldSearchProduct", resourceCulture);
             }
         }
         

@@ -6,7 +6,7 @@
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
-            <h3 class="m-b-none">Promotion Category List</h3>
+            <h3 class="m-b-none">@Resources.Backend.headPromotionCategoryList</h3>
         </div>
         <section class="panel panel-default">
             <div class="panel-body">
@@ -33,10 +33,10 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-warning"></i> Warning</h4>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> @Resources.Backend.mesTitleWarring</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure to delete?</p>
+                    <p>@Resources.Backend.messDelete</p>
                 </div>
                 <div class="modal-footer">
                     <button id="btnOk" ng-click="DeleteInvoice()" class="btn btn-primary">@Resources.Backend.btnOk</button>

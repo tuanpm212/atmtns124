@@ -288,4 +288,19 @@
   <data name="pldUserName" xml:space="preserve">
     <value>Email/Login Name</value>
   </data>
+  <data name="headCreatePromotionCategory" xml:space="preserve">
+    <value>Create/View Promotion Category</value>
+  </data>
+  <data name="headOrderList" xml:space="preserve">
+    <value>Order List</value>
+  </data>
+  <data name="headPromotionCategoryList" xml:space="preserve">
+    <value>Promotion Category List</value>
+  </data>
+  <data name="headPromotionList" xml:space="preserve">
+    <value>Promotion List</value>
+  </data>
+  <data name="pldSearchProduct" xml:space="preserve">
+    <value>Search product</value>
+  </data>
 </root>
