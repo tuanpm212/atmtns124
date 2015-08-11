@@ -58,7 +58,6 @@ namespace NailShop.Business
             }
         }
 
-
         public vw_Brand GetData(string LangID, long ID)
         {
             using (var db = new NailShopEntities())
@@ -76,6 +75,7 @@ namespace NailShop.Business
             {
                 var select = from c in db.vw_Brand
                              where c.LangID == LangID
+                             orderby c.Sort
                              select c;
                 return select.ToList();
             }

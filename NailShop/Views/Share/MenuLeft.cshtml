@@ -144,7 +144,6 @@
                             else
                             {
                                 <li>
-
                                     <a href="/admin/brand">
                                         <i class="fa fa-suitcase icon">
                                             <b class="bg-info dker"></b>
@@ -168,12 +167,34 @@
                             else
                             {
                                 <li>
-
                                     <a href="/admin/producthot">
                                         <i class="fa fa-shopping-cart icon">
                                             <b class="bg-primary dker"></b>
                                         </i>
                                         <span>Product Hot</span>
+                                    </a>
+                                </li>
+                            }
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToUpper() == "NEWS" || ViewContext.RouteData.Values["action"].ToString().ToUpper() == "CREATENEWS")
+                            {
+                                <li class="active">
+                                    <a href="/admin/news">
+                                        <i class="fa fa-shopping-cart icon">
+                                            <b class="bg-primary dker"></b>
+                                        </i>
+                                        <span>News</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/admin/news">
+                                        <i class="fa fa-shopping-cart icon">
+                                            <b class="bg-primary dker"></b>
+                                        </i>
+                                        <span>News</span>
                                     </a>
                                 </li>
                             }

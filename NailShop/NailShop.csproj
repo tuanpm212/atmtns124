@@ -525,6 +525,8 @@
     <Content Include="Views\Admin\CreateBrand.cshtml" />
     <Content Include="Views\Admin\ProductHot.cshtml" />
     <Content Include="Views\Admin\CreateProductHot.cshtml" />
+    <Content Include="Views\Admin\News.cshtml" />
+    <Content Include="Views\Admin\CreateNews.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

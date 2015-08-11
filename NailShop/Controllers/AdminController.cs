@@ -224,6 +224,32 @@ namespace NailShop.Controllers
             }
             #endregion
 
+        #region News
+            public ActionResult News()
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                    return View();
+                else
+                    return RedirectToAction("index", "admin");
+            }
+            public ActionResult CreateNews(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    vw_News model = new vw_News();
+                    ViewBag.ID = id;
+                    if (id != -1)
+                    {
+                        INews cls = new NewsBO();
+                        model = cls.GetData(_session.LangID, id);
+                    }
+                    return View(model);
+                }
+                else
+                    return RedirectToAction("index", "admin");
+            }
+        #endregion
+
         #region JsonResult
 
             [HttpPost]
@@ -639,6 +665,44 @@ namespace NailShop.Controllers
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
+            public JsonResult GetNews()
+            {
+                string jsonData = "[]";
+                INews _cls = new NewsBO();
+                var data = _cls.GetData(_session.LangID);
+                if (data != null)
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult DeleteNews(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    INews _cls = new NewsBO();
+                    var IsResult = _cls.Delete(id);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "admin");
+                return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult SaveNews(News news, NewsLang newsLang)
+            {
+                if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
+                {
+                    news.SiteID = _session.SiteID;
+                    INews _cls = new NewsBO();
+                    var IsResult = _cls.Save(news, newsLang);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "admin");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
 
         #endregion
     }

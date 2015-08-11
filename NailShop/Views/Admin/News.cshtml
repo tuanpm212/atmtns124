@@ -1,18 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "Brand";
+    ViewBag.Title = "News";
     Layout = "~/Views/Share/_Backend.cshtml";
 }
+
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
-            <h3 class="m-b-none">@Resources.Backend.headBrand</h3>
+            <h3 class="m-b-none">News List</h3>
         </div>
         <div class="table-responsive">
             <div ng-grid="gridOptions"></div>
         </div>
         <div>
-            <a href="/admin/createbrand?id=-1" class="btn btn-primary">@Resources.Backend.btnAdd</a>
+            <a href="/admin/createnews?id=-1" class="btn btn-primary">@Resources.Backend.btnAdd</a>
         </div>
     </section>
 
@@ -78,7 +79,7 @@
                     page = 1;
                 }
                 $http({
-                    url: "/admin/GetBrand",
+                    url: "/admin/GetNews",
                     method: "GET"
                 }).success(function (data, status, headers, config) {
                     var myJson = JSON.parse(JSON.parse(data));
@@ -106,11 +107,12 @@
             $scope.gridOptions = {
                 data: 'myData',
                 columnDefs: [
-                { field: 'Name', displayName: 'Name', width: "25%" },
-                { field: 'Description', displayName: 'Description' },
+                { field: 'Title', displayName: 'Title', width: "25%" },
+                { field: 'ShortDescription', displayName: 'ShortDescription' },
                 { field: 'Image', displayName: 'Image', width: "20%" },
-                 { field: 'Url', displayName: 'Url', width: "20%" },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                { field: 'Url', displayName: 'Url', width: "20%" },
+                { field: 'IsActive', displayName: 'Active', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center'},
+                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createnews?id={{row.entity.NewsID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,
                 showFooter: true,
@@ -127,12 +129,12 @@
 
             $scope.Delete = function (row) {
                 $('#modalConfirm').modal('show');
-                ID = row.entity.BrandID;
+                ID = row.entity.NewsID;
             };
 
             $scope.DeleteBrand = function () {
                 $http({
-                    url: "/admin/DeleteBrand",
+                    url: "/admin/DeleteNews",
                     method: "POST",
                     params: { ID: ID }
                 }).success(function (data) {
@@ -143,3 +145,6 @@
         }]);
     </script>
 }
+
+
+
