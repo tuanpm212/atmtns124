@@ -9,9 +9,7 @@ namespace NailShop.Business
 {
     public interface INews : IRepository<vw_News>
     {
-        bool Save(News news, NewsLang newsLang);
-        bool Delete(long ID);
-        vw_News GetData(string LangID, long ID);
-        List<vw_News> GetData(string LangID);
+        bool AddNew(News news, NewsLang newsLang);
+        bool Edit(News news, NewsLang newsLang);
     }
 }
