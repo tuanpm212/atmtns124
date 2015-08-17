@@ -12,10 +12,10 @@
         </div>
         @using (Html.BeginForm("CreateSlide", "admin", FormMethod.Post, new { id = "formSlide", @class = "form-horizontal", @name = "formSlide" }))
         {
-            <div class="form-group" ng-class="{ 'has-error': formSlide.Name.$invalid && formSlide.Name.$dirty }">
+            <div class="form-group">
                 <label class="col-sm-2 control-label">@Resources.Backend.lblName</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(m => m.Name, new { id = "Name", @class = "form-control"})
+                    @Html.TextBoxFor(m => m.Name, new { id = "Name", @class = "form-control", @required = "true" })
                 </div>
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-10 col-sm-offset-2">
-                    <button id="btnSave" type="submit" class="btn btn-primary" ng-disabled="!formSlide.$valid">@Resources.Backend.btnSave</button>
+                    <button id="btnSave" type="submit" class="btn btn-primary">@Resources.Backend.btnSave</button>
                     <a class="btn btn-primary" href="/admin/slide">@Resources.Backend.btnBack</a>
                 </div>
             </div>

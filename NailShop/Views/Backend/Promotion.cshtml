@@ -10,15 +10,15 @@
         <section class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" name="promotionForm">
-                    <div class="form-group" ng-class="{ 'has-error': promotionForm.fromDate.$invalid }">
+                    <div class="form-group">
                         <label>@Resources.Order.lblFromDate</label>
-                        <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="fromDate" ng-model="promotion.fromDate" required>
+                        <input id="txtFromDate" type="text" class="form-control" placeholder="@Resources.Order.placeholderChooseDate" name="fromDate">
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': promotionForm.toDate.$invalid }">
+                    <div class="form-group">
                         <label>@Resources.Order.lblToDate</label>
-                        <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate" name="toDate" ng-model="promotion.toDate" required>
+                        <input id="txtToDate" type="text" class="form-control" placeholder="@Resources.Order.placeholderChooseDate" name="toDate">
                     </div>
-                    <button class="btn btn-primary" type="submit" ng-disabled="!promotionForm.$valid" data-ng-click="getPagedDataAsync()">@Resources.Order.btnSearch</button>
+                    <button class="btn btn-primary" type="button" data-ng-click="getPagedDataAsync()">@Resources.Order.btnSearch</button>
                     <a class="btn btn-primary" href="/backend/CreatePromotion?ID=-1">@Resources.Order.btnCreate</a>
                 </form>
             </div>
@@ -63,9 +63,11 @@
             language: 'en',
         });
 
+        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
+        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+
         var app = angular.module('MyApp', ['ngGrid']), ID, StoreID, RowIndex;
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
-            $scope.promotion = { fromDate: "@ViewBag.FromDate", toDate: "@ViewBag.ToDate" };
             $scope.filterOptions = {
                 filterText: "",
                 useExternalFilter: true
@@ -100,8 +102,8 @@
                     url: "/Backend/GetPromotion",
                     method: "GET",
                     params: {
-                        FromDate: $scope.promotion.fromDate,
-                        ToDate: $scope.promotion.toDate,
+                        FromDate: $('#txtFromDate').val(),
+                        ToDate: $('#txtToDate').val(),
                         IsItem: true,
                     }
                 }).success(function (data, status, headers, config) {
