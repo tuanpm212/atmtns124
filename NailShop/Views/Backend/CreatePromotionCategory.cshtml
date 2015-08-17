@@ -12,7 +12,7 @@
                 <form class="form-horizontal" name="promotionForm">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">@Resources.Backend.lblPromotionName</label>
-                        <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.Name.$invalid && promotionForm.Name.$dirty }">
+                        <div class="col-sm-10">
                             <input id="Name" type="text" class="form-control" name="Name" ng-model="@Resources.Backend.lblName" required />
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">@Resources.Backend.lblDiscountPercent</label>
-                        <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.discount.$invalid && promotionForm.discount.$dirty }">
+                        <div class="col-sm-10">
                             <input id="Percent" type="number" class="form-control" name="discount" ng-model="Discount" required />
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="!promotionForm.$valid">@Resources.CreateOrder.btnSave</button>
+                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()">@Resources.CreateOrder.btnSave</button>
                             <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">@Resources.Backend.btnAdd</button>
                             <a href="/backend/promotioncategory" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                         </div>
@@ -158,8 +158,8 @@
                         $('#Name').val($scope.myMaster.PromotionName);
                         $('#Description').val($scope.myMaster.Description);
                         $('#Percent').val($scope.myMaster.Percent);
-                        $('#txtFromDate').val(ForDateTime($scope.myMaster.FromDate));
-                        $('#txtToDate').val(ForDateTime($scope.myMaster.ToDate));
+                        $("#txtFromDate").datepicker('setDate', ForDateTime($scope.myMaster.FromDate));
+                        $("#txtFromDate").datepicker('setDate', ForDateTime($scope.myMaster.ToDate));
                         $('#chkIsActvie').prop('checked', $scope.myMaster.IsActive);
                     }
                     $scope.myData = myJson;
@@ -216,17 +216,17 @@
 
             $scope.addNew = function () {
                 var master = {
-                    PromotionID: PromotoinID
-                    , StoreID: StoreID
-                    , SiteID: 1
-                    , PromotionName: $('#Name').val()
-                    , FromDate: $('#txtFromDate').val()
-                    , ToDate: $('#txtToDate').val()
-                    , CreateDate: $('#txtFromDate').val()
-                    , Description: $('#Description').val()
-                    , Percent: $('#Percent').val()
-                    , IsItem: 0
-                    , IsActive: $('#chkIsActvie').is(':checked')
+                    PromotionID: PromotoinID,
+                    StoreID: StoreID,
+                    SiteID: 1,
+                    PromotionName: $('#Name').val(),
+                    FromDate: $('#txtFromDate').val(),
+                    ToDate: $('#txtToDate').val(),
+                    CreateDate: $('#txtFromDate').val(),
+                    Description: $('#Description').val(),
+                    Percent: $('#Percent').val(),
+                    IsItem: 0,
+                    IsActive: $('#chkIsActvie').is(':checked')
                 };
                 $http({
                     url: "/backend/SavePromotion",
@@ -330,8 +330,8 @@
 
         function ForDateTime(jsonDate) {
             var date = new Date(parseInt(jsonDate.substr(6)));
-            return ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-                  ("0" + date.getDate()).slice(-2) + "-" + date.getFullYear();
+            return ("0" + (date.getMonth() + 1)).slice(-2) + "/" +
+                  ("0" + date.getDate()).slice(-2) + "/" + date.getFullYear();
         }
     </script>
 }

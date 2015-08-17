@@ -28,7 +28,7 @@
                 <form id="formSignIn" class="panel-body wrapper-lg" name="loginForm" novalidate>
                     <div class="form-group" ng-class="{ 'has-error': loginForm.UserName.$invalid && loginForm.UserName.$dirty }">
                         <label class="control-label">@Resources.Backend.lblUserName</label>
-                        <input id="txtLoginName" type="text" placeholder="@Resources.Backend.pldUserName" class="form-control input-lg" name="UserName" ng-model="login.username" required>
+                        <input id="txtLoginName" type="text" placeholder="@Resources.Backend.pldUserName" class="form-control input-lg" name="UserName" ng-model="login.username" required autofocus>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': loginForm.Password.$invalid && loginForm.Password.$dirty }">
                         <label class="control-label">@Resources.Backend.lblPassword</label>
