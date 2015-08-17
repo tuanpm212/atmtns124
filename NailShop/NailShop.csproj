@@ -181,6 +181,7 @@
     <Content Include="Contents\css\bootstrap.css" />
     <Content Include="Contents\css\bootstrap.min.css" />
     <Content Include="Contents\css\datepicker.css" />
+    <Content Include="Contents\css\datetimepicker.css" />
     <Content Include="Contents\css\font-awesome.css" />
     <Content Include="Contents\css\font-awesome.min.css" />
     <Content Include="Contents\css\layerslider.css" />
@@ -318,6 +319,7 @@
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datetimepicker.js" />
     <Content Include="Scripts\greensock.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
