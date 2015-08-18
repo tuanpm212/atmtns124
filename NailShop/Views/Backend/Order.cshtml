@@ -6,7 +6,7 @@
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
-            <h3 class="m-b-none">@Resources.Backend.headOrderList</h3>
+            <h3 class="m-b-none">Order List</h3>
         </div>
         <section class="panel panel-default">
             <div class="panel-body">
@@ -33,7 +33,6 @@
 </section>
 
 @section Styles {
-    <link href="~/Contents/css/datepicker.css" rel="stylesheet" />
     <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
 }
 @section Scripts {
@@ -67,8 +66,8 @@
 
             $scope.totalServerItems = 0;
             $scope.pagingOptions = {
-                pageSizes: [20, 40],
-                pageSize: 20,
+                pageSizes: [10, 20, 40],
+                pageSize: 10,
                 currentPage: 1
             };
 
@@ -83,8 +82,8 @@
 
             $scope.getPagedDataAsync = function (pageSize, page) {
                 if (pageSize == null) {
-                    $scope.pagingOptions.pageSize = 20;
-                    pageSize = 20;
+                    $scope.pagingOptions.pageSize = 10;
+                    pageSize = 10;
                 }
                 if (page == null) {
                     $scope.pagingOptions.currentPage = 1;
@@ -124,14 +123,14 @@
                 data: 'myData',
                 columnDefs: [
                 { field: "InvoiceNo", displayName: '@Resources.Order.gridNo', width: "7%", cellClass: 'ngCellText-Center' },
-        { field: 'InvoiceDate', displayName: '@Resources.Order.gridInvoiceDate', width: "10%", cellTemplate: '<div class="ngCellText">{{row.getProperty(col.field) | resolve_date}}</div>', cellClass: 'ngCellText-Center' },
-        { field: "Notes", displayName: '@Resources.Order.gridNotes', pinnable: true },
-        { field: "FullName", displayName: 'Customer Name', pinnable: true },
-        { field: "SubTotal", displayName: '@Resources.Order.gridAmount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-        { field: "SaleTax", displayName: '@Resources.Order.gridTaxAmount', pinnable: true, width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-        { field: "Discount", displayName: '@Resources.Order.gridDiscount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-        { field: "Total", displayName: '@Resources.Order.gridTotal', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-        { field: 'InvoiceID', displayName: '@Resources.Order.gridAction', cellTemplate: '<div class="ngCellText"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}">View</a></div>', width: "7%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                { field: 'InvoiceDate', displayName: '@Resources.Order.gridInvoiceDate', width: "10%", cellTemplate: '<div class="ngCellText">{{row.getProperty(col.field) | resolve_date}}</div>', cellClass: 'ngCellText-Center' },
+                { field: "Notes", displayName: '@Resources.Order.gridNotes', pinnable: true },
+                { field: "FullName", displayName: 'Customer Name', pinnable: true },
+                { field: "SubTotal", displayName: '@Resources.Order.gridAmount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: "SaleTax", displayName: '@Resources.Order.gridTaxAmount', pinnable: true, width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: "Discount", displayName: '@Resources.Order.gridDiscount', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: "Total", displayName: '@Resources.Order.gridTotal', pinnable: true, width: "7%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
+                { field: 'InvoiceID', displayName: '@Resources.Order.gridAction', cellTemplate: '<div class="ngCellText"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}">View</a></div>', width: "7%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,
                 showFooter: true,

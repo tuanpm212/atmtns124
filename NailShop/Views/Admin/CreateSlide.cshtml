@@ -76,7 +76,7 @@
             },
         });
 
-        $("#btnSave").click(function () {
+        $("#formSlide").submit(function (event) {
             var slide = {
 
                 SlideID: '@ViewBag.ID',
@@ -103,6 +103,7 @@
                         window.location.href = "/admin/slide";
                 }
             });
+            event.preventDefault();
         });
 
         angular.module('MyApp', []).controller('CtrlController', ['$scope', function ($scope) { }]);

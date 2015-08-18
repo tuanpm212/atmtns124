@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "News";
     Layout = "~/Views/Share/_Backend.cshtml";
 }
@@ -111,7 +110,7 @@
                 { field: 'ShortDescription', displayName: 'ShortDescription' },
                 { field: 'Image', displayName: 'Image', width: "20%" },
                 { field: 'Url', displayName: 'Url', width: "20%" },
-                { field: 'IsActive', displayName: 'Active', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center'},
+                { field: 'IsActive', displayName: 'Active', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' },
                 { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createnews?id={{row.entity.NewsID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
                 ],
                 enablePaging: true,
