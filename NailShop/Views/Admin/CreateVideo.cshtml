@@ -3,69 +3,67 @@
     Layout = "~/Views/Share/_Backend.cshtml";
 }
 
-<section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
-    <section class="scrollable padder">
-        <div class="m-b-md">
-            <h3 class="m-b-none">@Resources.Backend.headCreateVideo</h3>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <form class="form-horizontal" name="formVideo">
-                    <div class="form-group" ng-class="{ 'has-error': formVideo.Name.$invalid && formVideo.Name.$dirty }">
-                        <label class="col-sm-3 control-label">@Resources.Backend.lblTitle</label>
-                        <div class="col-sm-9">
-                            @Html.TextBox("Name", (string)ViewBag.Name, new { @class = "form-control", ng_model = "video.title", required = "required" })
+<section class="scrollable padder">
+    <div class="m-b-md">
+        <h3 class="m-b-none">Create Video/View</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Title</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("Name", (string)ViewBag.Name, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("Description", (string)ViewBag.Description, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Video</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("Video", (string)ViewBag.Video, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                @{
+                                    bool IsCheck = Convert.ToBoolean(ViewBag.IsActive);
+                                    @Html.CheckBox("IsActive", IsCheck)<strong>IsActive</strong>
+                                }
+                            </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">@Resources.Backend.lblDescription</label>
-                        <div class="col-sm-9">
-                            @Html.TextBox("Description", (string)ViewBag.Description, new { @class = "form-control" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <button id="btnSave" class="btn btn-primary">Save</button>
+                        <a href="/admin/video" class="btn btn-primary">Back to Video</a>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': formVideo.Video.$invalid && formVideo.Video.$dirty }">
-                        <label class="col-sm-3 control-label">@Resources.Backend.lblVideo</label>
-                        <div class="col-sm-9">
-                            @Html.TextBox("Video", (string)ViewBag.Video, new { @class = "form-control", ng_model = "video.id", required = "required" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-8">
-                            <div class="checkbox">
-                                <label>
-                                    @{
-                                        bool IsCheck = Convert.ToBoolean(ViewBag.IsActive);
-                                        @Html.CheckBox("IsActive", IsCheck)@Resources.Backend.lblActive
-                                    }
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-8">
-                            <button id="btnSave" class="btn btn-primary" ng-disabled="!formVideo.$valid">@Resources.Backend.btnSave</button>
-                            <a href="/admin/video" class="btn btn-primary">@Resources.Backend.btnBack</a>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 </section>
 
 @section Styles {
     <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
     <script>
+    $(document).ready(function () {
         $("#btnSave").click(function () {
             var photo = {
                 ID: '@ViewBag.ID',
-                IsPhoto: 0,
-                Sort: 1,
-                IsActive: $('#IsActive').val()
-            },
+                    IsPhoto: 0,
+                    Sort: 1,
+                    IsActive: $('#IsActive').val()
+                },
                 photolang = {
                     PhotoID: '@ViewBag.ID',
                     LangID: 'en-US',
@@ -73,18 +71,17 @@
                     Description: $('#Description').val(),
                     Video: $('#Video').val()
                 }
-            $.ajax({
-                url: '/admin/SaveVideo',
-                type: 'Post',
-                data: JSON.stringify({ photo: photo, photolang: photolang }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    if (data.IsOk)
-                        window.location.href = "/admin/video";
-                }
+                $.ajax({
+                    url: '/admin/SaveVideo',
+                    type: 'Post',
+                    data: JSON.stringify({ photo: photo, photolang: photolang }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.IsOk)
+                            window.location.href = "/admin/video";
+                    }
+                });
             });
         });
-
-        angular.module('MyApp', []).controller('CtrlController', ['$scope', function ($scope) { }]);
     </script>
 }

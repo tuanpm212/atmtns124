@@ -5,53 +5,46 @@
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
-            <h3 class="m-b-none">@Resources.Backend.headCreatePromotion</h3>
+            <h3 class="m-b-none">Create/View Promotion</h3>
         </div>
         <section class="panel panel-default">
             <div class="panel-body">
                 <form class="form-horizontal" name="promotionForm">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">@Resources.Backend.lblPromotionName</label>
-                        <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.Name.$invalid && promotionForm.Name.$dirty }">
-                            <input id="Name" type="text" class="form-control" name="Name" ng-model="Name" required />
+                        <label class="col-sm-2 control-label">Promotion Name</label>
+                        <div class="col-sm-10">
+                            <input id="Name" type="text" class="form-control" ng-model="Name" />
+                            <span ng-show="promotionForm.Name.$error.required">Username is required.</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">@Resources.Backend.lblDescription</label>
+                        <label class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10">
                             <input id="Description" type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">@Resources.Backend.lblFromDate</label>
+                        <label class="col-sm-2 control-label">From Date</label>
                         <div class="col-sm-4">
                             <input id="txtFromDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
                         </div>
-                        <label class="col-sm-2 control-label">@Resources.Backend.lblToDate</label>
+                        <label class="col-sm-2 control-label">To Date</label>
                         <div class="col-sm-4">
                             <input id="txtToDate" type="text" class="form-control date-control" placeholder="@Resources.Order.placeholderChooseDate">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">@Resources.Backend.lblDiscountPercent</label>
-                        <div class="col-sm-10" ng-class="{ 'has-error': promotionForm.discount.$invalid && promotionForm.discount.$dirty }">
-                            <input id="Percent" type="number" class="form-control" name="discount" ng-model="Discount" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <div class="checkbox">
-                                <label>
-                                    <input id="chkIsActvie" type="checkbox" />
-                                    @Resources.Backend.lblActive
-                                </label>
-                            </div>
+                        <label class="col-sm-2 control-label">Discount Percent(%)</label>
+                        <div class="col-sm-10">
+                            <input id="Percent" type="number" class="form-control" required="required" />
+                            <input id="chkIsActvie" type="checkbox" />
+                            <label class="control-label">IsActive</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="!promotionForm.$valid">@Resources.CreateOrder.btnSave</button>
-                            <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">@Resources.Backend.btnAdd</button>
+                            <button type="submit" class="btn btn-primary" data-ng-click="addNew()" ng-disabled="promotionForm.name.$dirty && promotionForm.name.$invalid">@Resources.CreateOrder.btnSave</button>
+                            <button type="submit" data-ng-click="AddItemPromotion()" class="btn btn-primary">Add Item</button>
                             <a href="/backend/promotion" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
                         </div>
                     </div>
@@ -67,21 +60,21 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-warning"></i> @Resources.Backend.mesTitleWarring</h4>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> Warning</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">@Resources.Backend.lblProductName</label>
+                            <label class="col-sm-2 control-label">Product Name</label>
                             <div class="col-sm-4">
-                                <input id="txtSearch" type="text" class="form-control" placeholder="@Resources.Backend.pldSearchProduct" />
+                                <input id="txtSearch" type="text" class="form-control" placeholder="Search product" />
                             </div>
                             <div class="col-sm-6">
-                                <button id="btnSearch" type="submit" ng-click="getProduct()" class="btn btn-primary">@Resources.Backend.btnSearch</button>
+                                <button id="btnSearch" type="submit" ng-click="getProduct()" class="btn btn-primary">Search</button>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">@Resources.Backend.lblQuantity</label>
+                            <label class="col-sm-2 control-label">Quantity</label>
                             <div class="col-sm-4">
                                 <input id="txtQuantity" type="number" class="form-control" required />
                             </div>
@@ -92,8 +85,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btnAddItem" type="submit" ng-click="AddItem()" class="btn btn-primary">@Resources.Backend.btnAdd</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">@Resources.Backend.btnClose</button>
+                    <button id="btnAddItem" type="submit" ng-click="AddItem()" class="btn btn-primary">Add Item</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
