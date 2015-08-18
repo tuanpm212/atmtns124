@@ -42,6 +42,12 @@
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script src="~/Scripts/AngularJs/moment.js"></script>
     <script type="text/javascript">
+        $(".date-control").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'mm/dd/yyyy',
+            language: 'en',
+        });
         $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
         $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
 
