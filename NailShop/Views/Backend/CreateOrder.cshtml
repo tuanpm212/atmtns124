@@ -140,7 +140,7 @@
                 {
                     isFristLoad=false;
                     $http({
-                        url: "/backend/GetOrdItem?id="+ OrdID,
+                        url: "/backend/GetOrdForBackend?id="+ OrdID,
                         method: "GET"
 
                     }).success(function (data, status, headers, config) {

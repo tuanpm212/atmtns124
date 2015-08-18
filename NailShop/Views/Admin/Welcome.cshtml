@@ -68,17 +68,14 @@
             }
         });
 
-        var editor = $("#description").data("kendoEditor");
-
         $('#formWelcome').submit(function (event) {
-            event.preventDefault();
             var slide = {
                 SlideID: $('#divValue').attr('data-id'),
             }
             var slideLang = {
                 SlideID: $('#divValue').attr('data-id'),
                 LangID: 'en-US',
-                Description: editor.value(),
+                Description: $("#description").data("kendoEditor").value(),
             };
             $.ajax({
                 url: '/admin/SaveWelcome',
@@ -96,6 +93,7 @@
                     }
                 }
             });
+            event.preventDefault();
         });
 
         $("#imgCover").uploadFile({

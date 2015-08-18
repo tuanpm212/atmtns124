@@ -265,7 +265,8 @@ body .page-wrap {
   opacity: 1;
 }
 .modal-title {
-  font-size: 24px;
+  font-size: 20px;
+  line-height: 20px;
 }
 .form-control {
   border-color: #e0e0e0;

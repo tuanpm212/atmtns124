@@ -64,7 +64,7 @@
             var aboutlang = {
                 AboutID: 1,
                 LangID: 'en-US',
-                Contents: $('#description').text()
+                Contents: $('#description').data("kendoEditor").value()
             };
             $.ajax({
                 url: '/admin/About',
