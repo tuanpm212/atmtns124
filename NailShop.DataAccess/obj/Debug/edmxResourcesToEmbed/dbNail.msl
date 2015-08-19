@@ -320,29 +320,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Slides">
-      <EntityTypeMapping TypeName="NailShopModel.Slide">
-        <MappingFragment StoreEntitySet="Slide">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Sort" ColumnName="Sort" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-          <ScalarProperty Name="SlideID" ColumnName="SlideID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SlideLangs">
-      <EntityTypeMapping TypeName="NailShopModel.SlideLang">
-        <MappingFragment StoreEntitySet="SlideLang">
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="LangID" ColumnName="LangID" />
-          <ScalarProperty Name="SlideID" ColumnName="SlideID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="vw_Slide">
       <EntityTypeMapping TypeName="NailShopModel.vw_Slide">
         <MappingFragment StoreEntitySet="vw_Slide">
@@ -785,6 +762,29 @@
           <ScalarProperty Name="StoreID" ColumnName="StoreID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="checker" ColumnName="checker" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slides">
+      <EntityTypeMapping TypeName="NailShopModel.Slide">
+        <MappingFragment StoreEntitySet="Slide">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SlideID" ColumnName="SlideID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SlideLangs">
+      <EntityTypeMapping TypeName="NailShopModel.SlideLang">
+        <MappingFragment StoreEntitySet="SlideLang">
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LangID" ColumnName="LangID" />
+          <ScalarProperty Name="SlideID" ColumnName="SlideID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

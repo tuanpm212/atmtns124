@@ -539,7 +539,11 @@ namespace NailShop.Controllers
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
                 {
                     slide.SiteID = _session.SiteID;
+                    slide.Type = "WELCOME";
+                    slide.IsActive = true;
                     slideLang.LangID = _session.LangID;
+                    slideLang.Name = "Welcome";
+
                     IWelcome _cls = new WelcomeBO();
                     var IsResult = _cls.SaveWelcome(slide, slideLang);
                     return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);

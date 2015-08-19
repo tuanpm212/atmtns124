@@ -922,7 +922,7 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SlideLang_Slide">
+        <Association Name="FK_SlideLang_Slide1">
           <End Role="Slide" Type="Self.Slide" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -1366,7 +1366,7 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
             <End Role="Photo" EntitySet="Photo" />
             <End Role="PhotoLang" EntitySet="PhotoLang" />
           </AssociationSet>
-          <AssociationSet Name="FK_SlideLang_Slide" Association="Self.FK_SlideLang_Slide">
+          <AssociationSet Name="FK_SlideLang_Slide1" Association="Self.FK_SlideLang_Slide1">
             <End Role="Slide" EntitySet="Slide" />
             <End Role="SlideLang" EntitySet="SlideLang" />
           </AssociationSet>
@@ -1391,8 +1391,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <EntitySet Name="Languages" EntityType="NailShopModel.Language" />
           <EntitySet Name="News" EntityType="NailShopModel.News" />
           <EntitySet Name="NewsLangs" EntityType="NailShopModel.NewsLang" />
-          <EntitySet Name="Slides" EntityType="NailShopModel.Slide" />
-          <EntitySet Name="SlideLangs" EntityType="NailShopModel.SlideLang" />
           <AssociationSet Name="FK_BrandLang_Brand" Association="NailShopModel.FK_BrandLang_Brand">
             <End Role="Brand" EntitySet="Brands" />
             <End Role="BrandLang" EntitySet="BrandLangs" />
@@ -1404,10 +1402,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <AssociationSet Name="FK_NewsLang_News" Association="NailShopModel.FK_NewsLang_News">
             <End Role="News" EntitySet="News" />
             <End Role="NewsLang" EntitySet="NewsLangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SlideLang_Slide" Association="NailShopModel.FK_SlideLang_Slide">
-            <End Role="Slide" EntitySet="Slides" />
-            <End Role="SlideLang" EntitySet="SlideLangs" />
           </AssociationSet>
           <EntitySet Name="vw_Slide" EntityType="NailShopModel.vw_Slide" />
           <EntitySet Name="Contacts" EntityType="NailShopModel.Contact" />
@@ -1456,6 +1450,12 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <AssociationSet Name="FK_PhotoDetailLang_PhotoDetail" Association="NailShopModel.FK_PhotoDetailLang_PhotoDetail">
             <End Role="PhotoDetail" EntitySet="PhotoDetails" />
             <End Role="PhotoDetailLang" EntitySet="PhotoDetailLangs" />
+          </AssociationSet>
+          <EntitySet Name="Slides" EntityType="NailShopModel.Slide" />
+          <EntitySet Name="SlideLangs" EntityType="NailShopModel.SlideLang" />
+          <AssociationSet Name="FK_SlideLang_Slide1" Association="NailShopModel.FK_SlideLang_Slide1">
+            <End Role="Slide" EntitySet="Slides" />
+            <End Role="SlideLang" EntitySet="SlideLangs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
@@ -1792,30 +1792,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <NavigationProperty Name="Language" Relationship="NailShopModel.FK_NewsLang_Language" FromRole="NewsLang" ToRole="Language" />
           <NavigationProperty Name="News" Relationship="NailShopModel.FK_NewsLang_News" FromRole="NewsLang" ToRole="News" />
         </EntityType>
-        <EntityType Name="Slide">
-          <Key>
-            <PropertyRef Name="SlideID" />
-          </Key>
-          <Property Name="SlideID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SiteID" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Sort" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="SlideLangs" Relationship="NailShopModel.FK_SlideLang_Slide" FromRole="Slide" ToRole="SlideLang" />
-        </EntityType>
-        <EntityType Name="SlideLang">
-          <Key>
-            <PropertyRef Name="SlideID" />
-            <PropertyRef Name="LangID" />
-          </Key>
-          <Property Name="SlideID" Type="Int64" Nullable="false" />
-          <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Slide" Relationship="NailShopModel.FK_SlideLang_Slide" FromRole="SlideLang" ToRole="Slide" />
-        </EntityType>
         <Association Name="FK_BrandLang_Brand">
           <End Type="NailShopModel.Brand" Role="Brand" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1853,20 +1829,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
             </Principal>
             <Dependent Role="NewsLang">
               <PropertyRef Name="NewsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SlideLang_Slide">
-          <End Type="NailShopModel.Slide" Role="Slide" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="NailShopModel.SlideLang" Role="SlideLang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Slide">
-              <PropertyRef Name="SlideID" />
-            </Principal>
-            <Dependent Role="SlideLang">
-              <PropertyRef Name="SlideID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2401,6 +2363,44 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="SlideID" />
+          </Key>
+          <Property Name="SlideID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SlideLangs" Relationship="NailShopModel.FK_SlideLang_Slide1" FromRole="Slide" ToRole="SlideLang" />
+        </EntityType>
+        <EntityType Name="SlideLang">
+          <Key>
+            <PropertyRef Name="SlideID" />
+            <PropertyRef Name="LangID" />
+          </Key>
+          <Property Name="SlideID" Type="Int64" Nullable="false" />
+          <Property Name="LangID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Slide" Relationship="NailShopModel.FK_SlideLang_Slide1" FromRole="SlideLang" ToRole="Slide" />
+        </EntityType>
+        <Association Name="FK_SlideLang_Slide1">
+          <End Type="NailShopModel.Slide" Role="Slide" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NailShopModel.SlideLang" Role="SlideLang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slide">
+              <PropertyRef Name="SlideID" />
+            </Principal>
+            <Dependent Role="SlideLang">
+              <PropertyRef Name="SlideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2723,29 +2723,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="LangID" ColumnName="LangID" />
                 <ScalarProperty Name="NewsID" ColumnName="NewsID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Slides">
-            <EntityTypeMapping TypeName="NailShopModel.Slide">
-              <MappingFragment StoreEntitySet="Slide">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Sort" ColumnName="Sort" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="SlideID" ColumnName="SlideID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SlideLangs">
-            <EntityTypeMapping TypeName="NailShopModel.SlideLang">
-              <MappingFragment StoreEntitySet="SlideLang">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LangID" ColumnName="LangID" />
-                <ScalarProperty Name="SlideID" ColumnName="SlideID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3191,6 +3168,29 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
                 <ScalarProperty Name="StoreID" ColumnName="StoreID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="checker" ColumnName="checker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slides">
+            <EntityTypeMapping TypeName="NailShopModel.Slide">
+              <MappingFragment StoreEntitySet="Slide">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SlideID" ColumnName="SlideID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlideLangs">
+            <EntityTypeMapping TypeName="NailShopModel.SlideLang">
+              <MappingFragment StoreEntitySet="SlideLang">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LangID" ColumnName="LangID" />
+                <ScalarProperty Name="SlideID" ColumnName="SlideID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

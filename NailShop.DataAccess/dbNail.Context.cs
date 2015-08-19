@@ -42,8 +42,6 @@ namespace NailShop.DataAccess
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsLang> NewsLangs { get; set; }
-        public virtual DbSet<Slide> Slides { get; set; }
-        public virtual DbSet<SlideLang> SlideLangs { get; set; }
         public virtual DbSet<vw_Slide> vw_Slide { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<vw_About> vw_About { get; set; }
@@ -68,6 +66,8 @@ namespace NailShop.DataAccess
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<vw_Category> vw_Category { get; set; }
+        public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<SlideLang> SlideLangs { get; set; }
     
         [DbFunction("NailShopEntities", "GetOrdItem")]
         public virtual IQueryable<GetOrdItem_Result> GetOrdItem(Nullable<int> storeID, Nullable<long> customerID, Nullable<long> invoiceID)

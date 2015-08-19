@@ -20,12 +20,9 @@
         <EntityTypeShape EntityType="NailShopModel.Language" Width="1.5" PointX="16.625" PointY="7.125" />
         <EntityTypeShape EntityType="NailShopModel.News" Width="1.5" PointX="18.625" PointY="7.125" />
         <EntityTypeShape EntityType="NailShopModel.NewsLang" Width="1.5" PointX="16.75" PointY="4.5" />
-        <EntityTypeShape EntityType="NailShopModel.Slide" Width="1.5" PointX="12.75" PointY="4.5" />
-        <EntityTypeShape EntityType="NailShopModel.SlideLang" Width="1.5" PointX="15" PointY="10.625" />
         <AssociationConnector Association="NailShopModel.FK_BrandLang_Brand" />
         <AssociationConnector Association="NailShopModel.FK_NewsLang_Language" />
         <AssociationConnector Association="NailShopModel.FK_NewsLang_News" />
-        <AssociationConnector Association="NailShopModel.FK_SlideLang_Slide" />
         <EntityTypeShape EntityType="NailShopModel.vw_Slide" Width="1.5" PointX="5.375" PointY="9.75" />
         <EntityTypeShape EntityType="NailShopModel.Contact" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="NailShopModel.vw_About" Width="1.5" PointX="9.375" PointY="10.75" />
@@ -54,6 +51,9 @@
         <AssociationConnector Association="NailShopModel.FK_PhotoDetail_Photo" />
         <AssociationConnector Association="NailShopModel.FK_PhotoLang_Photo" />
         <AssociationConnector Association="NailShopModel.FK_PhotoDetailLang_PhotoDetail" />
+        <EntityTypeShape EntityType="NailShopModel.Slide" Width="1.5" PointX="21.375" PointY="7" />
+        <EntityTypeShape EntityType="NailShopModel.SlideLang" Width="1.5" PointX="23.625" PointY="7" />
+        <AssociationConnector Association="NailShopModel.FK_SlideLang_Slide1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

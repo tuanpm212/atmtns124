@@ -917,7 +917,7 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SlideLang_Slide">
+  <Association Name="FK_SlideLang_Slide1">
     <End Role="Slide" Type="Self.Slide" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -1361,7 +1361,7 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
       <End Role="Photo" EntitySet="Photo" />
       <End Role="PhotoLang" EntitySet="PhotoLang" />
     </AssociationSet>
-    <AssociationSet Name="FK_SlideLang_Slide" Association="Self.FK_SlideLang_Slide">
+    <AssociationSet Name="FK_SlideLang_Slide1" Association="Self.FK_SlideLang_Slide1">
       <End Role="Slide" EntitySet="Slide" />
       <End Role="SlideLang" EntitySet="SlideLang" />
     </AssociationSet>
