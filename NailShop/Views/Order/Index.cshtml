@@ -93,7 +93,7 @@
         $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
         $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
 
-        var InvoiceID;
+        var InvoiceID, RowIndex;
         var app = angular.module('MyApp', ['ngGrid']);
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.filterOptions = {
@@ -142,6 +142,7 @@
                     alert(JSON.stringify(myJson));
                 });
             };
+            $scope.$apply();
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
 
             $scope.$watch('pagingOptions', function (newVal, oldVal) {
@@ -182,6 +183,7 @@
 
             $scope.Delete = function (row) {
                 InvoiceID = row.entity.InvoiceID;
+                RowIndex = row.rowIndex;
                 if (row.entity.InvoiceStatus == 0) {
                     $('#modalConfirm').modal('show');
                 }
@@ -197,8 +199,12 @@
                 }).success(function (data) {
                     if (data.IsOk) {
                         $('#modalConfirm').modal('hide');
+
+                        $scope.gridOptions.selectItem(RowIndex, false);
+                        $scope.myData.splice(RowIndex, 1);
+                        $scope.$apply();
                     }
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    $scope.$apply();
                 });
             };
         }]);
