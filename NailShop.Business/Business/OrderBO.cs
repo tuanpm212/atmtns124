@@ -245,6 +245,7 @@ namespace NailShop.Business
                                     invoice.InvoiceNo = GetRefNo(invoice.StoreID, "INVOICE");
                                     invoice.InvoiceDate = DateTime.Now;
                                     invoice.LocalID = -1;
+                                    invoice.RecordState = (int)Enum.RecordState.AddNew;
                                     db.Invoices.Add(invoice);
                                     db.SaveChanges();
                                     UpdateRefNo(invoice.StoreID, "INVOICE");
@@ -263,6 +264,7 @@ namespace NailShop.Business
                                         oldInvoie.First().State = invoice.State;
                                         oldInvoie.First().ZipCode = invoice.ZipCode;
 
+
                                         oldInvoie.First().CityShip = invoice.CityShip;
                                         oldInvoie.First().StateShip = invoice.StateShip;
                                         oldInvoie.First().ZipCodeShip = invoice.ZipCodeShip;
@@ -273,9 +275,10 @@ namespace NailShop.Business
                                         oldInvoie.First().Discount = invoice.Discount;
                                         oldInvoie.First().Total = invoice.Total;
                                         oldInvoie.First().IsTemplate = invoice.IsTemplate;
+                                        if (oldInvoie.First().RecordState == (int)Enum.RecordState.Unchange)
+                                            oldInvoie.First().RecordState = (int)Enum.RecordState.Modify;
                                         if(oldInvoie.First().InvoiceStatus!=0)
                                             oldInvoie.First().InvoiceStatus = (int)Enum.RecordState.Modify;
-
                                         db.Entry(oldInvoie.First()).State = EntityState.Modified;
 
                                         var select = from c in db.OrdItems

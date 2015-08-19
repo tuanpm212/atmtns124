@@ -17,10 +17,8 @@ namespace NailShop.Business
             {
                 var select = from c in context.Promotions
                              where c.SiteID == SiteID && c.StoreID == StoreID &&
-                             ((FromDate <= c.FromDate && c.FromDate <= ToDate) ||
-                             (c.FromDate <= FromDate && ToDate <= c.ToDate) ||
-                             (c.FromDate <= FromDate && c.ToDate <= ToDate) ||
-                             (FromDate <= c.FromDate && c.ToDate <= ToDate))
+                             ((FromDate <= c.FromDate && FromDate <= c.ToDate) ||
+                             (FromDate >= c.FromDate && FromDate <= c.ToDate))
                              && c.IsItem == IsItem
                              orderby c.PromotionID descending
                              select c;

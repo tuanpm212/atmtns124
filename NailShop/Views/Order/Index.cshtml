@@ -42,10 +42,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-warning"></i> Thông báo</h4>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i>Warning</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có muốn xóa không ?</p>
+                    <p>Do you want to delete?</p>
                 </div>
                 <div class="modal-footer">
                     <button id="btnOk" ng-click="DeleteInvoice()" class="btn btn-primary">Ok</button>
@@ -62,10 +62,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><i class="fa fa-warning"></i> Thông báo</h4>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>Warning</h4>
             </div>
             <div class="modal-body">
-                <p>Không được sửa</p>
+                <p>Order is processing, can not editing</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -142,9 +142,7 @@
                     alert(JSON.stringify(myJson));
                 });
             };
-
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
 
             $scope.$watch('pagingOptions', function (newVal, oldVal) {
                 if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
@@ -199,8 +197,8 @@
                 }).success(function (data) {
                     if (data.IsOk) {
                         $('#modalConfirm').modal('hide');
-                        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
                     }
+                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
                 });
             };
         }]);

@@ -50,7 +50,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" data-ng-click="addNew()">@Resources.CreateOrder.btnSave</button>
                             <button type="button" data-ng-click="AddItemPromotion()" class="btn btn-primary">@Resources.Backend.btnAdd</button>
-                            <a href="/backend/promotion" class="btn btn-primary">@Resources.CreateOrder.btnBack</a>
+                            <a href="/backend/promotion" class="btn btn-primary">Back to Promotion</a>
                         </div>
                     </div>
                 </form>
@@ -163,7 +163,7 @@
                         $('#Description').val($scope.myMaster.Description);
                         $('#Percent').val($scope.myMaster.Percent);
                         $("#txtFromDate").datepicker('setDate', ForDateTime($scope.myMaster.FromDate));
-                        $("#txtFromDate").datepicker('setDate', ForDateTime($scope.myMaster.ToDate));
+                        $("#txtToDate").datepicker('setDate', ForDateTime($scope.myMaster.ToDate));
                         $('#chkIsActvie').prop('checked', $scope.myMaster.IsActive);
                     }
                     $scope.myData = myJson;
