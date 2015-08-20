@@ -101,6 +101,7 @@
                     var myJson = JSON.parse(JSON.parse(data));
                     $scope.myData = myJson;
                     $scope.setPagingData(myJson, page, pageSize);
+                    
                 }).error(function (myJson, status, headers, config) {
                     alert(JSON.stringify(myJson));
                 });
@@ -146,6 +147,7 @@
             };
         }]);
 
+        $scope.$apply();
         app.filter('resolve_date', function () {
             return function (text, length, end) {
                 var mResult = '', twoDigitMonth;
