@@ -83,6 +83,7 @@
                     var myJson = JSON.parse(JSON.parse(data));
                     $scope.myData = myJson;
                     $scope.setPagingData(myJson, page, pageSize);
+                    $scope.$apply();
                 }).error(function (myJson, status, headers, config) {
                     alert(JSON.stringify(myJson));
                 });
