@@ -25,6 +25,5 @@ D:\Git\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.dll
 D:\Git\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
 D:\Git\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.xml
 D:\Git\atmtns124\NailShop.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
-D:\Git\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.csprojResolveAssemblyReference.cache
 D:\Git\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.dll
 D:\Git\atmtns124\NailShop.DataAccess\obj\Debug\NailShop.DataAccess.pdb
