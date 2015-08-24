@@ -38,11 +38,12 @@
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
-    <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID;
         app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
             $scope.gridOptions = {
+                paginationPageSizes: [10, 20, 40],
+                paginationPageSize: 10,
                 columnDefs: [
                     { name: "Title" },
                     { name: "Description" },
@@ -91,8 +92,5 @@
         }]);
     </script>
 }
-
-
-
 
 

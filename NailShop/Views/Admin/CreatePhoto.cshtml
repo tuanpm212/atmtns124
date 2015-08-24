@@ -7,6 +7,7 @@
     <section class="scrollable padder">
         <div class="m-b-md">
             <h3 class="m-b-none">Create/View Photo</h3>
+            <hr />
         </div>
         <section class="panel panel-default">
             <header class="panel-heading font-bold"> Photo form </header>
@@ -43,9 +44,7 @@
                 </div>
             </div>
         </section>
-        <div class="table-responsive">
-            <div ng-grid="gridOptions"></div>
-        </div>
+        <div ui-grid="gridOptions" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
     </section>
     <div class="modal fade" id="modalConfirm" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -107,13 +106,13 @@
 
 
 @section Styles {
-    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/uploadfile.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
-    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
-    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/ui-grid.js"></script>
     <script src="~/Scripts/jquery.uploadfile.js"></script>
     <script src="~/Scripts/jquery.form.js"></script>
     <script>
@@ -142,97 +141,22 @@
             },
         });
 
-        var app = angular.module('MyApp', ['ngGrid']), ID, PhotoDetailLang = [], PhotoDetail = [];
-        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
-
-            $scope.filterOptions = {
-                filterText: "",
-                useExternalFilter: true
-            };
-
-            $scope.totalServerItems = 0;
-            $scope.pagingOptions = {
-                pageSizes: [10, 20, 40],
-                pageSize: 10,
-                currentPage: 1
-            };
-
-            $scope.setPagingData = function (data, page, pageSize) {
-                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-                $scope.myData = pagedData;
-                $scope.totalServerItems = data.length;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            };
-
-            $scope.getPagedDataAsync = function (pageSize, page) {
-                if (pageSize == null) {
-                    $scope.pagingOptions.pageSize = 10;
-                    pageSize = 10;
-                }
-                if (page == null) {
-                    $scope.pagingOptions.currentPage = 1;
-                    page = 1;
-                }
-                $http({
-                    url: "/admin/GetPhotoByID", 
-                    params: { id: photoID },
-                    method: "GET"
-                }).success(function (data, status, headers, config) {
-                    var temp = JSON.parse(JSON.parse(data));
-                    var myJson = temp.detail;
-                    $scope.myMaster = temp.master;
-                    if ($scope.myMaster.ID != 0) {
-                        $('#txtTitle').val($scope.myMaster.Title);
-                        $('#txtDescription').val($scope.myMaster.Description);
-                        $('#imgUpload').attr("src", $scope.myMaster.Image);
-                        $('#IsActvie').prop('checked', $scope.myMaster.IsActive);
-                    }
-                    $scope.myData = myJson;
-                    $scope.setPagingData(myJson, page, pageSize);
-                }).error(function (myJson, status, headers, config) {
-                    alert(JSON.stringify(myJson));
-                });
-            };
-
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
-            $scope.$watch('pagingOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-            $scope.$watch('filterOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID, PhotoDetailLang = [], PhotoDetail = [];
+        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
             $scope.gridOptions = {
-                data: 'myData',
+                paginationPageSizes: [10, 20, 40],
+                paginationPageSize: 10,
                 columnDefs: [
-                { field: "Title", displayName: 'Title', width: "25%" },
-                { field: 'Description', displayName: 'Description' },
-                { field: "Image", displayName: 'Image', width: "20%" },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                    { name: "Title" },
+                    { name: "Description" },
+                    { name: "Image" },
+                    { name: "", field: 'ID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
                 ],
-                enablePaging: true,
-                showFooter: true,
-                totalServerItems: 'totalServerItems',
-                pagingOptions: $scope.pagingOptions,
-                filterOptions: $scope.filterOptions,
-                sortInfo: $scope.sortOptions,
-                enableCellSelection: true,
-                enableRowSelection: false,
-                headerRowHeight: 31,
-                rowHeight: 31,
-                i18n: "en"
             };
 
             $scope.Delete = function (row) {
-                ID = row.entity.ID;
                 $('#modalConfirm').modal('show');
+                ID = row.entity.ID;
             };
 
             $scope.DeleteInvoice = function () {
@@ -242,12 +166,41 @@
                     params: { ID: ID }
                 }).success(function (data) {
                     $('#modalConfirm').modal('hide');
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
                 });
             };
 
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.gridOptions.paginationPageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.gridOptions.paginationCurrentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/admin/GetPhotoByID",
+                    params: { id: photoID },
+                    method: "GET"
+                }).success(function (data, status, headers, config) {
+                    var data = JSON.parse(data);
+                    $scope.gridOptions.data = data.detail;
+                    $scope.myMaster = data.master;
+                    if ($scope.myMaster.ID != 0) {
+                        $('#txtTitle').val($scope.myMaster.Title);
+                        $('#txtDescription').val($scope.myMaster.Description);
+                        $('#imgUpload').attr("src", $scope.myMaster.Image);
+                        $('#IsActvie').prop('checked', $scope.myMaster.IsActive);
+                    };
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
+
             $scope.modalPhoto = function () {
-                
                 $('#modalAddPhoto').modal('show');
             };
 
@@ -262,8 +215,7 @@
                         Thumbnail: urlImg[0] + "_thumnail" + urlImg[1],
                         FullImage: urlImg[0] + "_lightbox" + urlImg[1]
                     };
-                    $scope.myData.push(item);
-                    $scope.$apply();
+                    $scope.gridOptions.data.push(item);
                     $('#modalAddPhoto').modal('hide');
 
                     $('#TitlePhoto').val('');
@@ -287,9 +239,8 @@
                             IsActive: 1
                         };
 
-                    var detail=[], detaillang=[], temp, templang;
-                    for (var i = 0; i < $scope.myData.length; i++)
-                    {
+                    var detail = [], detaillang = [], temp, templang;
+                    for (var i = 0; i < $scope.gridOptions.data.length; i++) {
                         temp = {
                             DetailID: -1,
                             PhotoID: photoID,
@@ -300,16 +251,14 @@
                         templang = {
                             DetailID: -1,
                             LangID: "en-US",
-                            Title: $scope.myData[i].Title,
-                            Description: $scope.myData[i].Description,
-                            Image: $scope.myData[i].Image,
-                            Thumbnail: $scope.myData[i].Thumbnail,
-                            FullImage: $scope.myData[i].FullImage
+                            Title: $scope.gridOptions.data[i].Title,
+                            Description: $scope.gridOptions.data[i].Description,
+                            Image: $scope.gridOptions.data[i].Image,
+                            Thumbnail: $scope.gridOptions.data[i].Thumbnail,
+                            FullImage: $scope.gridOptions.data[i].FullImage
                         };
                         detaillang.push(templang);
                     }
-
-
 
                     $http({
                         url: "/admin/SavePhoto",
