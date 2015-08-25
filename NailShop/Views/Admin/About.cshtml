@@ -7,6 +7,7 @@
 <section class="scrollable padder">
     <div class="m-b-md">
         <h3 class="m-b-none">@Resources.Backend.headAbout</h3>
+        <hr />
     </div>
     <form id="formWelcome" class="form-horizontal">
         <div class="form-group">
@@ -40,13 +41,13 @@
     </div>
 </section>
 @section Styles {
-    <link href="~/contents/assets/css/kendo.common.css" rel=" stylesheet" />
-    <link href="~/contents/assets/css/kendo.default.css" rel=" stylesheet" />
+    <link href="~/Contents/css/kendo.common.css" rel="stylesheet" />
+    <link href="~/Contents/css/kendo.office365.css" rel="stylesheet" />
 }
 
 @section Scripts {
-    <script src="~/contents/assets/js/kendo.js"></script>
-    <script src="~/contents/assets/js/function.js"></script>
+    <script src="~/Scripts/kendo.js"></script>
+    <script src="~/Scripts/function.js"></script>
     <script>
         //config upload image browse
         var MRT_ReadImageURL = "@Url.Action("Index", "Mediamanager", new { area = "" })";
@@ -60,7 +61,6 @@
         loadEditor("#description");
 
         $('#btnSave').click(function () {
-
             var aboutlang = {
                 AboutID: 1,
                 LangID: 'en-US',

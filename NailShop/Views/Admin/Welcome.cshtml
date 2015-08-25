@@ -8,6 +8,7 @@
 <section class="scrollable padder">
     <div class="m-b-md">
         <h3 class="m-b-none">@Resources.Backend.headWelcome</h3>
+        <hr />
     </div>
     <form id="formWelcome" class="form-horizontal">
         <div class="form-group">
@@ -51,15 +52,15 @@
 </section>
 
 @section Styles {
-    <link href="~/contents/assets/css/kendo.common.css" rel=" stylesheet" />
-    <link href="~/contents/assets/css/kendo.default.css" rel=" stylesheet" />
+    <link href="~/Contents/css/kendo.common.css" rel="stylesheet" />
+    <link href="~/Contents/css/kendo.office365.css" rel="stylesheet" />
     <link href="~/Contents/css/uploadfile.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="~/contents/assets/js/kendo.js"></script>
-    <script src="~/contents/assets/js/function.js"></script>
-<script src="~/Scripts/jquery.uploadfile.js"></script>
-<script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/kendo.js"></script>
+    <script src="~/Scripts/function.js"></script>
+    <script src="~/Scripts/jquery.uploadfile.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
     <script>
        $("#description").kendoEditor({
             resizable: {
@@ -76,6 +77,7 @@
                 SlideID: $('#divValue').attr('data-id'),
                 LangID: 'en-US',
                 Description: $("#description").data("kendoEditor").value(),
+                Image: $("#imgUpload").attr('src'),
             };
             $.ajax({
                 url: '/admin/SaveWelcome',
