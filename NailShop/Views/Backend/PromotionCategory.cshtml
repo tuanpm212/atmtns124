@@ -74,7 +74,7 @@
                     { name: "ToDate", cellTemplate: '<div class="ui-grid-cell-contents"> {{row.entity.ToDate | resolve_date}}</div>' },
                     { name: "IsActive" },
                     { name: "FromDate" },
-                    { name: "", field: 'PromotionID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/backend/CreatePromotion?id={{row.entity.PromotionID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
+                    { name: "", field: 'PromotionID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/backend/CreatePromotionCategory?id={{row.entity.PromotionID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
                 ],
             };
 
