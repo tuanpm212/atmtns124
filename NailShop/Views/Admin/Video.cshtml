@@ -31,10 +31,12 @@
         </div>
     </div>
 </section>
+
 @section Styles {
     <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
@@ -50,7 +52,7 @@
                     { name: "Title", displayName: "Title", headerCellClass: 'text-center', sort: { direction: ['desc'], } },
                     { name: "Description", displayName: "Description", headerCellClass: 'text-center' },
                     { name: "Video", displayName: "Video", headerCellClass: 'text-center', cellClass: 'text-right', width: '150' },
-                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateVideo?id={{row.entity.ID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateVideo?id={{row.entity.ID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 

@@ -44,11 +44,13 @@
         </div>
     </div>
 </section>
+
 @section Styles {
     <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/datepicker.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
@@ -77,7 +79,7 @@
                     { name: "FromDate", displayName: "From Date", headerCellClass: 'text-center', cellClass: 'text-right', width: '150', cellTemplate: '<div class="ui-grid-cell-contents"> {{row.entity.FromDate | resolve_date}}</div>' },
                     { name: "ToDate", displayName: "To Date", headerCellClass: 'text-center', cellClass: 'text-right', width: '150', cellTemplate: '<div class="ui-grid-cell-contents"> {{row.entity.ToDate | resolve_date}}</div>' },
                     { name: "IsActive", displayName: "Active", headerCellClass: 'text-center', cellClass: 'text-center', width: '100' },
-                    { name: "", field: 'PromotionID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/backend/CreatePromotion?id={{row.entity.PromotionID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", field: 'PromotionID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/backend/CreatePromotion?id={{row.entity.PromotionID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 

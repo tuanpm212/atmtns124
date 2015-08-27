@@ -13,12 +13,6 @@
                     </ul>
                 </div>
                 <div class="col-sm-6 text-right header-top-right">
-                    @*<ul class="list-inline shopping-cart">
-                        <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;@Resources.Header.lblShoppingCart [0]</a>
-                        </li>
-                    </ul>*@
-
                     @{
                         if (Convert.ToBoolean(@ViewBag.IsLogin))
                         {
@@ -37,9 +31,6 @@
                                 <li>
                                     <a class="btn btn-primary text-uppercase" href="#" data-toggle="modal" data-target="#modalLogin ">@Resources.Header.lblLogin</a>
                                 </li>
-                                @*<li>
-                                    <a id="linkRegister" class="btn btn-default text-uppercase" href="#">@Resources.Header.lblRegister</a>
-                                </li>*@
                             </ul>
                         }
                     }
@@ -58,7 +49,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <img src="~/Contents/images/logo.png">
                     </a>
                 </div>
