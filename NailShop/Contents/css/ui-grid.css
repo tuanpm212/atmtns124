@@ -169,7 +169,7 @@
   vertical-align: sub;
 }
 .ui-grid-column-menu-button-last-col {
-  margin-right: 25px;
+  /*margin-right: 25px;*/
 }
 .ui-grid-column-menu {
   position: absolute;
