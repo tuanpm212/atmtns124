@@ -7,6 +7,7 @@
     <section class="scrollable padder">
         <div class="m-b-md">
             <h3 class="m-b-none">@Resources.CreateOrder.titleForm</h3>
+            <hr />
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -95,57 +96,54 @@
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <div ng-grid="gridOptions"></div>
-        </div>
+        <div ui-grid="gridOptions" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
     </section>
 </section>
 @section Styles {
-    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
-    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
-    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
-
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/ui-grid.js"></script>
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();
         });
         var OrdID = @ViewBag.OrdID, myjson, isFristLoad=true;
-        var app = angular.module('MyApp', ['ngGrid']);
-        app.controller('MainController', ['$scope', '$http', function ($scope, $http, $apply) {
-            $scope.filterOptions = {
-                filterText: "",
-                useExternalFilter: true
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']);
+        app.controller('MainController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
+            $scope.gridOptions = {
+                paginationPageSizes: [10, 20, 40],
+                paginationPageSize: 10,
+                columnDefs: [
+                    { name: "ProdNo", displayName: "@Resources.CreateOrder.gridNo" },
+                        { name: "ProductName", displayName: "@Resources.CreateOrder.gridName"},
+                        { name: "Price", displayName: "@Resources.CreateOrder.gridPrice" },
+                        { name: "Qty", displayName: "@Resources.CreateOrder.gridQty" },
+                        { name: "Discount", displayName: "@Resources.CreateOrder.gridDiscount" },
+                        { name: "Total", displayName: "@Resources.CreateOrder.gridTotal" },
+                ],
             };
 
-            $scope.totalServerItems = 0;
-            $scope.pagingOptions = {
-                pageSizes: [10, 20, 40],
-                pageSize:10,
-                currentPage: 1
-            };
-
-            $scope.setPagingData = function (data, page, pageSize) {
-                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-                $scope.myData = pagedData;
-                $scope.totalServerItems = data.length;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            };
             $scope.getPagedDataAsync = function (pageSize, page, searchText) {
+                if (pageSize == null) {
+                    $scope.gridOptions.paginationPageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.gridOptions.paginationCurrentPage = 1;
+                    page = 1;
+                }
                 if(isFristLoad)
                 {
                     isFristLoad=false;
                     $http({
                         url: "/backend/GetOrdForBackend?id="+ OrdID,
                         method: "GET"
-
                     }).success(function (data, status, headers, config) {
-                        myjson = JSON.parse(JSON.parse(data));
-                        $scope.setPagingData(myjson, page, pageSize);
+                        myjson = JSON.parse(data);
+                        $scope.gridOptions.data = myjson;
                         SumTotalAmount(myjson);
                     }).error(function (data, status, headers, config) {
                         alert(JSON.stringify(data));
@@ -157,64 +155,7 @@
                 }
             };
 
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
-            $scope.$watch('pagingOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-            $scope.$watch('filterOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-
-            $scope.gridOptions = {
-                data: 'myData',
-                columnDefs: [
-                { field: "ProdNo", displayName: '@Resources.CreateOrder.gridNo', width: "120",  enableCellEdit: false, headerClass: 'ngHeader-Center', cellClass: 'ngCellText-Center'},
-                { field: "ProductName", displayName: '@Resources.CreateOrder.gridName', pinnable: true, enableCellEdit: false},
-                { field: "Price", displayName: '@Resources.CreateOrder.gridPrice', pinnable: true, width: "120",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'},
-                { field: "Qty", displayName: '@Resources.CreateOrder.gridQty', pinnable: true, width: "120", enableCellEdit: true, cellFilter:"number:0",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'},
-                { field: "Discount", displayName: '@Resources.CreateOrder.gridDiscount', pinnable: true, width: "120",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right' },
-                { field: "Total", displayName: '@Resources.CreateOrder.gridTotal', pinnable: true, width: "150",  enableCellEdit: false, cellFilter:"number:2",  headerClass: 'ngHeader-Right', cellClass: 'ngCellText-Right'}
-                ],
-                enablePaging: true,
-                showFooter: true,
-                totalServerItems: 'totalServerItems',
-                pagingOptions: $scope.pagingOptions,
-                filterOptions: $scope.filterOptions,
-                sortInfo: $scope.sortOptions,
-                totalServerItems: "totalServerItems",
-                enableCellSelection: true,
-                enableCellEdit: true,
-                enableRowSelection: false,
-                enableColumnReordering: true,
-                headerRowHeight: 31,
-                rowHeight: 31,
-                i18n: "en"
-            };
-
-            //---Edit value changed---//
-            $scope.$on('ngGridEventEndCellEdit', function(evt){
-                if(evt.targetScope.row.entity.Qty>=0)
-                {
-                    var total=0, discount=0, price=0, quantity=0;
-                    quantity = evt.targetScope.row.entity.Qty;
-                    price = evt.targetScope.row.entity.Price;
-                    discount = evt.targetScope.row.entity.Discount * quantity;
-                    total = quantity*price - discount;
-                    evt.targetScope.row.entity.Total = total;
-                    SumTotalAmount($scope.myData);
-                }
-                else
-                {
-                    alert('@Resources.CreateOrder.msgQuantity');
-                    evt.targetScope.row.entity.Qty = 0;
-                }
-                $scope.$apply();
-            });
+            $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
         }]);
 
         function SumTotalAmount(json)

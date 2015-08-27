@@ -6,6 +6,7 @@
     <section class="scrollable padder">
         <div class="m-b-md">
             <h3 class="m-b-none">@Resources.Backend.headProductHot</h3>
+            <hr />
         </div>
         <div class="form-group">
             <label>@Resources.Backend.chooseStore</label>
@@ -13,9 +14,7 @@
                 <option data-ng-repeat="t in Stores" value="{{t.StoreID}}">{{t.StoreName}}</option>
             </select>
         </div>
-        <div class="table-responsive">
-            <div ng-grid="gridOptions"></div>
-        </div>
+        <div ui-grid="gridOptions" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
         <div>
             <button id="btnAddNew" class="btn btn-primary">@Resources.Backend.btnAdd</button>
         </div>
@@ -39,111 +38,40 @@
     </div>
 </section>
 @section Styles {
-    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
-    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
-    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
-    <script src="~/Scripts/bootstrap-datepicker.js"></script>
-    <script src="~/Scripts/AngularJs/moment.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/ui-grid.js"></script>
     <script type="text/javascript">
-
-        var app = angular.module('MyApp', ['ngGrid']), ID, StoreID;
-        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
-
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID, StoreID;
+        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
             $scope.GetStore = function () {
                 $http({
                     url: "/admin/GetStore",
                     method: "GET",
                 }).success(function (data) {
-                    $scope.Stores = JSON.parse(JSON.parse(data));
+                    $scope.Stores = JSON.parse(data);
                     $scope.selectedItem = $scope.Stores[0].StoreID;
                     StoreID = $scope.Stores[0].StoreID;
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
                 });
             };
+
             $scope.GetStore();
 
-            $scope.filterOptions = {
-                filterText: "",
-                useExternalFilter: true
-            };
-
-            $scope.totalServerItems = 0;
-            $scope.pagingOptions = {
-                pageSizes: [10, 20, 40],
-                pageSize: 10,
-                currentPage: 1
-            };
-
-            $scope.setPagingData = function (data, page, pageSize) {
-                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-                $scope.myData = pagedData;
-                $scope.totalServerItems = data.length;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            };
-
-            $scope.getPagedDataAsync = function (pageSize, page) {
-                if (pageSize == null) {
-                    $scope.pagingOptions.pageSize = 20;
-                    pageSize = 10;
-                }
-                if (page == null) {
-                    $scope.pagingOptions.currentPage = 1;
-                    page = 1;
-                }
-                if (StoreID != null) {
-                    $http({
-                        url: "/admin/GetProductHot",
-                        params: { StoreID: StoreID },
-                        method: "GET"
-                    }).success(function (data, status, headers, config) {
-                        var myJson = JSON.parse(JSON.parse(data));
-                        $scope.myData = myJson;
-                        $scope.setPagingData(myJson, page, pageSize);
-                    }).error(function (myJson, status, headers, config) {
-                        alert(JSON.stringify(myJson));
-                    });
-                }
-            };
-
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
-            $scope.$watch('pagingOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-            $scope.$watch('filterOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-
             $scope.gridOptions = {
-                data: 'myData',
+                paginationPageSizes: [10, 20, 40],
+                paginationPageSize: 10,
                 columnDefs: [
-                { field: 'ProductCode', displayName: 'Code', width: "8%", cellClass: 'ngCellText-Center' },
-                { field: 'ProductName', displayName: 'Name', width: "20%" },
-                { field: 'ShortDescription', displayName: 'Short Description' },
-                { field: 'Price', displayName: 'Price', width: "10%", cellFilter: "number:2", headerClass: 'ngHeader-right', cellClass: 'ngCellText-Right' },
-                { field: 'IsActive', displayName: 'Active', width: "8%", cellClass: 'ngCellText-Right' },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                    { name: "ProductCode" },
+                    { name: "ProductName" },
+                    { name: "ShortDescription" },
+                    { name: "Price" },
+                    { name: "IsActive" },
+                    { name: "", field: 'ID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
                 ],
-                enablePaging: true,
-                showFooter: true,
-                totalServerItems: 'totalServerItems',
-                pagingOptions: $scope.pagingOptions,
-                filterOptions: $scope.filterOptions,
-                sortInfo: $scope.sortOptions,
-                enableCellSelection: true,
-                enableRowSelection: false,
-                headerRowHeight: 31,
-                rowHeight: 31,
-                i18n: "en"
             };
 
             $scope.Delete = function (row) {
@@ -152,20 +80,47 @@
             };
 
             $scope.DeleteProductHot = function () {
+                $('#modalConfirm').modal('show');
                 $http({
                     url: "/admin/DeleteProductHot",
                     method: "POST",
                     params: { ID: ID }
                 }).success(function (data) {
                     $('#modalConfirm').modal('hide');
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
                 });
             };
 
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.gridOptions.paginationPageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.gridOptions.paginationCurrentPage = 1;
+                    page = 1;
+                }
+                if (StoreID != null) {
+                    $http({
+                        url: "/admin/GetProductHot",
+                        params: { StoreID: StoreID },
+                        method: "GET"
+                    }).success(function (data, status, headers, config) {
+                        $scope.gridOptions.data = JSON.parse(data);
+                    }).error(function (myJson, status, headers, config) {
+                        alert(JSON.stringify(myJson));
+                    });
+                };
+            };
+
+            $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
+
+            
+
             $("#drStore").change(function () {
                 StoreID = this.value;
-                $scope.pagingOptions.currentPage = 1;
-                $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                $scope.gridOptions.paginationCurrentPage = 1;
+                $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
             });
 
             $('#btnAddNew').click(function () {

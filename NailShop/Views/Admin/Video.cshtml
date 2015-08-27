@@ -8,9 +8,7 @@
             <h3 class="m-b-none">VIDEO LIST</h3>
             <hr />
         </div>
-        <div class="table-responsive">
-            <div ng-grid="gridOptions"></div>
-        </div>
+        <div ui-grid="gridOptions" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
         <div>
             <a href="/admin/createvideo?id=-1" class="btn btn-primary">Add New</a>
         </div>
@@ -34,93 +32,24 @@
     </div>
 </section>
 @section Styles {
-    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
-    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
-    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
-    <script src="~/Scripts/bootstrap-datepicker.js"></script>
-    <script src="~/Scripts/AngularJs/moment.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/ui-grid.js"></script>
     <script type="text/javascript">
-
-        var app = angular.module('MyApp', ['ngGrid']), ID;
-        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
-            $scope.filterOptions = {
-                filterText: "",
-                useExternalFilter: true
-            };
-
-            $scope.totalServerItems = 0;
-            $scope.pagingOptions = {
-                pageSizes: [10, 20, 40],
-                pageSize: 10,
-                currentPage: 1
-            };
-
-            $scope.setPagingData = function (data, page, pageSize) {
-                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-                $scope.myData = pagedData;
-                $scope.totalServerItems = data.length;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            };
-
-            $scope.getPagedDataAsync = function (pageSize, page) {
-                if (pageSize == null) {
-                    $scope.pagingOptions.pageSize = 10;
-                    pageSize = 10;
-                }
-                if (page == null) {
-                    $scope.pagingOptions.currentPage = 1;
-                    page = 1;
-                }
-                $http({
-                    url: "/admin/GetVideo",
-                    method: "GET"
-                }).success(function (data, status, headers, config) {
-                    var myJson = JSON.parse(JSON.parse(data));
-                    $scope.myData = myJson;
-                    $scope.setPagingData(myJson, page, pageSize);
-                }).error(function (myJson, status, headers, config) {
-                    alert(JSON.stringify(myJson));
-                });
-            };
-
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
-
-            $scope.$watch('pagingOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-            $scope.$watch('filterOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID;
+        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
             $scope.gridOptions = {
-                data: 'myData',
+                paginationPageSizes: [10, 20, 40],
+                paginationPageSize: 10,
                 columnDefs: [
-                { field: "Title", displayName: 'Title', width: "25%" },
-                { field: 'Description', displayName: 'Description' },
-                { field: "Video", displayName: 'Video', width: "20%" },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/CreateVideo?id={{row.entity.ID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
+                    { name: "Title" },
+                    { name: "Description" },
+                    { name: "Video" },
+                    { name: "", field: 'ID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateVideo?id={{row.entity.ID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
                 ],
-                enablePaging: true,
-                showFooter: true,
-                totalServerItems: 'totalServerItems',
-                pagingOptions: $scope.pagingOptions,
-                filterOptions: $scope.filterOptions,
-                sortInfo: $scope.sortOptions,
-                enableCellSelection: true,
-                enableRowSelection: false,
-                headerRowHeight: 31,
-                rowHeight: 31,
-                i18n: "en"
             };
 
             $scope.Delete = function (row) {
@@ -136,14 +65,32 @@
                     params: { ID: ID }
                 }).success(function (data) {
                     $('#modalConfirm').modal('hide');
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
                 });
             };
+
+            $scope.getPagedDataAsync = function (pageSize, page) {
+                if (pageSize == null) {
+                    $scope.gridOptions.paginationPageSize = 10;
+                    pageSize = 10;
+                }
+                if (page == null) {
+                    $scope.gridOptions.paginationCurrentPage = 1;
+                    page = 1;
+                }
+                $http({
+                    url: "/admin/GetVideo",
+                    method: "GET"
+                }).success(function (data, status, headers, config) {
+                    $scope.gridOptions.data = JSON.parse(data);
+                }).error(function (myJson, status, headers, config) {
+                    alert(JSON.stringify(myJson));
+                });
+            };
+
+            $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
         }]);
     </script>
 }
-
-
-
 
 
