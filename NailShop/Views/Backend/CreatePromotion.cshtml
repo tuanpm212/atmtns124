@@ -99,6 +99,7 @@
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/datepicker.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
@@ -124,7 +125,7 @@
                     { name: "ProdNo", displayName: "Code", headerCellClass: 'text-center', enableCellEdit: false, sort: { direction: ['desc'], }, },
                     { name: "ProductName", displayName: "Product Name", headerCellClass: 'text-center', enableCellEdit: false },
                     { name: "Quantity", displayName: "Quantity", headerCellClass: 'text-center', cellClass: 'text-right', width: '150', enableCellEdit: true },
-                    { name: "", field: 'ProductID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false, enableCellEdit: false },
+                    { name: "", field: 'ProductID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false, enableCellEdit: false },
                 ],
             };
 

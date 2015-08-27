@@ -4,9 +4,7 @@
     ViewBag.Title = @Resources.FormTitle.formGallery;
     Layout = "~/Views/Share/_Layout.cshtml";
 }
-<link href="~/Contents/css/owl.carousel.css" rel="stylesheet" />
-<link href="~/Contents/css/nail-gallery.css" rel="stylesheet" />
-<link href="~/Contents/css/lightbox.css" rel="stylesheet" />
+
 <div class="page-wrap">
     <section class="section-gallery">
         <div class="title-page">
@@ -59,6 +57,12 @@
         </div>
     </section>
 </div>
+@section Style {
+    <link href="~/Contents/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Contents/css/nail-gallery.css" rel="stylesheet" />
+    <link href="~/Contents/css/lightbox.css" rel="stylesheet" />
+}
+
 @section Scripts {
     <script src="~/Scripts/lightbox.js"></script>
     <script src="~/Scripts/owl.carousel.js"></script>
