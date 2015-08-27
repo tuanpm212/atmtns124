@@ -76,7 +76,7 @@
                                 <button id="btnSearch" type="submit" ng-click="getProduct()" class="btn btn-primary">Search</button>
                             </div>
                         </div>
-                        <div ui-grid="gridSearch" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
+                        <div ui-grid="gridSearch" ui-grid-pagination ui-grid-auto-resize class="myGrid table" style="height: 372px;"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -106,15 +106,17 @@
         });
         $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
         $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
-        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']);
-        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination', 'ui.grid.autoResize']);
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.gridMaster = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "Code", displayName: "Code", },
-                    { name: "CategoryName", displayName: "Category Name", },
-                    { name: "", field: 'CategoryID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
+                    { name: "Code", displayName: "Code", headerCellClass: 'text-center', sort: { direction: ['desc'], }, },
+                    { name: "CategoryName", displayName: "Category Name", headerCellClass: 'text-center', },
+                    { name: "", field: 'CategoryID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 
@@ -189,12 +191,14 @@
 
             /*---Grid Product---*/
             $scope.gridSearch = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "checker", displayName: "", type: 'boolean', headerCellTemplate: '<div class="ui-grid-cell-contents"><input type="checkbox" ng-model="checker" ng-change="grid.appScope.toggleCheckerAll(checker)"></div>', cellTemplate: '<input type="checkbox" ng-model="row.entity.checker">', width: '100', cellClass: 'text-center', headerCellClass: 'text-center' },
-                    { name: "Code", displayName: "Code", },
-                    { name: "CategoryName", displayName: "Category Name" },
+                    { name: "checker", displayName: "", type: 'boolean', headerCellTemplate: '<div class="ui-grid-cell-contents"><input type="checkbox" ng-model="checker" ng-change="grid.appScope.toggleCheckerAll(checker)"></div>', cellTemplate: '<input type="checkbox" ng-model="row.entity.checker">', width: '50', cellClass: 'text-center', headerCellClass: 'text-center', headerCellClass: 'text-center', enableSorting: false },
+                    { name: "Code", displayName: "Code", headerCellClass: 'text-center', sort: { direction: ['desc'], }, },
+                    { name: "CategoryName", displayName: "Category Name", headerCellClass: 'text-center' },
                 ],
             };
 

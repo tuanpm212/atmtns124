@@ -12,7 +12,7 @@
 }
 
 .ui-grid-header-cell {
-    border-right: none;
+    border-right: 1px solid #ebebeb;
 }
 
 .ui-grid-canvas {
@@ -28,7 +28,7 @@
 }
 
 .ui-grid-cell {
-    border-right: 0px;
+    border-right: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
 }
 
@@ -77,4 +77,9 @@
 
 .ui-grid-cell-contents {
     outline: none;
+}
+
+.ui-grid-row:last-child .ui-grid-cell {
+    border-bottom-width: 1px !important;
+    border-bottom-color: #f1f1f1;
 }
