@@ -57,7 +57,7 @@
                 </form>
             </div>
         </section>
-        <div ui-grid="gridMaster" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
+        <div ui-grid="gridMaster" ui-grid-pagination ui-grid-edit class="myGrid table" style="height: 372px;"></div>
     </section>
     <div id="modalAddItem" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -113,7 +113,7 @@
         });
         $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
         $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
-        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']);
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination', 'ui.grid.edit']);
         app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
             $scope.gridMaster = {
                 paginationPageSizes: [10, 20, 40],
@@ -121,7 +121,7 @@
                 columnDefs: [
                     { name: "ProdNo", displayName: "Code", },
                     { name: "ProductName", displayName: "Product Name", },
-                    { name: "Quantity" },
+                    { name: "Quantity", enableCellEdit: true },
                     { name: "", field: 'ProductID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
                 ],
             };
