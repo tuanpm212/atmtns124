@@ -83,7 +83,7 @@
                                 <input id="txtQuantity" type="number" class="form-control" required />
                             </div>
                         </div>
-                        <div ui-grid="gridSearch" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
+                        <div ui-grid="gridSearch" ui-grid-pagination ui-grid-auto-resize class="myGrid table" style="height: 372px;"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -113,16 +113,18 @@
         });
         $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
         $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
-        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination', 'ui.grid.edit']);
-        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.autoResize']);
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.gridMaster = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "ProdNo", displayName: "Code", },
-                    { name: "ProductName", displayName: "Product Name", },
-                    { name: "Quantity", enableCellEdit: true },
-                    { name: "", field: 'ProductID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
+                    { name: "ProdNo", displayName: "Code", headerCellClass: 'text-center', enableCellEdit: false, sort: { direction: ['desc'], }, },
+                    { name: "ProductName", displayName: "Product Name", headerCellClass: 'text-center', enableCellEdit: false },
+                    { name: "Quantity", displayName: "Quantity", headerCellClass: 'text-center', cellClass: 'text-right', width: '150', enableCellEdit: true },
+                    { name: "", field: 'ProductID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false, enableCellEdit: false },
                 ],
             };
 
@@ -195,13 +197,15 @@
             };
 
             $scope.gridSearch = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "checker", displayName: "", type: 'boolean', headerCellTemplate: '<div class="ui-grid-cell-contents"><input type="checkbox" ng-model="checker" ng-change="grid.appScope.toggleCheckerAll(checker)"></div>', cellTemplate: '<input type="checkbox" ng-model="row.entity.checker">', width: '100', cellClass: 'text-center', headerCellClass: 'text-center' },
-                    { name: "ProdNo", displayName: "Code", },
-                    { name: "ProductName", displayName: "Product Name" },
-                    { name: "Price" },
+                    { name: "checker", displayName: "", type: 'boolean', headerCellTemplate: '<div class="ui-grid-cell-contents"><input type="checkbox" ng-model="checker" ng-change="grid.appScope.toggleCheckerAll(checker)"></div>', cellTemplate: '<input type="checkbox" ng-model="row.entity.checker">', width: '50', cellClass: 'text-center', headerCellClass: 'text-center', enableSorting: false },
+                    { name: "ProdNo", displayName: "Code", headerCellClass: 'text-center', sort: { direction: ['desc'], }, },
+                    { name: "ProductName", displayName: "Product Name", headerCellClass: 'text-center' },
+                    { name: "Price", displayName: "Price", headerCellClass: 'text-center', cellClass: 'text-right' },
                 ],
             };
 

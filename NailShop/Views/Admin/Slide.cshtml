@@ -42,15 +42,17 @@
     <script src="~/Scripts/ui-grid.js"></script>
     <script type="text/javascript">
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID;
-        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.gridOptions = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "Name" },
-                    { name: "Description" },
-                    { name: "Image" },
-                    { name: "", field: 'ID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateSlide?id={{row.entity.SlideID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
+                    { name: "Name", displayName: "Name", headerCellClass: 'text-center', sort: { direction: ['desc'], } },
+                    { name: "Description", displayName: "Description", headerCellClass: 'text-center' },
+                    { name: "Image", displayName: "Image", headerCellClass: 'text-center' },
+                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateSlide?id={{row.entity.SlideID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 

@@ -46,7 +46,7 @@
     <script src="~/Scripts/ui-grid.js"></script>
     <script type="text/javascript">
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID, StoreID;
-        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.GetStore = function () {
                 $http({
                     url: "/admin/GetStore",
@@ -62,15 +62,17 @@
             $scope.GetStore();
 
             $scope.gridOptions = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "ProductCode" },
-                    { name: "ProductName" },
-                    { name: "ShortDescription" },
-                    { name: "Price" },
-                    { name: "IsActive" },
-                    { name: "", field: 'ID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
+                    { name: "ProductCode", displayName: "Product Code", headerCellClass: 'text-center', cellClass: 'text-right', width: '150', sort: { direction: ['desc'], } },
+                    { name: "ProductName", displayName: "Product Name", headerCellClass: 'text-center' },
+                    { name: "ShortDescription", displayName: "Description", headerCellClass: 'text-center' },
+                    { name: "Price", displayName: "Price", headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "IsActive", displayName: "Active", width: '100', headerCellClass: 'text-center', cellClass: 'text-center' },
+                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 

@@ -41,30 +41,32 @@
     <script src="~/Scripts/ui-grid.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
-        $(".date-control").datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            format: 'mm/dd/yyyy',
-            language: 'en',
-        });
-        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
-        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+    $(".date-control").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'mm/dd/yyyy',
+        language: 'en',
+    });
+    $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
+    $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
 
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']);
-        app.controller('CtrlController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, $apply, uiGridConstants) {
+        app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
             $scope.gridOptions = {
+                enableSorting: true,
+                enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "InvoiceNo", cellClass: 'text-center', width: '120' },
-                    { name: "InvoiceDate", cellTemplate: '<div class="ui-grid-cell-contents"> {{row.entity.InvoiceDate | resolve_date}}</div>', cellClass: 'text-center', width: '120' },
-                    { name: "Notes" },
-                    { name: "FullName" },
-                    { name: "SubTotal" },
-                    { name: "SaleTax", width: '200', cellClass: 'text-right' },
-                    { name: "Discount", width: '150', cellClass: 'text-right' },
-                    { name: "Total", width: '200', cellClass: 'text-right' },
-                    { name: "", field: 'InvoiceID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}"">View</a></div>', cellClass: 'text-center', width: '150', enableSorting: false },
+                    { name: "InvoiceNo", displayName: "Invoice No", cellClass: 'text-center', width: '120', headerCellClass: 'text-center', cellClass: 'text-right', sort: { direction: ['desc'], }, },
+                    { name: "InvoiceDate", displayName: "Invoice Date", cellTemplate: '<div class="ui-grid-cell-contents"> {{row.entity.InvoiceDate | resolve_date}}</div>', cellClass: 'text-center', width: '120', headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "Notes", displayName: "Notes", headerCellClass: 'text-center' },
+                    { name: "FullName", displayName: "Full Name", headerCellClass: 'text-center' },
+                    { name: "SubTotal", displayName: "Sub Total", headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "SaleTax", displayName: "Sale Tax", width: '150', headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "Discount", displayName: "Discount", width: '150', headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "Total", displayName: "Total", width: '150', headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "", field: 'InvoiceID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/backend/createorder?id={{row.entity.InvoiceID}}"">View</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 
