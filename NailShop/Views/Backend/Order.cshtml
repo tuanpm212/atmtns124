@@ -34,21 +34,22 @@
 @section Styles {
     <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
-    <link href="~/Contents/css/datepicker.css" rel="stylesheet" />  
+    <link href="~/Contents/css/datepicker.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
-    $(".date-control").datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        format: 'mm/dd/yyyy',
-        language: 'en',
-    });
-    $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
-    $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
+        $(".date-control").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'mm/dd/yyyy',
+            language: 'en',
+        });
+        $("#txtFromDate").datepicker('setDate', '@ViewBag.FromDate');
+        $("#txtToDate").datepicker('setDate', '@ViewBag.ToDate');
 
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']);
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
@@ -106,5 +107,5 @@
                 return mResult;
             };
         });
-</script>
+    </script>
 }

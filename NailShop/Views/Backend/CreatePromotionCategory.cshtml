@@ -2,6 +2,7 @@
     ViewBag.Title = "CreatePromotionCategory";
     Layout = "~/Views/Share/_Backend.cshtml";
 }
+
 <section class="vbox" ng-app="MyApp" ng-controller="CtrlController">
     <section class="scrollable padder">
         <div class="m-b-md">
@@ -87,11 +88,13 @@
         </div>
     </div>
 </section>
+
 @section Styles {
     <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/datepicker.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
@@ -116,7 +119,7 @@
                 columnDefs: [
                     { name: "Code", displayName: "Code", headerCellClass: 'text-center', sort: { direction: ['desc'], }, },
                     { name: "CategoryName", displayName: "Category Name", headerCellClass: 'text-center', },
-                    { name: "", field: 'CategoryID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", field: 'CategoryID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 

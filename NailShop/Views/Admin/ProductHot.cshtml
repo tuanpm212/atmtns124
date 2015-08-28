@@ -37,10 +37,12 @@
         </div>
     </div>
 </section>
+
 @section Styles {
     <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
@@ -72,7 +74,7 @@
                     { name: "ShortDescription", displayName: "Description", headerCellClass: 'text-center' },
                     { name: "Price", displayName: "Price", headerCellClass: 'text-center', cellClass: 'text-right' },
                     { name: "IsActive", displayName: "Active", width: '100', headerCellClass: 'text-center', cellClass: 'text-center' },
-                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 
@@ -117,8 +119,6 @@
 
             $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
 
-            
-
             $("#drStore").change(function () {
                 StoreID = this.value;
                 $scope.gridOptions.paginationCurrentPage = 1;
@@ -129,8 +129,6 @@
                 window.location.href = "/admin/CreateProductHot?store=" + $("#drStore").val() + "&id=-1";
             });
         }]);
-
-
     </script>
 }
 

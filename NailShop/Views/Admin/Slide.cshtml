@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Slide";
     Layout = "~/Views/Share/_Backend.cshtml";
 }
@@ -37,6 +36,7 @@
     <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
     <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
+
 @section Scripts {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/ui-grid.js"></script>
@@ -52,7 +52,7 @@
                     { name: "Name", displayName: "Name", headerCellClass: 'text-center', sort: { direction: ['desc'], } },
                     { name: "Description", displayName: "Description", headerCellClass: 'text-center' },
                     { name: "Image", displayName: "Image", headerCellClass: 'text-center' },
-                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateSlide?id={{row.entity.SlideID}}">View</a>/<a ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/CreateSlide?id={{row.entity.SlideID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
             };
 
