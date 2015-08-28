@@ -8,9 +8,7 @@
         <div class="m-b-md">
             <h3 class="m-b-none">News List</h3>
         </div>
-        <div class="table-responsive">
-            <div ng-grid="gridOptions"></div>
-        </div>
+        <div ui-grid="gridOptions" ui-grid-pagination class="myGrid table" style="height: 372px;"></div>
         <div>
             <a href="/admin/createnews?id=-1" class="btn btn-primary">@Resources.Backend.btnAdd</a>
         </div>
@@ -35,96 +33,52 @@
     </div>
 </section>
 @section Styles {
-    <link href="~/Contents/css/ng-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/ui-grid.css" rel="stylesheet" />
+    <link href="~/Contents/css/backend-ui-grid.css" rel="stylesheet" />
 }
+
 @section Scripts {
-    <script src="~/Scripts/AngularJs/1.3.8.angular.min.js"></script>
-    <script src="~/Scripts/AngularJs/ng-grid.debug.js"></script>
-    <script src="~/Scripts/AngularJs/1.0.2.angular.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/ui-grid.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
-    <script src="~/Scripts/AngularJs/moment.js"></script>
     <script type="text/javascript">
-
-        var app = angular.module('MyApp', ['ngGrid']), ID;
+        var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID;
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
-            $scope.filterOptions = {
-                filterText: "",
-                useExternalFilter: true
-            };
-
-            $scope.totalServerItems = 0;
-            $scope.pagingOptions = {
-                pageSizes: [20, 40],
-                pageSize: 20,
-                currentPage: 1
-            };
-
-            $scope.setPagingData = function (data, page, pageSize) {
-                var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-                $scope.myData = pagedData;
-                $scope.totalServerItems = data.length;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+            $scope.gridOptions = {
+                enableSorting: true,
+                enableColumnMenus: false,
+                paginationPageSizes: [10, 20, 40],
+                paginationPageSize: 10,
+                columnDefs: [
+                    { name: "Title", displayName: "Title", headerCellClass: 'text-center', sort: { direction: ['desc'], } },
+                    { name: "ShortDescription", displayName: "Description", headerCellClass: 'text-center' },
+                    { name: "Image", displayName: "Image", headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "Url", displayName: "Url", headerCellClass: 'text-center' },
+                    { name: "IsActive", displayName: "Active", headerCellClass: 'text-center', cellClass: 'text-center' },
+                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createnews?id={{row.entity.NewsID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                ],
             };
 
             $scope.getPagedDataAsync = function (pageSize, page) {
                 if (pageSize == null) {
-                    $scope.pagingOptions.pageSize = 20;
+                    $scope.gridOptions.paginationPageSize = 10;
                     pageSize = 10;
                 }
                 if (page == null) {
-                    $scope.pagingOptions.currentPage = 1;
+                    $scope.gridOptions.paginationCurrentPage = 1;
                     page = 1;
                 }
                 $http({
                     url: "/admin/GetNews",
                     method: "GET"
                 }).success(function (data, status, headers, config) {
-                    var myJson = JSON.parse(JSON.parse(data));
-                    $scope.myData = myJson;
-                    $scope.setPagingData(myJson, page, pageSize);
+                    $scope.gridOptions.data = JSON.parse(data);
                 }).error(function (myJson, status, headers, config) {
                     alert(JSON.stringify(myJson));
                 });
             };
 
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
-
-            $scope.$watch('pagingOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-            $scope.$watch('filterOptions', function (newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-                }
-            }, true);
-
-            $scope.gridOptions = {
-                data: 'myData',
-                columnDefs: [
-                { field: 'Title', displayName: 'Title', width: "25%" },
-                { field: 'ShortDescription', displayName: 'ShortDescription' },
-                { field: 'Image', displayName: 'Image', width: "20%" },
-                { field: 'Url', displayName: 'Url', width: "20%" },
-                { field: 'IsActive', displayName: 'Active', width: "10%", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' },
-                { field: 'ID', displayName: 'Action', cellTemplate: '<div class="ngCellText"><a ng-href="/admin/createnews?id={{row.entity.NewsID}}">View</a>/<a ng-click="Delete(row)">Delete</a></div>', width: "100", headerClass: 'ngHeader-center', cellClass: 'ngCellText-Center' }
-                ],
-                enablePaging: true,
-                showFooter: true,
-                totalServerItems: 'totalServerItems',
-                pagingOptions: $scope.pagingOptions,
-                filterOptions: $scope.filterOptions,
-                sortInfo: $scope.sortOptions,
-                enableCellSelection: true,
-                enableRowSelection: false,
-                headerRowHeight: 31,
-                rowHeight: 31,
-                i18n: "en"
-            };
+            $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
 
             $scope.Delete = function (row) {
                 $('#modalConfirm').modal('show');
@@ -138,7 +92,7 @@
                     params: { ID: ID }
                 }).success(function (data) {
                     $('#modalConfirm').modal('hide');
-                    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
                 });
             };
         }]);

@@ -8,7 +8,7 @@
     <meta name="author" content="truc.truong">
     <link href="~/Contents/css/bootstrap.css" rel="stylesheet" />
     <link href="~/Contents/css/animate.css" rel="stylesheet" />
-    <link href="~/Contents/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Contents/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Contents/css/app.css" rel="stylesheet" />
     <!--[if lt IE 9]>
       <script src="js/ie/html5shiv.js"></script>
@@ -48,7 +48,7 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/app.js"></script>
     <script src="~/Scripts/app.plugin.js"></script>
-    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/jquery.slimscroll.js"></script>
     <script>
         $(document).ready(function () {
             $("#btnLogin").click(function () {
@@ -62,7 +62,7 @@
                     data: JSON.stringify(login),
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        if (data.IsOk) 
+                        if (data.IsOk)
                             window.location.href = "/admin/video";
                         else
                             $('#divError').removeClass('hide');
@@ -70,8 +70,6 @@
                 });
             });
         });
-
     </script>
-
 </body>
 </html>

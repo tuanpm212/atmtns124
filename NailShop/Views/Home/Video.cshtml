@@ -4,7 +4,7 @@
     ViewBag.Title = @Resources.FormTitle.formVideo;
     Layout = "~/Views/Share/_Layout.cshtml";
 }
-<link href="~/Contents/css/nail-video.css" rel="stylesheet" />
+
 <div class="page-wrap">
     <section class="section-video">
         <div class="title-page">
@@ -34,22 +34,22 @@
                                         {
                                             if (isFirst)
                                             {
-                                                <li class="active">
-                                                    <a href="javascript:;" data-video="@row.Video">
-                                                        <img src="http://img.youtube.com/vi/@row.Video/hqdefault.jpg">
-                                                        <p>@row.Title</p>
-                                                    </a>
-                                                </li>
+                                    <li class="active">
+                                        <a href="javascript:;" data-video="@row.Video">
+                                            <img src="http://img.youtube.com/vi/@row.Video/hqdefault.jpg">
+                                            <p>@row.Title</p>
+                                        </a>
+                                    </li>
                                                 isFirst = false;
                                             }
                                             else
                                             {
-                                                <li>
-                                                    <a href="javascript:;" data-video="@row.Video">
-                                                        <img src="http://img.youtube.com/vi/@row.Video/hqdefault.jpg">
-                                                        <p>@row.Title</p>
-                                                    </a>
-                                                </li>
+                                    <li>
+                                        <a href="javascript:;" data-video="@row.Video">
+                                            <img src="http://img.youtube.com/vi/@row.Video/hqdefault.jpg">
+                                            <p>@row.Title</p>
+                                        </a>
+                                    </li>
                                             }
                                         }
                                     }
@@ -63,6 +63,10 @@
     </section>
 
 </div>
+@section Style {
+    <link href="~/Contents/css/nail-video.css" rel="stylesheet" />
+}
+
 @section Scripts {
     <script>
         $(document).ready(function () {

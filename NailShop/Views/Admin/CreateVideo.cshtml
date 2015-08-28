@@ -57,21 +57,21 @@
 }
 @section Scripts {
     <script>
-    $(document).ready(function () {
-        $("#btnSave").click(function () {
-            var photo = {
-                ID: '@ViewBag.ID',
+        $(document).ready(function () {
+            $("#btnSave").click(function () {
+                var photo = {
+                    ID: '@ViewBag.ID',
                     IsPhoto: 0,
                     Sort: 1,
                     IsActive: $('#IsActive').val()
                 },
-                photolang = {
-                    PhotoID: '@ViewBag.ID',
-                    LangID: 'en-US',
-                    Title: $('#Name').val(),
-                    Description: $('#Description').val(),
-                    Video: $('#Video').val()
-                }
+                    photolang = {
+                        PhotoID: '@ViewBag.ID',
+                        LangID: 'en-US',
+                        Title: $('#Name').val(),
+                        Description: $('#Description').val(),
+                        Video: $('#Video').val()
+                    }
                 $.ajax({
                     url: '/admin/SaveVideo',
                     type: 'Post',
