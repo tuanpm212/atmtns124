@@ -238,3 +238,6 @@ D:\Git\atmtns124\NailShop\obj\Debug\NailShop.csproj.GenerateResource.Cache
 D:\Git\atmtns124\NailShop\obj\Debug\vi-vn\NailShop.resources.dll
 D:\Git\atmtns124\NailShop\obj\Debug\NailShop.dll
 D:\Git\atmtns124\NailShop\obj\Debug\NailShop.pdb
+D:\Git\atmtns124\NailShop\bin\Antlr3.Runtime.dll
+D:\Git\atmtns124\NailShop\bin\WebGrease.dll
+D:\Git\atmtns124\NailShop\bin\Antlr3.Runtime.pdb

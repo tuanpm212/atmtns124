@@ -182,7 +182,8 @@
                 $http({
                     url: "/admin/GetPhotoByID",
                     params: { id: photoID },
-                    method: "GET"
+                    method: "GET",
+                    cache: false,
                 }).success(function (data, status, headers, config) {
                     var data = JSON.parse(data);
                     $scope.gridOptions.data = data.detail;
