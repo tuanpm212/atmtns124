@@ -74,13 +74,8 @@
             };
 
             $scope.getPagedDataAsync = function (pageSize, page) {
-
                 alert('begin reload');
-                $http({
-                    url: "/admin/GetVideo",
-                    method: "GET"
-                }).success(function (data) {
-
+                $http.get("/admin/GetVideo").success(function (data) {
                     $scope.gridOptions.data = JSON.parse(data);
                 }).error(function (myJson, status, headers, config) {
                     alert(JSON.stringify(myJson));
@@ -95,7 +90,6 @@
                     $scope.gridOptions.paginationCurrentPage = 1;
                     page = 1;
                 }
-
             };
 
 
@@ -122,8 +116,8 @@
             //    }
                 
             //};
-            //$scope.getPagedDataAsync();
-            $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
+            $scope.getPagedDataAsync();
+            //$scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
         }]);
     </script>
 }

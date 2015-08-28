@@ -1,16 +1,3 @@
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.dll.config
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.dll
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.pdb
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.dll
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.SqlServer.dll
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.DataAccess.dll
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailSyn.DataAccess.dll
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.DataAccess.pdb
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.xml
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.SqlServer.xml
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.csprojResolveAssemblyReference.cache
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.dll
-D:\MyData\Web\Nail\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.pdb
 D:\Source Web\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.dll.config
 D:\Source Web\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.dll
 D:\Source Web\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.pdb
@@ -37,3 +24,16 @@ D:\Git\atmtns124\NailShop.Business\bin\Debug\EntityFramework.SqlServer.xml
 D:\Git\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.csprojResolveAssemblyReference.cache
 D:\Git\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.dll
 D:\Git\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.pdb
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.dll.config
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.dll
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.Business.pdb
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.dll
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.SqlServer.dll
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.DataAccess.dll
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailSyn.DataAccess.dll
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\NailShop.DataAccess.pdb
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.xml
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\bin\Debug\EntityFramework.SqlServer.xml
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.csprojResolveAssemblyReference.cache
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.dll
+D:\MyData\Web\Nail\atmtns124\NailShop.Business\obj\Debug\NailShop.Business.pdb
