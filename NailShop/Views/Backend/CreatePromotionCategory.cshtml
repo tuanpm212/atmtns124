@@ -135,6 +135,7 @@
                 $http({
                     url: "/backend/GetPromotionCategory",
                     method: "GET",
+                    cache: false,
                     params: { ID: PromotoinID }
 
                 }).success(function (data, status, headers, config) {
@@ -209,6 +210,7 @@
                 $http({
                     url: "/backend/GetCategoryForPromotion",
                     method: "GET",
+                    cache: false,
                     params: { StoreID: StoreID, TextSearch: $('#txtSearch').val() }
 
                 }).success(function (data) {

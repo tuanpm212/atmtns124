@@ -141,6 +141,7 @@
                 $http({
                     url: "/backend/GetPromotionItem",
                     method: "GET",
+                    cache: false,
                     params: { ID: PromotoinID }
                 }).success(function (data, status, headers, config) {
                     var temp = JSON.parse(data);
@@ -214,6 +215,7 @@
                 $http({
                     url: "/backend/GetItemForPromotion",
                     method: "GET",
+                    cache: false,
                     params: { StoreID: StoreID, TextSearch: $('#txtSearch').val() }
 
                 }).success(function (data) {
