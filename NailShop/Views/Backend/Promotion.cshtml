@@ -8,6 +8,8 @@
             <h3 class="m-b-none">Promotion List</h3>
             <hr />
         </div>
+        <p>{{debug}}</p>
+        <p>{{temp}}</p>
         <section class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" name="promotionForm">
@@ -68,6 +70,8 @@
 
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID, StoreID;
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
+            $scope.temp = "";
+            $scope.debug = "";
             $scope.gridOptions = {
                 enableSorting: true,
                 enableColumnMenus: false,
@@ -84,6 +88,7 @@
             };
 
             $scope.getPagedDataAsync = function (pageSize, page) {
+                $scope.debug += "=> start get data ";
                 if (pageSize == null) {
                     $scope.gridOptions.paginationPageSize = 10;
                     pageSize = 10;
@@ -95,18 +100,23 @@
                 $http({
                     url: "/Backend/GetPromotion",
                     method: "GET",
+                    cache: false,
                     params: {
                         FromDate: $('#txtFromDate').val(),
                         ToDate: $('#txtToDate').val(),
                         IsItem: true,
                     }
                 }).success(function (data, status, headers, config) {
+                    $scope.debug += "=> get data done ",
                     $scope.gridOptions.data = JSON.parse(data);
+                    $scope.temp = $scope.gridOptions.data;
+                    $scope.$apply;
                 }).error(function (myJson, status, headers, config) {
                     alert(JSON.stringify(myJson));
                 });
             };
 
+            $scope.debug += "=> call fn get data ",
             $scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
 
             $scope.Delete = function (row) {

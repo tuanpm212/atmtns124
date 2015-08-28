@@ -145,7 +145,8 @@
                     isFristLoad=false;
                     $http({
                         url: "/backend/GetOrdForBackend?id="+ OrdID,
-                        method: "GET"
+                        method: "GET",
+                        cache: false,
                     }).success(function (data, status, headers, config) {
                         myjson = JSON.parse(data);
                         $scope.gridOptions.data = myjson;
@@ -170,7 +171,6 @@
 
             $scope.addNew = function ()
             {
-
                 var Invoice={InvoiceID: OrdID, Address: $('#BillAddress').val(), AddressAddr1S: $('#DeliveryAddress').val(), Notes: $('#Description').val(),
                     City: $('#City').val(), State: $('#State').val(), ZipCode: $('#ZipCode').val(),
                     CityShip: $('#CityShip').val(), StateShip: $('#StateShip').val(), ZipCodeShip: $('#ZipCodeShip').val(),

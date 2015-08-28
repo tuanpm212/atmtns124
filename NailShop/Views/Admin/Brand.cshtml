@@ -86,7 +86,8 @@
                 }
                 $http({
                     url: "/admin/GetBrand",
-                    method: "GET"
+                    method: "GET",
+                    cache: false,
                 }).success(function (data, status, headers, config) {
                     $scope.gridOptions.data = JSON.parse(data);
                 }).error(function (myJson, status, headers, config) {

@@ -53,6 +53,7 @@
                 $http({
                     url: "/admin/GetStore",
                     method: "GET",
+                    cache: false,
                 }).success(function (data) {
                     $scope.Stores = JSON.parse(data);
                     $scope.selectedItem = $scope.Stores[0].StoreID;
@@ -108,7 +109,8 @@
                     $http({
                         url: "/admin/GetProductHot",
                         params: { StoreID: StoreID },
-                        method: "GET"
+                        method: "GET",
+                        cache: false,
                     }).success(function (data, status, headers, config) {
                         $scope.gridOptions.data = JSON.parse(data);
                     }).error(function (myJson, status, headers, config) {

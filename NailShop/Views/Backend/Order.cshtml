@@ -83,6 +83,7 @@
                 $http({
                     url: "/Backend/GetOrderByStoreID",
                     method: "GET",
+                    cache: false,
                     params: {
                         FromDate: $('#txtFromDate').val(),
                         ToDate: $('#txtToDate').val(),
