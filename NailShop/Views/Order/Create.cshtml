@@ -172,7 +172,7 @@
                 var Invoice={InvoiceID: OrdID, Address: $('#BillAddress').val(), AddressAddr1S: $('#DeliveryAddress').val(), Notes: $('#Description').val(),
                     City: $('#City').val(), State: $('#State').val(), ZipCode: $('#ZipCode').val(),
                     CityShip: $('#CityShip').val(), StateShip: $('#StateShip').val(), ZipCodeShip: $('#ZipCodeShip').val(),
-                    SubTotal: $('#lblAmount').html(), SaleTax: $('#lblTaxAmount').html(), Discount: $('#lblDiscountAmount').html(), Total: $('#lblTotalAmount').html(), IsTemplate: $('#IsTemplate').val()};
+                    SubTotal: parseFloat($('#lblAmount').html().replace(',', '')), SaleTax: parseFloat($('#lblTaxAmount').html().replace(',','')), Discount: parseFloat($('#lblDiscountAmount').html().replace(',','')), Total: parseFloat($('#lblTotalAmount').html().replace(',','')), IsTemplate: $('#IsTemplate').val()};
                 $http({
                     url: "/Order/SaveData",
                     method: "Post",
@@ -202,7 +202,7 @@
         for(var i=0; i<json.length; i++)
         {
             mPercent = GetPromotion(json[i].CategoryID, json[i].ProductID, json[i].Qty);
-            mDiscount = (json[i].Price*mPercent/100)*json[i].Qty;
+            mDiscount = Math.round((json[i].Price*mPercent/100)*json[i].Qty);
             mAmount = json[i].Price*json[i].Qty;
             json[i].Discount = mDiscount;
             json[i].SubTotal = mAmount;
