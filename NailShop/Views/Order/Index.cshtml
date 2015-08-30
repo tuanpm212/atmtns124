@@ -98,10 +98,10 @@
                 { name: "InvoiceNo", displayName: "@Resources.Order.gridNo", headerCellClass: 'text-center', cellClass: 'text-right', width: '100', sort: { direction: ['desc'], }, },
                 { name: "InvoiceDate", displayName: "@Resources.Order.gridInvoiceDate", headerCellClass: 'text-center', cellClass: 'text-right', width: '100', cellTemplate: '<div class="ui-grid-cell-contents"> {{row.entity.InvoiceDate | resolve_date}}</div>' },
                 { name: "Notes", displayName: "@Resources.Order.gridNotes", headerCellClass: 'text-center' },
-                { name: "SubTotal", displayName: "@Resources.Order.gridAmount", headerCellClass: 'text-center', cellClass: 'text-right', width: '100' },
-                { name: "SaleTax", displayName: "@Resources.Order.gridTaxAmount", headerCellClass: 'text-center', cellClass: 'text-right', width: '100' },
-                { name: "Discount", displayName: "@Resources.Order.gridDiscount", headerCellClass: 'text-center', cellClass: 'text-right', width: '100' },
-                { name: "Total", displayName: "@Resources.Order.gridTotal", headerCellClass: 'text-center', cellClass: 'text-right', width: '100' },
+                { name: "SubTotal", displayName: "@Resources.Order.gridAmount", headerCellClass: 'text-center', cellClass: 'text-right', width: '100', cellFilter: 'currencyFilter'},
+                { name: "SaleTax", displayName: "@Resources.Order.gridTaxAmount", headerCellClass: 'text-center', cellClass: 'text-right', width: '100', cellFilter: 'currencyFilter'},
+                { name: "Discount", displayName: "@Resources.Order.gridDiscount", headerCellClass: 'text-center', cellClass: 'text-right', width: '100', cellFilter: 'currencyFilter'},
+                { name: "Total", displayName: "@Resources.Order.gridTotal", headerCellClass: 'text-center', cellClass: 'text-right', width: '100', cellFilter: 'currencyFilter'},
                 { name: "", field: 'InvoiceID', displayName: "Action", cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/order/create?id={{row.entity.InvoiceID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', headerCellClass: 'text-center', cellClass: 'text-center', width: '100', enableSorting: false },
             ],
         };
@@ -163,6 +163,21 @@
             twoDigitMonth = ((mDate.getMonth().length + 1) === 1) ? (mDate.getMonth() + 1) : '0' + (mDate.getMonth() + 1);
             mResult = mDate.getDate() + "/" + twoDigitMonth + "/" + mDate.getFullYear();
             return mResult;
+        };
+    });
+
+    app.filter('commaSeparateNumber', function () {
+        val = val.toFixed(2);
+        while (/(\d+)(\d{3})/.test(val.toString())) {
+            val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+        }
+        return val;
+    });
+
+    app.filter('currencyFilter', function () {
+        return function (value) {
+            return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
         };
     });
 </script>
