@@ -133,6 +133,8 @@ namespace NailShop.Controllers
                 string jsonData = new JavaScriptSerializer().Serialize(data);
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
+
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetInvoice(DateTime FromDate, DateTime ToDate, int Status)
             {
                 if (_session.IsLogin && !_session.IsStore)
@@ -239,6 +241,7 @@ namespace NailShop.Controllers
                 return Json(new { IsOk = data }, JsonRequestBehavior.AllowGet);
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetPromotionRule()
             {
                 string jsonData = "[]";

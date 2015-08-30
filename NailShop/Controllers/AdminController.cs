@@ -21,7 +21,6 @@ namespace NailShop.Controllers
         #endregion
 
         #region Photo
-
             public ActionResult Photo()
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
@@ -152,7 +151,6 @@ namespace NailShop.Controllers
         #endregion
 
         #region Welcome
-
             public ActionResult Welcome()
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
@@ -168,7 +166,6 @@ namespace NailShop.Controllers
         #endregion
 
         #region Brand
-
             public ActionResult Brand()
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
@@ -196,7 +193,6 @@ namespace NailShop.Controllers
         #endregion
 
         #region Product Hot
-
             public ActionResult ProductHot()
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
@@ -316,6 +312,7 @@ namespace NailShop.Controllers
                 }
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetPhoto()
             {
                 string jsonData = "[]";
@@ -368,6 +365,7 @@ namespace NailShop.Controllers
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetVideo()
             {
                 if (_session.IsLogin && _session.IsStore && _session.IsAdmin)
@@ -494,6 +492,7 @@ namespace NailShop.Controllers
                 return relativeFileAndPath + "/" + fileNameFull;
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetSlider()
             {
                 string jsonData = "[]";
@@ -553,6 +552,7 @@ namespace NailShop.Controllers
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetBrand()
             {
                 string jsonData = "[]";
@@ -593,6 +593,7 @@ namespace NailShop.Controllers
                 return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetProductHot(int StoreID)
             {
                 string jsonData = "[]";
@@ -603,6 +604,7 @@ namespace NailShop.Controllers
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetStore()
             {
                 string jsonData = "[]";

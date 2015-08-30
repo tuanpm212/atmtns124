@@ -43,7 +43,8 @@
     <script type="text/javascript">
         var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination']), ID, myJson;
         app.controller('CtrlController', ['$scope', '$http', function ($scope, $http, $apply) {
-            $scope.gridOptions = {
+
+           $scope.gridOptions = {
                 enableSorting: true,
                 enableColumnMenus: false,
                 paginationPageSizes: [10, 20, 40],
@@ -74,13 +75,10 @@
             };
 
             $scope.getPagedDataAsync = function (pageSize, page) {
-                alert('begin reload');
-                $http.get("/admin/GetVideo").success(function (data) {
-                    $scope.gridOptions.data = JSON.parse(data);
-                }).error(function (myJson, status, headers, config) {
-                    alert(JSON.stringify(myJson));
+
+                $http.get("/admin/GetVideo", { cache: false }).then(function (response) {
+                    $scope.gridOptions.data = JSON.parse(response.data);
                 });
-                alert('after reload');
                 if (pageSize == null) {
                     $scope.gridOptions.paginationPageSize = 10;
                     pageSize = 10;
@@ -91,33 +89,7 @@
                     page = 1;
                 }
             };
-
-
-            //$scope.getPagedDataAsync = function (pageSize, page) {
-
-            //    alert('begin reload');
-            //    $http({
-            //        url: "/admin/GetVideo",
-            //        method: "GET"
-            //    }).success(function (data, status, headers, config) {
-            //        $scope.gridOptions.data = JSON.parse(data);
-            //    }).error(function (myJson, status, headers, config) {
-            //        alert(JSON.stringify(myJson));
-            //    });
-            //    alert('after reload');
-            //    if (pageSize == null) {
-            //        $scope.gridOptions.paginationPageSize = 10;
-            //        pageSize = 10;
-            //        page = 1;
-            //    }
-            //    if (page == null) {
-            //        $scope.gridOptions.paginationCurrentPage = 1;
-            //        page = 1;
-            //    }
-                
-            //};
             $scope.getPagedDataAsync();
-            //$scope.getPagedDataAsync($scope.gridOptions.paginationCurrentPage, $scope.gridOptions.paginationPageSize);
         }]);
     </script>
 }

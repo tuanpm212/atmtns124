@@ -129,7 +129,6 @@ namespace NailShop.Controllers
         #endregion
 
         #region Order
-
             public ActionResult Order()
             {
                 GetInvoiceStatus();
@@ -197,7 +196,6 @@ namespace NailShop.Controllers
                 else
                     return RedirectToAction("index", "backend");
             }
-               
         #endregion
 
         #region Json Result
@@ -243,6 +241,7 @@ namespace NailShop.Controllers
                         return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
                 }
 
+                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
                 public JsonResult GetPromotion(DateTime FromDate, DateTime ToDate, bool IsItem)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
@@ -258,6 +257,7 @@ namespace NailShop.Controllers
                     return Json("[]", JsonRequestBehavior.AllowGet);
                 }
 
+                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
                 public JsonResult GetPromotionItem(long id)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
@@ -284,6 +284,7 @@ namespace NailShop.Controllers
                     return Json("[]", JsonRequestBehavior.AllowGet);
                 }
 
+                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
                 public JsonResult GetOrdForBackend(long ID)
                 {
                     string jsonData = "";
@@ -310,7 +311,7 @@ namespace NailShop.Controllers
                     return Json("[]", JsonRequestBehavior.AllowGet);
                 }
 
-
+                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
                 public JsonResult GetItemForPromotion(int StoreID, string TextSearch)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
@@ -359,6 +360,7 @@ namespace NailShop.Controllers
                     return Json("[]", JsonRequestBehavior.AllowGet);
                 }
 
+                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
                 public JsonResult GetPromotionCategory(long id)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
@@ -385,6 +387,7 @@ namespace NailShop.Controllers
                     return Json("[]", JsonRequestBehavior.AllowGet);
                 }
 
+                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
                 public JsonResult GetCategoryForPromotion(int StoreID, string TextSearch)
                 {
                     if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
@@ -439,6 +442,7 @@ namespace NailShop.Controllers
 
                 ViewBag.ListStatus = data;
             }
+
         #endregion
     }
 
