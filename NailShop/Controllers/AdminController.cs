@@ -672,8 +672,6 @@ namespace NailShop.Controllers
                 return Json("[]", JsonRequestBehavior.AllowGet);
             }
 
-
-
             [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetNews()
             {

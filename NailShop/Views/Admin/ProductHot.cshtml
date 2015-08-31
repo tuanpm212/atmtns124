@@ -70,10 +70,10 @@
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "ProductCode", displayName: "Product Code", headerCellClass: 'text-center', cellClass: 'text-right', width: '150', sort: { direction: ['desc'], } },
+                    { name: "ProductCode", displayName: "Product Code", headerCellClass: 'text-center', cellClass: 'text-center', width: '150', sort: { direction: ['desc'], } },
                     { name: "ProductName", displayName: "Product Name", headerCellClass: 'text-center' },
                     { name: "ShortDescription", displayName: "Description", headerCellClass: 'text-center' },
-                    { name: "Price", displayName: "Price", headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "Price", displayName: "Price", headerCellClass: 'text-center', cellClass: 'text-right', width: '100'},
                     { name: "IsActive", displayName: "Active", width: '100', headerCellClass: 'text-center', cellClass: 'text-center' },
                     { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createproducthot?store={{row.entity.StoreID}}&id={{row.entity.ProductID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
                 ],
