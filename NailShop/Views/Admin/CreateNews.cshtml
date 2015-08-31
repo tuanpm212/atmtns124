@@ -97,15 +97,15 @@
         });
 
         $("#btnSave").click(function () {
-            var news = {
-                NewsID: '@ViewBag.ID',
+            @*var news = {
+                NewsID: @ViewBag.ID,
                 SiteID: 1,
                 Url: $('#Url').val(),
                 Sort: $('#Sort').val(),
-                IsActive: $('#IsActvie').is(':checked')
+                IsActive: $('#IsActive').is(':checked')
             },
                 newslang = {
-                    NewsID: '@ViewBag.ID',
+                    NewsID: @ViewBag.ID,
                     LangID: 'en-US',
                     Title: $('#Title').val(),
                     ShortDescription: $('#ShortDescription').val(),
@@ -115,13 +115,43 @@
             $.ajax({
                 url: '/admin/SaveNews',
                 type: 'Post',
-                data: JSON.stringify({ news: news, newLang: newslang }),
+                data: JSON.stringify({ news: news, newlang: newslang }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     if (data.IsOk)
                         window.location.href = "/admin/news";
                 }
+            });*@
+
+
+            var news = {
+                NewsID: @ViewBag.ID,
+                SiteID: 1,
+                Url: $('#Url').val(),
+                Sort: $('#Sort').val(),
+                IsActive: $('#IsActive').is(':checked')
+            },
+              newslang = {
+                  NewsID: @ViewBag.ID,
+                  LangID: 'en-US',
+                  Title: $('#Title').val(),
+                  ShortDescription: $('#ShortDescription').val(),
+                  ImageThumbnail: $('#imgUpload').attr('src'),
+                  Image: $('#imgUpload').attr('src')
+              };
+
+            $.ajax({
+                url: '/admin/SaveNews',
+                type: 'Post',
+                data: JSON.stringify({ News: news, NewsLang: newslang }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.IsOk)
+                        window.location.href = "/admin/News";
+                }
             });
+
+
         });
 
         angular.module('MyApp', []).controller('CtrlController', ['$scope', function ($scope) { }]);

@@ -58,7 +58,6 @@ namespace NailShop.Business
             }
         }
 
-
         public vw_Brand GetData(string LangID, long ID)
         {
             using (var db = new NailShopEntities())

@@ -200,208 +200,208 @@ namespace NailShop.Controllers
 
         #region Json Result
 
-                [HttpPost]
-                public JsonResult Login(Business.Model.ModelWeb.LoginModel model)
+            [HttpPost]
+            public JsonResult Login(Business.Model.ModelWeb.LoginModel model)
+            {
+                IStore _cls = new StoreBO();
+                Store _store = _cls.Login(model.LoginName, model.Password);
+                if (_store != null && !_store.IsAdmin)
                 {
-                    IStore _cls = new StoreBO();
-                    Store _store = _cls.Login(model.LoginName, model.Password);
-                    if (_store != null && !_store.IsAdmin)
-                    {
-                        _session.IsLogin = true;
-                        _session.IsStore = true;
-                        _session.CustomerID = -1;
-                        _session.FullName = _store.StoreName;
-                        _session.StoreID = _store.StoreID;
-                        _session.IsAdmin = false;
-                        return Json(new { IsOk = true }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                    {
-                        _session.IsLogin = false;
-                        _session.IsStore = false;
-                        _session.CustomerID = -1;
-                        _session.IsAdmin = false;
-                        return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
-                    }
+                    _session.IsLogin = true;
+                    _session.IsStore = true;
+                    _session.CustomerID = -1;
+                    _session.FullName = _store.StoreName;
+                    _session.StoreID = _store.StoreID;
+                    _session.IsAdmin = false;
+                    return Json(new { IsOk = true }, JsonRequestBehavior.AllowGet);
                 }
-
-                [HttpPost]
-                public JsonResult Logout()
+                else
                 {
-                    if (_session.IsLogin)
-                    {
-                        _session.IsLogin = false;
-                        _session.IsAdmin = false;
-                        _session.IsStore = false;
-                        _session.StoreID = -1;
-                        _session.FullName = null;
-                        return Json(new { IsOk = true }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                        return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
+                    _session.IsLogin = false;
+                    _session.IsStore = false;
+                    _session.CustomerID = -1;
+                    _session.IsAdmin = false;
+                    return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
                 }
+            }
 
-                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-                public JsonResult GetPromotion(DateTime FromDate, DateTime ToDate, bool IsItem)
+            [HttpPost]
+            public JsonResult Logout()
+            {
+                if (_session.IsLogin)
                 {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
-                    {
-                        string jsonData = "[]";
-                        IPromotion _cls = new PromotionBO();
-                        var data = _cls.GetPromotion(_session.SiteID, _session.StoreID, FromDate, ToDate, IsItem);
-                        jsonData = new JavaScriptSerializer().Serialize(data);
-                        return Json(jsonData, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
+                    _session.IsLogin = false;
+                    _session.IsAdmin = false;
+                    _session.IsStore = false;
+                    _session.StoreID = -1;
+                    _session.FullName = null;
+                    return Json(new { IsOk = true }, JsonRequestBehavior.AllowGet);
                 }
+                else
+                    return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
+            }
 
-                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-                public JsonResult GetPromotionItem(long id)
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+            public JsonResult GetPromotion(DateTime FromDate, DateTime ToDate, bool IsItem)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
                 {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
-                    {
-                        if (id == -1)
-                        {
-                            string jsonData = "";
-                            jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(new Promotion());
-                            jsonData += ",\"detail\":[]}";
-                            return Json(jsonData, JsonRequestBehavior.AllowGet);
-                        }
-                        else
-                        {
-                            string jsonData = "";
-                            IPromotion _cls = new PromotionBO();
-                            var data = _cls.GetPromotionItem(id);
-                            jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(data[0]);
-                            jsonData += ",\"detail\":" + new JavaScriptSerializer().Serialize(data[1]) + "}"; ;
-                            return Json(jsonData, JsonRequestBehavior.AllowGet);
-                        }
-                    }
-                    else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
-                }
-
-                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-                public JsonResult GetOrdForBackend(long ID)
-                {
-                    string jsonData = "";
-                    IOrder _ord = new OrderBO();
-                    var data = _ord.GetOrdItemByID(ID);
+                    string jsonData = "[]";
+                    IPromotion _cls = new PromotionBO();
+                    var data = _cls.GetPromotion(_session.SiteID, _session.StoreID, FromDate, ToDate, IsItem);
                     jsonData = new JavaScriptSerializer().Serialize(data);
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
 
-                public JsonResult GetOrderByStoreID(DateTime FromDate, DateTime ToDate, int Status)
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+            public JsonResult GetPromotionItem(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
                 {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                    if (id == -1)
                     {
-                        string jsonData = "[]";
-                        IOrder _order = new OrderBO();
-                        List<vw_Invoice> data;
-                        data = _order.GetOrderByStoreID(_session.StoreID, FromDate, ToDate, Status);
-                        if (data != null)
-                            jsonData = new JavaScriptSerializer().Serialize(data);
+                        string jsonData = "";
+                        jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(new Promotion());
+                        jsonData += ",\"detail\":[]}";
                         return Json(jsonData, JsonRequestBehavior.AllowGet);
                     }
                     else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
-                }
-
-                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-                public JsonResult GetItemForPromotion(int StoreID, string TextSearch)
-                {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
                     {
-                        string jsonData = "[]";
+                        string jsonData = "";
                         IPromotion _cls = new PromotionBO();
-                        var data = _cls.GetItemForPromotion(StoreID, TextSearch);
+                        var data = _cls.GetPromotionItem(id);
+                        jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(data[0]);
+                        jsonData += ",\"detail\":" + new JavaScriptSerializer().Serialize(data[1]) + "}"; ;
+                        return Json(jsonData, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+            public JsonResult GetOrdForBackend(long ID)
+            {
+                string jsonData = "";
+                IOrder _ord = new OrderBO();
+                var data = _ord.GetOrdItemByID(ID);
+                jsonData = new JavaScriptSerializer().Serialize(data);
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+
+            public JsonResult GetOrderByStoreID(DateTime FromDate, DateTime ToDate, int Status)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                {
+                    string jsonData = "[]";
+                    IOrder _order = new OrderBO();
+                    List<vw_Invoice> data;
+                    data = _order.GetOrderByStoreID(_session.StoreID, FromDate, ToDate, Status);
+                    if (data != null)
                         jsonData = new JavaScriptSerializer().Serialize(data);
-                        return Json(jsonData, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
+                    return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
 
-                [HttpPost]
-                public JsonResult SavePromotion(Promotion master, List<PromotionDetail> detail)
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+            public JsonResult GetItemForPromotion(int StoreID, string TextSearch)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
                 {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                    string jsonData = "[]";
+                    IPromotion _cls = new PromotionBO();
+                    var data = _cls.GetItemForPromotion(StoreID, TextSearch);
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    return Json(jsonData, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult SavePromotion(Promotion master, List<PromotionDetail> detail)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                {
+                    IPromotion _cls = new PromotionBO();
+                    var IsResult = _cls.SavePromotion(master, detail);
+                    return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpPost]
+            public JsonResult DeletePromotion(int StoreID, long ID)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                {
+                    if (_session.StoreID == StoreID)
                     {
                         IPromotion _cls = new PromotionBO();
-                        var IsResult = _cls.SavePromotion(master, detail);
+                        var IsResult = _cls.Delete(ID);
                         return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
                     }
                     else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
+                        return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
                 }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
 
-                [HttpPost]
-                public JsonResult DeletePromotion(int StoreID, long ID)
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+            public JsonResult GetPromotionCategory(long id)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
                 {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                    if (id == -1)
                     {
-                        if (_session.StoreID == StoreID)
-                        {
-                            IPromotion _cls = new PromotionBO();
-                            var IsResult = _cls.Delete(ID);
-                            return Json(new { IsOk = IsResult }, JsonRequestBehavior.AllowGet);
-                        }
-                        else
-                            return Json(new { IsOk = false }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
-                }
-
-                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-                public JsonResult GetPromotionCategory(long id)
-                {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
-                    {
-                        if (id == -1)
-                        {
-                            string jsonData = "";
-                            jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(new Promotion());
-                            jsonData += ",\"detail\":[]}";
-                            return Json(jsonData, JsonRequestBehavior.AllowGet);
-                        }
-                        else
-                        {
-                            string jsonData = "";
-                            IPromotion _cls = new PromotionBO();
-                            var data = _cls.GetPromotionCategory(id);
-                            jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(data[0]);
-                            jsonData += ",\"detail\":" + new JavaScriptSerializer().Serialize(data[1]) + "}"; ;
-                            return Json(jsonData, JsonRequestBehavior.AllowGet);
-                        }
-                    }
-                    else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
-                }
-
-                [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-                public JsonResult GetCategoryForPromotion(int StoreID, string TextSearch)
-                {
-                    if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
-                    {
-                        string jsonData = "[]";
-                        IPromotion _cls = new PromotionBO();
-                        var data = _cls.GetCategoryForPromotion(StoreID, TextSearch);
-                        jsonData = new JavaScriptSerializer().Serialize(data);
+                        string jsonData = "";
+                        jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(new Promotion());
+                        jsonData += ",\"detail\":[]}";
                         return Json(jsonData, JsonRequestBehavior.AllowGet);
                     }
                     else
-                        RedirectToAction("index", "backend");
-                    return Json("[]", JsonRequestBehavior.AllowGet);
+                    {
+                        string jsonData = "";
+                        IPromotion _cls = new PromotionBO();
+                        var data = _cls.GetPromotionCategory(id);
+                        jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(data[0]);
+                        jsonData += ",\"detail\":" + new JavaScriptSerializer().Serialize(data[1]) + "}"; ;
+                        return Json(jsonData, JsonRequestBehavior.AllowGet);
+                    }
                 }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
+
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+            public JsonResult GetCategoryForPromotion(int StoreID, string TextSearch)
+            {
+                if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)
+                {
+                    string jsonData = "[]";
+                    IPromotion _cls = new PromotionBO();
+                    var data = _cls.GetCategoryForPromotion(StoreID, TextSearch);
+                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    return Json(jsonData, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    RedirectToAction("index", "backend");
+                return Json("[]", JsonRequestBehavior.AllowGet);
+            }
 
         #endregion
 

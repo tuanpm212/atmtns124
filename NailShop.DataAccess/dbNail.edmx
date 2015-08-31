@@ -840,18 +840,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NewsLang_Language">
-          <End Role="Language" Type="Self.Language" Multiplicity="1" />
-          <End Role="NewsLang" Type="Self.NewsLang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Language">
-              <PropertyRef Name="LangID" />
-            </Principal>
-            <Dependent Role="NewsLang">
-              <PropertyRef Name="LangID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_NewsLang_News">
           <End Role="News" Type="Self.News" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1341,10 +1329,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <AssociationSet Name="FK_BrandLang_Brand" Association="Self.FK_BrandLang_Brand">
             <End Role="Brand" EntitySet="Brand" />
             <End Role="BrandLang" EntitySet="BrandLang" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NewsLang_Language" Association="Self.FK_NewsLang_Language">
-            <End Role="Language" EntitySet="Language" />
-            <End Role="NewsLang" EntitySet="NewsLang" />
           </AssociationSet>
           <AssociationSet Name="FK_NewsLang_News" Association="Self.FK_NewsLang_News">
             <End Role="News" EntitySet="News" />
