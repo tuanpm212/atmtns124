@@ -53,7 +53,7 @@
                 columnDefs: [
                     { name: "Title", displayName: "Title", headerCellClass: 'text-center', sort: { direction: ['desc'], } },
                     { name: "ShortDescription", displayName: "Description", headerCellClass: 'text-center' },
-                    { name: "Image", displayName: "Image", headerCellClass: 'text-center', cellClass: 'text-right' },
+                    { name: "Image", displayName: "Image", headerCellClass: 'text-center' },
                     { name: "Url", displayName: "Url", headerCellClass: 'text-center' },
                     { name: "IsActive", displayName: "Active", headerCellClass: 'text-center', cellClass: 'text-center' },
                     { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createnews?id={{row.entity.NewsID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
