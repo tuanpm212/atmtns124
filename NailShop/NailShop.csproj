@@ -117,10 +117,8 @@
     <Content Include="Contents\css\backend-ui-grid.css" />
     <Content Include="Contents\css\blank.gif" />
     <Content Include="Contents\css\bootstrap.css" />
-    <Content Include="Contents\css\bootstrap.min.css" />
     <Content Include="Contents\css\datepicker.css" />
     <Content Include="Contents\css\font-awesome.css" />
-    <Content Include="Contents\css\font-awesome.min.css" />
     <Content Include="Contents\css\kendo.common.css" />
     <Content Include="Contents\css\kendo.office365.css" />
     <Content Include="Contents\css\layerslider.css" />
@@ -135,7 +133,6 @@
     <Content Include="Contents\css\nail-main.css" />
     <Content Include="Contents\css\nail-order.css" />
     <Content Include="Contents\css\nail-video.css" />
-    <Content Include="Contents\css\ng-grid.css" />
     <Content Include="Contents\css\owl.carousel.css" />
     <Content Include="Contents\css\theme-fresh.css" />
     <Content Include="Contents\css\ui-grid.css" />
@@ -201,7 +198,6 @@
     <Content Include="Contents\skins\v5\skin.png" />
     <Content Include="fonts\ui-grid.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Contents\css\bootstrap.css.map" />
     <Content Include="Contents\fonts\fontawesome-webfont.eot" />
     <Content Include="Contents\fonts\fontawesome-webfont.ttf" />
     <Content Include="Contents\fonts\fontawesome-webfont.woff" />

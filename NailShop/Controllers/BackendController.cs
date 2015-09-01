@@ -378,7 +378,7 @@ namespace NailShop.Controllers
                         IPromotion _cls = new PromotionBO();
                         var data = _cls.GetPromotionCategory(id);
                         jsonData = "{\"master\":" + new JavaScriptSerializer().Serialize(data[0]);
-                        jsonData += ",\"detail\":" + new JavaScriptSerializer().Serialize(data[1]) + "}"; ;
+                        jsonData += ",\"detail\":" + new JavaScriptSerializer().Serialize(data[1]) + "}";
                         return Json(jsonData, JsonRequestBehavior.AllowGet);
                     }
                 }
