@@ -69,7 +69,7 @@ namespace NailShop.Controllers
                         ViewBag.Name = "";
                         ViewBag.Description = "";
                         ViewBag.Video = "";
-                        ViewBag.IsActive = false;
+                        ViewBag.IsActive = true;
                     }
                     return View();
                 }
