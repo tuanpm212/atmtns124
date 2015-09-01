@@ -42,7 +42,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input id="chkIsActvie" type="checkbox" />@Resources.Backend.lblActive
+                                    <input id="chkIsActvie" type="checkbox" checked="checked" />@Resources.Backend.lblActive
                                 </label>
                             </div>
                         </div>
@@ -117,9 +117,9 @@
                 paginationPageSizes: [10, 20, 40],
                 paginationPageSize: 10,
                 columnDefs: [
-                    { name: "Code", displayName: "Code", headerCellClass: 'text-center', sort: { direction: ['desc'], }, },
+                    { name: "Code", width: '200', displayName: "Code", headerCellClass: 'text-center', cellClass: 'text-center', sort: { direction: ['desc']}},
                     { name: "CategoryName", displayName: "Category Name", headerCellClass: 'text-center', },
-                    { name: "", field: 'CategoryID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", field: 'CategoryID', width: '200', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', enableSorting: false },
                 ],
             };
 

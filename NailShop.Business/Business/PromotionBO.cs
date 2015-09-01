@@ -16,10 +16,11 @@ namespace NailShop.Business
             using (var context = new NailShopEntities())
             {
                 var select = from c in context.Promotions
-                             where c.SiteID == SiteID && c.StoreID == StoreID &&
-                             ((FromDate <= c.FromDate && FromDate <= c.ToDate) ||
-                             (FromDate >= c.FromDate && FromDate <= c.ToDate))
-                             && c.IsItem == IsItem
+                             where c.SiteID == SiteID && c.StoreID == StoreID && c.IsItem == IsItem &&
+                             ((FromDate <= c.FromDate && c.FromDate<= ToDate &&  ToDate <= c.ToDate) ||
+                             (FromDate <= c.FromDate && ToDate >= c.ToDate) ||
+                             (FromDate >= c.FromDate && ToDate <= c.ToDate) ||
+                             (FromDate >= c.FromDate && ToDate >= c.ToDate))
                              orderby c.PromotionID descending
                              select c;
                 if (select.Count() > 0)

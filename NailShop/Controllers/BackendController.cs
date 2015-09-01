@@ -249,7 +249,8 @@ namespace NailShop.Controllers
                     string jsonData = "[]";
                     IPromotion _cls = new PromotionBO();
                     var data = _cls.GetPromotion(_session.SiteID, _session.StoreID, FromDate, ToDate, IsItem);
-                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    if (data != null)
+                        jsonData = new JavaScriptSerializer().Serialize(data);
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -287,10 +288,11 @@ namespace NailShop.Controllers
             [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetOrdForBackend(long ID)
             {
-                string jsonData = "";
+                string jsonData = "[]";
                 IOrder _ord = new OrderBO();
                 var data = _ord.GetOrdItemByID(ID);
-                jsonData = new JavaScriptSerializer().Serialize(data);
+                if (data != null)
+                    jsonData = new JavaScriptSerializer().Serialize(data);
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
 
@@ -319,7 +321,8 @@ namespace NailShop.Controllers
                     string jsonData = "[]";
                     IPromotion _cls = new PromotionBO();
                     var data = _cls.GetItemForPromotion(StoreID, TextSearch);
-                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    if (data != null)
+                        jsonData = new JavaScriptSerializer().Serialize(data);
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -395,7 +398,8 @@ namespace NailShop.Controllers
                     string jsonData = "[]";
                     IPromotion _cls = new PromotionBO();
                     var data = _cls.GetCategoryForPromotion(StoreID, TextSearch);
-                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    if (data != null)
+                        jsonData = new JavaScriptSerializer().Serialize(data);
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
                 else

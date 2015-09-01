@@ -400,7 +400,8 @@ namespace NailShop.Controllers
                     string jsonData = "[]";
                     IPhoto _cls = new PhotoBO();
                     var data = _cls.GetData(_session.LangID, false);
-                    jsonData = new JavaScriptSerializer().Serialize(data);
+                    if (data != null)
+                        jsonData = new JavaScriptSerializer().Serialize(data);
                     return Json(jsonData, JsonRequestBehavior.AllowGet);
                 }
                 else
