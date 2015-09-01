@@ -150,7 +150,6 @@
                     }).success(function (data, status, headers, config) {
                         myjson = JSON.parse(data);
                         $scope.gridOptions.data = myjson;
-                        //SumTotalAmount($scope.gridOptions.data);
                     }).error(function (data, status, headers, config) {
                         alert(JSON.stringify(data));
                     });
@@ -163,7 +162,6 @@
                 $scope.gridApi = gridApi;
                 gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue) {
                     if (newValue != oldValue) {
-                        //SumTotalAmount($scope.gridOptions.data);
                         $scope.IsHidden = false;
                     };
                 });
@@ -186,19 +184,6 @@
             };
         }]);
 
-        function SumTotalAmount(json)
-        {
-            var Total=0, Discount=0, TaxAmount=0, Amount=0;
-            for(var i=0; i<json.length; i++)
-            {
-                Amount+=json[i].Price*json[i].Qty;
-            }
-            Total=Amount+TaxAmount - Discount;
-            $('#lblAmount').html(Amount);
-            $('#lblDiscountAmount').html(Discount);
-            $('#lblTaxAmount').html(TaxAmount);
-            $('#lblTotalAmount').html(Total);
-        }
         IsEdit();
         function IsEdit()
         {

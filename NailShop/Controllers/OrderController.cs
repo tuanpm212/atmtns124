@@ -212,7 +212,7 @@ namespace NailShop.Controllers
                             mRow.NoTax = row.NoTax;
                             mRow.Qty = row.Qty;
                             mRow.Price = row.Price;
-                            mRow.Discount = mRow.Discount;
+                            mRow.Discount = row.Discount;
                             mRow.Total = row.Total;
                             if (invoice.InvoiceID == -1)
                                 mRow.RecordState = (int)NailShop.Business.Enum.RecordState.AddNew;
