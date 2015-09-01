@@ -86,12 +86,12 @@
                     </div>
                     <div class="form-group form-inline">
                         <div class="col-sm-12 text-right">
-                            <p class="control-label">@Resources.CreateOrder.lblNo  @Html.Label((string)@ViewBag.InvoiceNo, new { id = "lblInvoiceNo" })</></p>
+                            <p class="control-label">@Resources.CreateOrder.lblNo  @Html.Label((string)@ViewBag.InvoiceNo, new { id = "lblInvoiceNo" })</p>
                             <p class="control-label">@Resources.CreateOrder.lblOrdDate  @Html.Label((string)@ViewBag.InvoiceDate, new { id = "lblInvoiceDate" })</p>
-                            <p class="control-label">@Resources.CreateOrder.lblAmount $@Html.Label((string)@ViewBag.Amount, new { id = "lblAmount" })</p>
-                            <p class="control-label">@Resources.CreateOrder.lblDiscount $@Html.Label((string)@ViewBag.DiscountAmount, new { id = "lblDiscountAmount" })</p>
-                            <p class="control-label">@Resources.CreateOrder.lblTaxAmount $@Html.Label((string)@ViewBag.TaxAmount, new { id = "lblTaxAmount" })</p>
-                            <p class="control-label">@Resources.CreateOrder.lblTotal $@Html.Label((string)@ViewBag.TotalAmount, new { id = "lblTotalAmount" })</p>
+                            <p class="control-label">@Resources.CreateOrder.lblAmount $@ViewBag.Amount</p>
+                            <p class="control-label">@Resources.CreateOrder.lblDiscount $@ViewBag.DiscountAmount</p>
+                            <p class="control-label">@Resources.CreateOrder.lblTaxAmount $@ViewBag.TaxAmount</p>
+                            <p class="control-label">@Resources.CreateOrder.lblTotal $@ViewBag.TotalAmount</p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                     }).success(function (data, status, headers, config) {
                         myjson = JSON.parse(data);
                         $scope.gridOptions.data = myjson;
-                        SumTotalAmount($scope.gridOptions.data);
+                        //SumTotalAmount($scope.gridOptions.data);
                     }).error(function (data, status, headers, config) {
                         alert(JSON.stringify(data));
                     });
@@ -163,7 +163,7 @@
                 $scope.gridApi = gridApi;
                 gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue) {
                     if (newValue != oldValue) {
-                        SumTotalAmount($scope.gridOptions.data);
+                        //SumTotalAmount($scope.gridOptions.data);
                         $scope.IsHidden = false;
                     };
                 });

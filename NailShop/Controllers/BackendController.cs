@@ -184,10 +184,10 @@ namespace NailShop.Controllers
                     ViewBag.StateShip = model.Invoice.StateShip;
 
                     ViewBag.InvoiceNo = model.Invoice.InvoiceNo;
-                    ViewBag.Amount = model.Invoice.SubTotal.ToString();
-                    ViewBag.DiscountAmount = model.Invoice.Discount.ToString();
-                    ViewBag.TaxAmount = model.Invoice.SaleTax.ToString();
-                    ViewBag.TotalAmount = model.Invoice.Total.ToString();
+                    ViewBag.Amount = string.Format("{0:#,###0}", model.Invoice.SubTotal);
+                    ViewBag.DiscountAmount = string.Format("{0:#,###0}", model.Invoice.Discount);
+                    ViewBag.TaxAmount = string.Format("{0:#,###0}", model.Invoice.SaleTax);
+                    ViewBag.TotalAmount = string.Format("{0:#,###0}", model.Invoice.Total);
                     ViewBag.IsTemplate = model.Invoice.IsTemplate;
 
                     ViewBag.OrdID = id;
