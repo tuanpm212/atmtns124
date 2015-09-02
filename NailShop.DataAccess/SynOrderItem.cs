@@ -26,5 +26,8 @@ namespace NailShop.DataAccess
         public Nullable<decimal> Discount { get; set; }
         public Nullable<decimal> Total { get; set; }
         public Nullable<int> RecordState { get; set; }
+        public string ProdNo { get; set; }
+        public string BarCode { get; set; }
+        public string InvoiceNo { get; set; }
     }
 }

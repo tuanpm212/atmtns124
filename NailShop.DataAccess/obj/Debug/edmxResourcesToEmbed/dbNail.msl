@@ -770,6 +770,9 @@
     <EntitySetMapping Name="SynOrderItems">
       <EntityTypeMapping TypeName="NailShopModel.SynOrderItem">
         <MappingFragment StoreEntitySet="SynOrderItems">
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="ProdNo" ColumnName="ProdNo" />
           <ScalarProperty Name="RecordState" ColumnName="RecordState" />
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="Discount" ColumnName="Discount" />

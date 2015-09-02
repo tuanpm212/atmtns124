@@ -1022,5 +1022,8 @@
     <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="RecordState" Type="Int32" />
+    <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -493,6 +493,9 @@ warning 6002: The table/view 'NailShop.dbo.SynOrderItems' does not have a primar
           </Key>
           <Property Name="OrdItemID" Type="bigint" Nullable="false" />
           <Property Name="InvoiceID" Type="bigint" Nullable="false" />
+          <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
+          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="16" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="ProductName" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
@@ -1088,6 +1091,9 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
             <DefiningQuery>SELECT 
     [SynOrderItems].[OrdItemID] AS [OrdItemID], 
     [SynOrderItems].[InvoiceID] AS [InvoiceID], 
+    [SynOrderItems].[ProdNo] AS [ProdNo], 
+    [SynOrderItems].[BarCode] AS [BarCode], 
+    [SynOrderItems].[InvoiceNo] AS [InvoiceNo], 
     [SynOrderItems].[ProductID] AS [ProductID], 
     [SynOrderItems].[ProductName] AS [ProductName], 
     [SynOrderItems].[Description] AS [Description], 
@@ -2375,6 +2381,9 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="RecordState" Type="Int32" />
+          <Property Name="ProdNo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3151,6 +3160,9 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
           <EntitySetMapping Name="SynOrderItems">
             <EntityTypeMapping TypeName="NailShopModel.SynOrderItem">
               <MappingFragment StoreEntitySet="SynOrderItems">
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="ProdNo" ColumnName="ProdNo" />
                 <ScalarProperty Name="RecordState" ColumnName="RecordState" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
