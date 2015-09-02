@@ -53,8 +53,7 @@
                     { name: "Name", displayName: "Name", headerCellClass: 'text-center', sort: { direction: ['desc'], } },
                     { name: "Description", displayName: "Description", headerCellClass: 'text-center' },
                     { name: "Image", displayName: "Image", headerCellClass: 'text-center' },
-                    { name: "Url", displayName: "Url", headerCellClass: 'text-center' },
-                    { name: "", field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', width: '100', enableSorting: false },
+                    { name: "", width: '100', field: 'ID', displayName: "Action", headerCellClass: 'text-center', cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="/admin/createbrand?id={{row.entity.BrandID}}">View</a>/<a href="javascript:;" ng-click="grid.appScope.Delete(row)">Delete</a></div>', cellClass: 'text-center', enableSorting: false },
                 ],
             };
 
