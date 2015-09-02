@@ -488,9 +488,6 @@ warning 6002: The table/view 'NailShop.dbo.SynOrderItems' does not have a primar
     </Key>
     <Property Name="OrdItemID" Type="bigint" Nullable="false" />
     <Property Name="InvoiceID" Type="bigint" Nullable="false" />
-    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="16" />
-    <Property Name="BarCode" Type="nvarchar" MaxLength="64" />
-    <Property Name="ProdNo" Type="nvarchar" MaxLength="64" />
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="nvarchar(max)" />
     <Property Name="Description" Type="nvarchar(max)" />
@@ -1086,9 +1083,6 @@ warning 6002: The table/view 'NailShop.dbo.vw_Slide' does not have a primary key
       <DefiningQuery>SELECT 
     [SynOrderItems].[OrdItemID] AS [OrdItemID], 
     [SynOrderItems].[InvoiceID] AS [InvoiceID], 
-    [SynOrderItems].[InvoiceNo] AS [InvoiceNo], 
-    [SynOrderItems].[BarCode] AS [BarCode], 
-    [SynOrderItems].[ProdNo] AS [ProdNo], 
     [SynOrderItems].[ProductID] AS [ProductID], 
     [SynOrderItems].[ProductName] AS [ProductName], 
     [SynOrderItems].[Description] AS [Description], 

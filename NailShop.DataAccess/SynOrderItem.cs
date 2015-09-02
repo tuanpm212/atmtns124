@@ -16,9 +16,6 @@ namespace NailShop.DataAccess
     {
         public long OrdItemID { get; set; }
         public long InvoiceID { get; set; }
-        public string InvoiceNo { get; set; }
-        public string BarCode { get; set; }
-        public string ProdNo { get; set; }
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }

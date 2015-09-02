@@ -169,27 +169,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SynOrderItems">
-      <EntityTypeMapping TypeName="NailShopModel.SynOrderItem">
-        <MappingFragment StoreEntitySet="SynOrderItems">
-          <ScalarProperty Name="RecordState" ColumnName="RecordState" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Qty" ColumnName="Qty" />
-          <ScalarProperty Name="NoTax" ColumnName="NoTax" />
-          <ScalarProperty Name="ProdType" ColumnName="ProdType" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ProdNo" ColumnName="ProdNo" />
-          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
-          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
-          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
-          <ScalarProperty Name="OrdItemID" ColumnName="OrdItemID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SynInvoices">
       <EntityTypeMapping TypeName="NailShopModel.SynInvoice">
         <MappingFragment StoreEntitySet="SynInvoice">
@@ -785,6 +764,24 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="LangID" ColumnName="LangID" />
           <ScalarProperty Name="SlideID" ColumnName="SlideID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SynOrderItems">
+      <EntityTypeMapping TypeName="NailShopModel.SynOrderItem">
+        <MappingFragment StoreEntitySet="SynOrderItems">
+          <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="NoTax" ColumnName="NoTax" />
+          <ScalarProperty Name="ProdType" ColumnName="ProdType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="OrdItemID" ColumnName="OrdItemID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

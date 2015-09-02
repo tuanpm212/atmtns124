@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="NailShopModel.Store" Width="1.5" PointX="6.75" PointY="5.625" />
         <EntityTypeShape EntityType="NailShopModel.SynCustomer" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="NailShopModel.SynProduct" Width="1.5" PointX="2.75" PointY="9.5" />
-        <EntityTypeShape EntityType="NailShopModel.SynOrderItem" Width="1.5" PointX="0.75" PointY="9.5" />
         <EntityTypeShape EntityType="NailShopModel.SynInvoice" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="NailShopModel.vw_Brand" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="NailShopModel.vw_News" Width="1.5" PointX="14.75" PointY="0.75" />
@@ -54,6 +53,7 @@
         <EntityTypeShape EntityType="NailShopModel.Slide" Width="1.5" PointX="21.375" PointY="7" />
         <EntityTypeShape EntityType="NailShopModel.SlideLang" Width="1.5" PointX="23.625" PointY="7" />
         <AssociationConnector Association="NailShopModel.FK_SlideLang_Slide1" />
+        <EntityTypeShape EntityType="NailShopModel.SynOrderItem" Width="1.5" PointX="9.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
