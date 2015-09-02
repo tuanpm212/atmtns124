@@ -51,6 +51,7 @@ namespace NailShop.Controllers
                 
                 if (_session.IsLogin && !_session.IsStore)
                 {
+                    ViewBag.IsEdit = true;
                     IOrder _ord = new OrderBO();
                     Business.Model.ModelWeb.InvoiceModel model = new Business.Model.ModelWeb.InvoiceModel();
                     model = _ord.GetOrderByID(_session.StoreID, _session.CustomerID, ID);
@@ -110,10 +111,10 @@ namespace NailShop.Controllers
                         ViewBag.StateShip = model.Invoice.StateShip;
 
                         ViewBag.InvoiceNo = model.Invoice.InvoiceNo;
-                        ViewBag.Amount = model.Invoice.SubTotal.ToString();
-                        ViewBag.DiscountAmount = model.Invoice.Discount.ToString();
-                        ViewBag.TaxAmount = model.Invoice.SaleTax.ToString();
-                        ViewBag.TotalAmount = model.Invoice.Total.ToString();
+                        ViewBag.Amount = string.Format("{0:#,###0}", model.Invoice.SubTotal);
+                        ViewBag.DiscountAmount = string.Format("{0:#,###0}", model.Invoice.Discount);
+                        ViewBag.TaxAmount = string.Format("{0:#,###0}", model.Invoice.SaleTax);
+                        ViewBag.TotalAmount = string.Format("{0:#,###0}", model.Invoice.Total);
                         ViewBag.IsTemplate = model.Invoice.IsTemplate;
                     }
                     ViewBag.OrdID = ID;
@@ -126,6 +127,8 @@ namespace NailShop.Controllers
         #endregion
 
         #region Json Data
+
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetOrdItem(long ID)
             {
                 IOrder _ord = new OrderBO();

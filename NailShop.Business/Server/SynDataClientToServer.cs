@@ -313,7 +313,7 @@ namespace NailShop.Business
                                                     {
                                                         _OrdItem = new OrdItem();
                                                         _OrdItem.InvoiceID = _invoice.InvoiceID;
-                                                        _OrdItem.ProductID = rowDetail.ProductID ?? -1;
+                                                       
                                                         _OrdItem.ProductName = rowDetail.ProductName;
                                                         _OrdItem.Description = rowDetail.Description;
                                                         _OrdItem.ProdType = rowDetail.ProdType;
@@ -323,6 +323,10 @@ namespace NailShop.Business
                                                         _OrdItem.Discount = rowDetail.Discount;
                                                         _OrdItem.Total = rowDetail.Total;
                                                         _OrdItem.RecordState = (int)Enum.RecordState.Unchange;
+                                                        var selectProduct = from c in db.Products
+                                                                                where c.LocalID == rowDetail.ProductID && c.StoreID == StoreID
+                                                                                select c;
+                                                        _OrdItem.ProductID = selectProduct.First().ProductID;
                                                         db.OrdItems.Add(_OrdItem);
                                                     }
                                                 }
@@ -402,7 +406,6 @@ namespace NailShop.Business
                                                         {
                                                             _OrdItem = new OrdItem();
                                                             _OrdItem.InvoiceID = InvoiceID;
-                                                            _OrdItem.ProductID = rowDetail.ProductID ?? -1;
                                                             _OrdItem.ProductName = rowDetail.ProductName;
                                                             _OrdItem.Description = rowDetail.Description;
                                                             _OrdItem.ProdType = rowDetail.ProdType;
@@ -412,6 +415,11 @@ namespace NailShop.Business
                                                             _OrdItem.Discount = rowDetail.Discount;
                                                             _OrdItem.Total = rowDetail.Total;
                                                             _OrdItem.RecordState = (int)Enum.RecordState.Unchange;
+                                                            
+                                                            var selectProduct = from c in db.Products
+                                                                                where c.LocalID == rowDetail.ProductID && c.StoreID == StoreID
+                                                                                select c;
+                                                            _OrdItem.ProductID = selectProduct.First().ProductID;
                                                             db.OrdItems.Add(_OrdItem);
                                                         }
                                                     }

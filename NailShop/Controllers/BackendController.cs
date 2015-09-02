@@ -296,6 +296,7 @@ namespace NailShop.Controllers
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
 
+            [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
             public JsonResult GetOrderByStoreID(DateTime FromDate, DateTime ToDate, int Status)
             {
                 if (_session.IsLogin && _session.IsStore && !_session.IsAdmin)

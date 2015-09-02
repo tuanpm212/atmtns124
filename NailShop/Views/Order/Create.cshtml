@@ -114,7 +114,8 @@
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover();
     });
-    var OrdID = @ViewBag.OrdID, myjson, isFristLoad=true, jsonPromotion;
+    var OrdID = @ViewBag.OrdID, myjson, isFristLoad=true, jsonPromotion, IsEdit='@ViewBag.IsEdit';
+
     var app = angular.module('MyApp', ['ui.grid', 'ui.grid.pagination', 'ui.grid.edit']);
     app.controller('MainController', ['$scope', '$http', function ($scope, $http, $apply) {
         $scope.gridOrder = {
@@ -142,7 +143,8 @@
 
                 }).success(function (data, status, headers, config) {
                     $scope.gridOrder.data = JSON.parse(data);
-                    SumTotalAmount($scope.gridOrder.data);
+                    if(IsEdit==true)
+                        SumTotalAmount($scope.gridOrder.data);
                 }).error(function (data, status, headers, config) {
                     alert(JSON.stringify(data));
                 });
@@ -239,7 +241,7 @@
     }
 
     LoadPromotion();
-    IsEdit();
+    IsEditFunction();
 
     function LoadPromotion()
     {
@@ -254,7 +256,7 @@
         });
     }
 
-    function IsEdit()
+    function IsEditFunction()
     {
         if('@ViewBag.IsEdit'=='False')
             $(btnSave).addClass('hide');
