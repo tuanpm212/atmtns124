@@ -363,7 +363,6 @@ namespace NailShop.Business
                 {
                     return null;
                 }
-
             }
 
             private List<GetOrdItem_Result> GetOrdItems(int StoreID, long CustomerID, long OrdID)
@@ -377,6 +376,8 @@ namespace NailShop.Business
                                      select c;
                         if (select.Count() > 0)
                             return select.ToList();
+                        else
+
                         return null;
                     }
                 }
